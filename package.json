@@ -1,0 +1,11 @@
+{
+  "name": "marinenationale",
+  "version": "1.0.0",
+  "description": "Site Internet de la Marine nationale",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fabrice N'DRI",
+  "license": "ISC"
+}
