@@ -1,0 +1,106 @@
+<div class="row container">
+  <div class="card-panel center-align">
+    <img class="" src="/img/icons8-pencil-64.png" alt="Infos">
+    <h5>Modifier mes informations</h5>
+  </div>
+  <hr>
+  <form class="container section col s12 p6">
+    <div class="input-field col m4 s12">
+      <input id="mecano" type="number" class="validate">
+      <label for="mecano">Mécano</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input id="matricule" type="text" class="validate">
+      <label for="matricule">Matricule</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <select>
+        <option value="" disabled selected>Grade</option>
+        <option value="membre">Membre</option>
+        <option value="editeur">Editeur</option>
+        <option value="administrateur">Administrateur</option>
+      </select>
+      <label for="grade">Grade</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input id="nom" type="text" class="validate">
+      <label for="nom">Nom</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <input id="prenoms" type="text" class="validate">
+      <label for="prenoms">Prénoms</label>
+    </div>
+    <div class="input-field col m2 s12">
+      <select>
+        <option value="" disabled selected>Genre</option>
+        <option value="masculin">Masculin</option>
+        <option value="feminin">Féminin</option>
+      </select>
+      <label for="genre">Genre</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input id="dateNaiss" type="date" class="datepicker">
+      <label for="dateNaiss">Né le</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input id="lieuNaiss" type="text" class="validate">
+      <label for="lieuNaiss">À</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input id="sousPref" type="text" class="validate">
+      <label for="sousPref">Sous Préfecture de</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <input id="pere" type="text" class="validate">
+      <label for="pere">Fils de (Père)</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <input id="mere" type="text" class="validate">
+      <label for="mere">Et de (Mère)</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input id="dateEntreeService" type="date" class="datepicker">
+      <label for="dateEntreeService">Date d'entrée en service</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input id="dateNomination" type="date" class="datepicker">
+      <label for="dateNomination">Date de nomination</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <select>
+        <option value="" disabled selected>Unité</option>
+        <option value="membre">Membre</option>
+        <option value="editeur">Editeur</option>
+        <option value="administrateur">Administrateur</option>
+      </select>
+      <label for="unite">Unité</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <select>
+        <option value="" disabled selected>Service</option>
+        <option value="membre">Membre</option>
+        <option value="editeur">Editeur</option>
+        <option value="administrateur">Administrateur</option>
+      </select>
+      <label for="service">Service</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input id="position" type="text" class="validate">
+      <label for="position">Position</label>
+    </div>
+    <div class="file-field input-field col m4 s12">
+      <div class="btn">
+        <span>Photo</span>
+        <input type="file" accept=".png, .jpg, .jpeg">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <div class="input-field col m2 offset-m10 s12">
+      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>

@@ -30,10 +30,20 @@
       $('.button-collapse').sideNav();
       $('.parallax').parallax();
       $('.dropdown-trigger').dropdown({
-        hover:true,
+        hover: true,
         belowOrigin: true,
         constrainWidth: false
       });
+      $('.datepicker').pickadate({
+        monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+        weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        today: 'aujourd\'hui',
+        clear: 'effacer',
+        formatSubmit: 'yyyy/mm/dd',
+        selectMonths: true,
+        selectYears: 120
+      });
+      $('select').material_select();
     });
   </script>
 </body>

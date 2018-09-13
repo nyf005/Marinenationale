@@ -5,11 +5,11 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 router.get("/add", (req, res) => {
-  res.send("Adding User");
+  res.render('users/add');
 });
 
 router.get("/edit", (reeq, res) => {
-  res.send("Editing User");
+  res.render("users/edit");
 });
 
 

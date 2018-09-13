@@ -19,17 +19,24 @@ const UserSchema = new Schema({
   prenoms: {
     type: String
   },
-  dateNaiss: {
-    type: Date
+  naissance : {
+    date: {
+      type: Date
+    },
+    lieu: {
+      type: String
+    },
+    sousPref: {
+      type: String
+    }
   },
-  lieuNaiss: {
-    type: String
-  },
-  nomPere: {
-    type: String
-  },
-  nomMere: {
-    type: String
+  parents : {
+    pere: {
+      type: String
+    },
+    mere: {
+      type: String
+    },
   },
   dateEntreeService: {
     type: Date
@@ -44,8 +51,15 @@ const UserSchema = new Schema({
   unite: {
     type: String,
   },
+  service: {
+    type: String,
+  },
   position: {
     type: String
+  },
+  status:{
+    type: String,
+    default: "utilisateur"
   }
 });
 
