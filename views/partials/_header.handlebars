@@ -16,25 +16,7 @@
 </div>
 <!-- SIDE MENU -->
 <ul class="side-nav" id="main-menu">
-  <form class="container section col s12 p6">
-    <blockquote>
-      <div class="card-panel orange darken-3 center">ESPACE MEMBRE</div>
-      <hr>
-      <div class="input-field col s12">
-        <i class="material-icons prefix">account_circle</i>
-        <input id="mecano" type="number" class="validate">
-        <label for="mecano">Mécano</label>
-      </div>
-      <div class="input-field col s12">
-        <i class="material-icons prefix">vpn_key</i>
-        <input id="password" type="password" class="validate">
-        <label for="password">Mot de passe</label>
-      </div>
-      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Se Connecter
-        <i class="material-icons right">send</i>
-      </button>
-    </blockquote>
-  </form>
+{{#if user}}
   <li>
     <div class="user-view">
       <div class="background">
@@ -45,19 +27,38 @@
       <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
     </div>
   </li>
-
+  <li class="divider"></li>
+  <li>
+    <a href="/users/edit"><i class="fa fa-info"></i> Mes Informations</a>
+  </li>
+  <li>
+    <a href="#"><i class="fa fa-book"></i> Mes Diplômes et Stages</a>
+  </li>
+  <li><a href="#"><i class="fa fa-sign-out"></i> Me Déconnecter</a></li>
+  <li class="divider"></li>
+  {{else}}
+  <form class="container section col s12 p6">
+    <div class="card-panel orange darken-3 center">ESPACE MEMBRE</div>
+    <hr>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">account_circle</i>
+      <input id="mecano" type="number" class="validate">
+      <label for="mecano">Mécano</label>
+    </div>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">vpn_key</i>
+      <input id="password" type="password" class="validate">
+      <label for="password">Mot de passe</label>
+    </div>
+    <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Me Connecter
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+  <li class="divider"></li>
+  {{/if}}
   <li><a href="#"><i class="fa fa-sitemap"></i> Organisation</a></li>
   <li><a href="#"><i class="fa fa-anchor"></i> Missions</a></li>
   <li><a href="#"><i class="fa fa-ship"></i> Equipements</a></li>
   <li><a href="#"><i class="fa fa-users"></i> Ressources Humaines</a></li>
   <li><a href="#"><i class="fa fa-building"></i> Patrimoine</a></li>
-
-  <li class="divider"></li>
-  <li>
-    <a href="#"><i class="fa fa-cog"></i> Dashboard</a>
-  </li>
-  <li>
-    <a href="#"><i class="fa fa-user"></i> My Stories</a>
-  </li>
-  <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
 </ul>
