@@ -5,18 +5,21 @@
       <a href="/" class="logo">Marine Nationale</a>
       <!-- RIGHT NAV -->
       <ul class="right hide-on-med-and-down">
-        <li><a href="#"><i class="fa fa-sitemap"></i> Organisation</a></li>
-        <li><a href="#"><i class="fa fa-anchor"></i> Missions</a></li>
-        <li><a href="#"><i class="fa fa-ship"></i> Equipements</a></li>
-        <li><a href="#"><i class="fa fa-users"></i> Ressources Humaines</a></li>
-        <li><a href="#"><i class="fa fa-building"></i> Patrimoine</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-activates="organisation_1"><i class="fa fa-sitemap"></i>
+            Organisation</a></li>
+        <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-activates="equipements_1"><i class="fa fa-ship"></i> Equipements</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-activates="ressources_1"><i class="fa fa-users"></i> Ressources
+            Humaines</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-activates="patrimoine_1"><i class="fa fa-building"></i> Patrimoine</a></li>
       </ul>
     </div>
   </nav>
 </div>
+
 <!-- SIDE MENU -->
 <ul class="side-nav" id="main-menu">
-{{#if user}}
+  {{#if user}}
   <li>
     <div class="user-view">
       <div class="background">
@@ -50,15 +53,58 @@
       <input id="password" type="password" class="validate">
       <label for="password">Mot de passe</label>
     </div>
-    <button class="btn waves-effect waves-light green darken-3 center" type="submit" name="action">Me Connecter
+    <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Me Connecter
       <i class="material-icons right">send</i>
     </button>
   </form>
   <li class="divider"></li>
   {{/if}}
-  <li><a href="#"><i class="fa fa-sitemap"></i> Organisation</a></li>
-  <li><a href="#"><i class="fa fa-anchor"></i> Missions</a></li>
-  <li><a href="#"><i class="fa fa-ship"></i> Equipements</a></li>
-  <li><a href="#"><i class="fa fa-users"></i> Ressources Humaines</a></li>
-  <li><a href="#"><i class="fa fa-building"></i> Patrimoine</a></li>
+  <li><a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i> Organisation</a></li>
+  <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
+  <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i> Equipements</a></li>
+  <li><a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i> Ressources Humaines</a></li>
+  <li><a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i> Patrimoine</a></li>
+</ul>
+
+{{!-- Dropdown structure --}}
+<ul id="equipements" class="dropdown-content">
+  <li><a href="/equipements/patrouilleurs">Patrouilleurs</a></li>
+  <li><a href="/equipements/embarcations">Embarcations</a></li>
+</ul>
+<ul id="organisation" class="dropdown-content">
+  <li><a href="/organisation/commandement">Commandement</a></li>
+  <li><a href="/organisation/unites">Unités</a></li>
+  <li><a href="/organisation/soutien">Soutien des unités</a></li>
+</ul>
+<ul id="patrimoine" class="dropdown-content">
+  <li><a href="/patrimoine/histoire">Histoire</a></li>
+  <li><a href="/patrimoine/traditions">Traditions</a></li>
+  <li><a href="/patrimoine/sport">Sport</a></li>
+  <li><a href="/patrimoine/orchestre">Orchestre</a></li>
+</ul>
+<ul id="ressources" class="dropdown-content">
+  <li><a href="/ressources_humaines/recrutement">Recrutement</a></li>
+  <li><a href="/ressources_humaines/formation">Formations et Stages</a></li>
+  <li><a href="/ressources_humaines/ecole">Ecole</a></li>
+</ul>
+
+<ul id="equipements_1" class="dropdown-content">
+  <li><a href="/equipements/patrouilleurs">Patrouilleurs</a></li>
+  <li><a href="/equipements/embarcations">Embarcations</a></li>
+</ul>
+<ul id="organisation_1" class="dropdown-content">
+  <li><a href="/organisation/commandement">Commandement</a></li>
+  <li><a href="/organisation/unites">Unités</a></li>
+  <li><a href="/organisation/soutien">Soutien des unités</a></li>
+</ul>
+<ul id="patrimoine_1" class="dropdown-content">
+  <li><a href="/patrimoine/histoire">Histoire</a></li>
+  <li><a href="/patrimoine/traditions">Traditions</a></li>
+  <li><a href="/patrimoine/sport">Sport</a></li>
+  <li><a href="/patrimoine/orchestre">Orchestre</a></li>
+</ul>
+<ul id="ressources_1" class="dropdown-content">
+  <li><a href="/ressources_humaines/recrutement">Recrutement</a></li>
+  <li><a href="/ressources_humaines/formation">Formations et Stages</a></li>
+  <li><a href="/ressources_humaines/ecole">Ecole</a></li>
 </ul>

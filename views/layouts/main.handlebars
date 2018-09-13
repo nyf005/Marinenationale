@@ -16,7 +16,7 @@
 <body>
   {{> _header}}
   <main>
-      {{{body}}}
+    {{{body}}}
   </main>
 
   {{> _footer}}
@@ -28,11 +28,12 @@
   <script>
     $(document).ready(function () {
       $('.button-collapse').sideNav();
-      $('.slider').slider({
-        height: 400,
-        indicators: false
-      });
       $('.parallax').parallax();
+      $('.dropdown-trigger').dropdown({
+        hover:true,
+        belowOrigin: true,
+        constrainWidth: false
+      });
     });
   </script>
 </body>
