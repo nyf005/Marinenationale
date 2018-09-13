@@ -1,0 +1,57 @@
+<div class="navbar-fixed">
+  <nav class="blue darken-3">
+    <div class="nav-wrapper container">
+        <a href="#" data-activates="main-menu" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
+        <a href="/" class="logo">Marine Nationale</a>
+        <!-- RIGHT NAV -->
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Welcome {{user.firstName}}</a></li>
+          <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+          <li><a href="#"><i class="fa fa-book"></i> Public Stories</a></li>
+        </ul>
+    </div>
+  </nav>
+</div>
+<!-- SIDE MENU -->
+<ul class="side-nav" id="main-menu">
+  <form class="container section col s12 p6">
+    <blockquote>ESPACE MEMBRE</blockquote>
+    <hr>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">account_circle</i>
+      <input id="mecano" type="text" class="validate">
+      <label for="mecano">Mécano</label>
+    </div>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">vpn_key</i>
+      <input id="password" type="password" class="validate">
+      <label for="password">Mot de passe</label>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="img/sea.png">
+      </div>
+      <a href="#user"><img class="circle" src="img/jdoe.jpg"></a>
+      <a href="#name"><span class="white-text name">John Doe</span></a>
+      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div>
+  </li>
+
+  <li>
+    <a href="/stories"><i class="fa fa-book"></i> Public Stories</a>
+  </li>
+
+  <li class="divider"></li>
+  <li>
+    <a href="#"><i class="fa fa-cog"></i> Dashboard</a>
+  </li>
+  <li>
+    <a href="#"><i class="fa fa-user"></i> My Stories</a>
+  </li>
+  <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+</ul>
