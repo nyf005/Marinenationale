@@ -16,6 +16,7 @@
 <body>
   {{> _header}}
   <main>
+    {{> _msg}}
     {{{body}}}
   </main>
 
@@ -44,6 +45,12 @@
         selectYears: 120
       });
       $('select').material_select();
+
+      //Alert Message button close
+      $('#alert_close').click(function () {
+        $("#alert_box").fadeOut("slow", function () {
+        });
+      });
     });
   </script>
 </body>

@@ -11,32 +11,32 @@ const UserSchema = new Schema({
     required: true
   },
   grade: {
-    type: String
+    type: String,
+    required: true
   },
   nom: {
-    type: String
+    type: String,
+    required: true
   },
   prenoms: {
-    type: String
+    type: String,
+    required: true
   },
-  naissance : {
+  naissance: {
     date: {
       type: Date
     },
     lieu: {
       type: String
-    },
-    sousPref: {
-      type: String
     }
   },
-  parents : {
+  parents: {
     pere: {
       type: String
     },
     mere: {
       type: String
-    },
+    }
   },
   dateEntreeService: {
     type: Date
@@ -49,17 +49,22 @@ const UserSchema = new Schema({
     data: Buffer
   },
   unite: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "unites"
   },
   service: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "services"
   },
   position: {
     type: String
   },
-  status:{
+  statut: {
     type: String,
-    default: "utilisateur"
+    default: "membre"
+  },
+  password: {
+    type: String
   }
 });
 

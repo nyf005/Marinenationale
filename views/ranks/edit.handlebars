@@ -1,0 +1,50 @@
+<div class="row container">
+  <div class="card-panel center-align">
+    <h5>Mettre à jour un grade</h5>
+  </div>
+  <hr>
+  <form action="/ranks/edit/{{rank.id}}?_method=PUT" method="POST" class="container section col s12 p6">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="input-field col m6 s12">
+      <select name="categorie">
+        {{#select rank.categorie}}
+        <option value="" disabled selected>Catégorie du grade</option>
+        <option value="officier">Officier</option>
+        <option value="o_marinier">Officier Marinier</option>
+        <option value="militaire_du_rang">Militaire du Rang</option>
+        {{/select}}
+      </select>
+      <label for="categorie">Catégorie</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <select name="sous_categorie">
+        {{#select rank.sousCategorie}}
+        <option value="" disabled selected>Sous-catégorie du grade</option>
+        <option value="off_gen">Officier Général</option>
+        <option value="off_sup">Officier Supérieur</option>
+        <option value="off_sub">Officier Subalterne</option>
+        <option value="off_mar_sup">Officier Marinier Supérieur</option>
+        <option value="off_mar_sub">Officier Marinier Subalterne</option>
+        {{/select}}
+      </select>
+      <label for="sous_categorie">Sous-catégorie</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <input name="grade" id="grade" type="text" class="validate" {{#if errors}} value="{{grade}}" {{else}} value="{{rank.grade}}" {{/if}}>
+      <label for="grade">Grade</label>
+    </div>
+    <div class="input-field col m3 s12">
+      <input name="abreviation" id="abreviation" type="text" class="validate" {{#if errors}} value="{{abreviation}}" {{else}} value="{{rank.abreviation}}" {{/if}}>
+      <label for="abreviation">Abréviation</label>
+    </div>
+    <div class="input-field col m3 s12">
+      <input name="ordre" id="ordre" type="number" class="validate" {{#if errors}} value="{{ordre}}" {{else}} value="{{rank.ordre}}" {{/if}}>
+      <label for="ordre">Ordre</label>
+    </div>
+    <div class="input-field col m2 offset-m10 s12">
+      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,36 @@
+<div class="container">
+  <h4>Les Unités</h4>
+  {{#if unites}}
+  <table class="responsive-table centered highlight">
+    <thead>
+      <tr>
+        <th>Abréviation</th>
+        <th>Intitulé</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each unites}}
+      <tr>
+        <td>{{abreviation}}</td>
+        <td>{{nom}}</td>
+        <td>
+          <a class="btn left-align" href="/unites/edit/{{id}}">
+            <i class="fa fa-pencil"></i> Modifier
+          </a>
+        </td>
+        <td>
+          <form action="/unites/delete/{{id}}?_method=DELETE" method="POST" id="delete-form">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn red"><i class="fa fa-remove"></i> Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p>Aucune unité n'a été ajoutée pour l'instant.</p>
+  {{/if}}
+</div>

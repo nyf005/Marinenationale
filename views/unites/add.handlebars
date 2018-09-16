@@ -1,0 +1,21 @@
+<div class="row container">
+  <div class="card-panel center-align">
+    <h5>Ajouter une unité</h5>
+  </div>
+  <hr>
+  <form action="/unites/add" method="POST" class="container section col s12 p6">
+    <div class="input-field col m6 s12">
+      <input name="unite" id="unite" type="text" class="validate" {{#if errors}} value="{{unite}}" {{/if}}>
+      <label for="unite">Intitulé de l'unité</label>
+    </div>
+    <div class="input-field col m3 s12">
+      <input name="abreviation" id="abreviation" type="text" class="validate" {{#if errors}} value="{{abreviation}}" {{/if}}>
+      <label for="abreviation">Abréviation</label>
+    </div>
+    <div class="input-field col m2 offset-m1 s12">
+      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>
