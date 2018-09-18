@@ -35,6 +35,31 @@
     </div>
   </li>
   <li class="divider"></li>
+  <li class="blue accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-bars icon_menu"></i>Menu
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li>
+              <a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i>Organisation</a>
+            </li>
+            <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i>Equipements</a></li>
+            <li>
+              <a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i>Ressources
+                Humaines</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i>Patrimoine</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="divider"></li>
   <li class="yellow accent-1">
     <ul class="collapsible collapsible-accordion">
       <li>
@@ -53,12 +78,13 @@
       </li>
     </ul>
   </li>
-   <li class="divider"></li>
+  <li class="divider"></li>
   {{#equal user.statut "super_admin"}}
   <li class="orange accent-1">
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Espace Administrateur
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Espace
+          Administrateur
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
           <ul>
@@ -76,9 +102,10 @@
     </ul>
   </li>
   {{/equal}}
-   <li class="divider"></li>
+  <li class="divider"></li>
   <li class="red darken-1">
-    <a class="collapsible-header waves-effect waves-blue" href="/users/logout"><i class="fa fa-sign-out icon_menu"></i>Me Déconnecter</a>
+    <a class="collapsible-header waves-effect waves-blue" href="/users/logout"><i class="fa fa-sign-out icon_menu"></i>Me
+      Déconnecter</a>
   </li>
   {{else}}
   <form action="/users/login" method="POST" class="container section col s12 p6">
@@ -98,8 +125,6 @@
       <i class="material-icons right">send</i>
     </button>
   </form>
-  <li class="divider"></li>
-  {{/if}}
   <li class="divider"></li>
   <li class="blue accent-1">
     <ul class="collapsible collapsible-accordion">
@@ -125,6 +150,7 @@
       </li>
     </ul>
   </li>
+  {{/if}}
 </ul>
 
 {{!-- Dropdown structure --}}
@@ -149,7 +175,6 @@
   <li><a href="/ressources_humaines/formation">Formations et Stages</a></li>
   <li><a href="/ressources_humaines/ecole">Ecole</a></li>
 </ul>
-
 <ul id="equipements_1" class="dropdown-content">
   <li><a href="/equipements/coms">Centres Opérationnels de la Marine</a></li>
   <li><a href="/equipements/patrouilleurs">Patrouilleurs</a></li>
