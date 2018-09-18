@@ -37,12 +37,18 @@
       });
       $('.datepicker').pickadate({
         monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+        monthsShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'],
         weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
         today: 'aujourd\'hui',
         clear: 'effacer',
-        formatSubmit: 'yyyy/mm/dd',
+        maxDate: new Date(),
+        firstDay: 1,
+        format: 'dd mmmm yyyy',
+        formatSubmit: 'yyyy-mm-dd',
+        selectYears: 70,
         selectMonths: true,
-        selectYears: 120
+        max: new Date(),
+        hiddenName: true
       });
       $('select').material_select();
 

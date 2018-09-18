@@ -5,7 +5,9 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
+const cookieParser = require('cookie-parser');
 const session = require("express-session");
+const passport = require("passport");
 
 //Load Models
 require("./models/User");
@@ -24,7 +26,13 @@ const services = require("./routes/services");
 const keys = require("./config/keys");
 
 //Handlebars Helpers
-const { select, equal } = require('./helpers/functions');
+const {
+  select,
+  equal,
+  dateFormat,
+  formatDate,
+  ifCond
+} = require("./helpers/functions");
 
 //Map global promises
 mongoose.Promise = global.Promise;
@@ -36,18 +44,22 @@ mongoose
     {
       useNewUrlParser: true
     }
-  )
-  .then(() => console.log("MongoDB Connected"))
+  ).then(() => {
+    console.log("MongoDB Connected");
+  })
   .catch(err => console.log(err));
 
 const app = express();
+
+//Passport config
+require('./config/passport')(passport);
 
 //Body Parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Method Override Middleware
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 
 //Handlebars middleware
 app.engine(
@@ -55,7 +67,10 @@ app.engine(
   exphbs({
     helpers: {
       select: select,
-      equal: equal
+      equal: equal,
+      dateFormat: dateFormat,
+      formatDate: formatDate,
+      ifCond: ifCond
     },
     defaultLayout: "main"
   })
@@ -63,12 +78,21 @@ app.engine(
 
 app.set("view engine", "handlebars");
 
+//cookie-parser middleware
+app.use(cookieParser());
+
 //express-session middleware
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+//Passport session middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Flash message middleware
 app.use(flash());
@@ -77,6 +101,7 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.errors_msg = req.flash("errors_msg");
+  res.locals.error = req.flash("error");
   res.locals.user = req.user || null;
   next();
 });

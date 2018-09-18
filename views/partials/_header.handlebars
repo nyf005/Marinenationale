@@ -16,41 +16,57 @@
     </div>
   </nav>
 </div>
-
 <!-- SIDE MENU -->
 <ul class="side-nav" id="main-menu">
   {{#if user}}
+  {{user.photo.url}}
   <li>
     <div class="user-view">
       <div class="background">
-        <img src="img/sea.png">
+        <img src="../../img/sea.png">
       </div>
-      <a href="#user"><img class="circle" src="img/jdoe.jpg"></a>
-      <a href="#name"><span class="white-text name">John Doe</span></a>
-      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+      {{#if user.photo.url}}
+      <img class="circle" src="{{user.photo.url}}">  
+      {{else}} 
+      <img class="circle" src="../../img/jdoe.jpg"> 
+      {{/if}}
+      <span class="white-text name">{{user.grade}} {{user.nom}} {{user.prenoms}}</span>
+      <span class="white-text email">{{user.unite.abreviation}} - {{user.service.nom}}</span>
     </div>
   </li>
   <li class="divider"></li>
-  <li>
-    <a href="/users/edit"><i class="fa fa-info"></i> Mes Informations</a>
+  <div class="yellow accent-1">
+    <li>
+    <a href="/users/edit/{{user.id}}"><i class="fa fa-info"></i> Mes Informations</a>
   </li>
-  <li>
+   <li>
     <a href="#"><i class="fa fa-book"></i> Mes Diplômes et Stages</a>
   </li>
-  <li><a href="#"><i class="fa fa-sign-out"></i> Me Déconnecter</a></li>
+  </div>
+  {{#equal user.statut "super_admin"}}
+   <li class="divider"></li>
+  <div class="orange accent-1">
+    <li><a class="dropdown-trigger" href="#!" data-activates="personnel"><i class="fa fa-users"></i> Gestion du personnel</a></li>
+    <li><a class="dropdown-trigger" href="#!" data-activates="grades"><i class="fa fa-bookmark"></i> Gestion des grades</a></li>
+  <li><a class="dropdown-trigger" href="#!" data-activates="unites"><i class="fa fa-home"></i> Gestion des unités</a></li>
+  <li><a class="dropdown-trigger" href="#!" data-activates="services"><i class="fa fa-briefcase"></i> Gestion des services</a></li>
+  </div>
+  {{/equal}}
+  <li class="divider"></li>
+  <li class="red darken-1"><a href="/users/logout"><i class="fa fa-sign-out"></i> Me Déconnecter</a></li>
   <li class="divider"></li>
   {{else}}
-  <form class="container section col s12 p6">
+  <form action="/users/login" method="POST" class="container section col s12 p6">
     <div class="card-panel orange darken-3 center">ESPACE MEMBRE</div>
     <hr>
     <div class="input-field col s12">
       <i class="material-icons prefix">account_circle</i>
-      <input id="mecano" type="number" class="validate">
+      <input name="mecano" id="mecano" type="number" class="validate">
       <label for="mecano">Mécano</label>
     </div>
     <div class="input-field col s12">
       <i class="material-icons prefix">vpn_key</i>
-      <input id="password" type="password" class="validate">
+      <input name="password" id="password" type="password" class="validate">
       <label for="password">Mot de passe</label>
     </div>
     <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Me Connecter
@@ -59,11 +75,13 @@
   </form>
   <li class="divider"></li>
   {{/if}}
-  <li><a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i> Organisation</a></li>
+  <div class="blue accent-1">
+     <li><a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i> Organisation</a></li>
   <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
   <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i> Equipements</a></li>
   <li><a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i> Ressources Humaines</a></li>
   <li><a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i> Patrimoine</a></li>
+  </div>
 </ul>
 
 {{!-- Dropdown structure --}}
@@ -109,4 +127,24 @@
   <li><a href="/ressources_humaines/recrutement">Recrutement</a></li>
   <li><a href="/ressources_humaines/formation">Formations et Stages</a></li>
   <li><a href="/ressources_humaines/ecole">Ecole</a></li>
+</ul>
+<ul id="personnel" class="dropdown-content">
+  <li><a href="/users/add">Ajouter un marin</a></li>
+  <li><a href="/users">Voir les marins</a></li>
+</ul>
+<ul id="personnel" class="dropdown-content">
+  <li><a href="/users/add">Ajouter un marin</a></li>
+  <li><a href="/users">Voir les marins</a></li>
+</ul>
+<ul id="grades" class="dropdown-content">
+  <li><a href="/ranks/add">Ajouter un grade</a></li>
+  <li><a href="/ranks">Voir les grades</a></li>
+</ul>
+<ul id="unites" class="dropdown-content">
+  <li><a href="/unites/add">Ajouter une unité</a></li>
+  <li><a href="/unites">Voir les unités</a></li>
+</ul>
+<ul id="services" class="dropdown-content">
+  <li><a href="/services/add">Ajouter un service</a></li>
+  <li><a href="/services">Voir les services</a></li>
 </ul>

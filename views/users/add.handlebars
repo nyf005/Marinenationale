@@ -14,10 +14,12 @@
     </div>
     <div class="input-field col m4 s12">
       <select name="grade" >
+        {{#select grade}}
         <option value="" disabled selected>Grade du marin</option>
         {{#each ranks}}
           <option value="{{abreviation}}">{{grade}}</option>
         {{/each}}
+        {{/select}}
       </select>
       <label for="grade">Grade</label>
     </div>
@@ -31,11 +33,13 @@
     </div>
     <div class="input-field col m4 s12">
       <select name="statut" >
+        {{#select statut}}
         <option value="" disabled selected>Droits d'utilisateur</option>
         <option value="membre">Membre</option>
         <option value="editeur">Editeur</option>
         <option value="admin">Administrateur</option>
         <option value="super_admin">Super Administrateur</option>
+        {{/select}}
       </select>
       <label>Statut</label>
     </div>

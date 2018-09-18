@@ -3,11 +3,11 @@
     <h5>Mettre à jour un service</h5>
   </div>
   <hr>
-  <form action="/services/edit/{{service.id}}?_method=PUT" method="POST" class="container section col s12 p6">
+  <form action="/services/edit/{{serv.id}}?_method=PUT" method="POST" class="container section col s12 p6">
     <input type="hidden" name="_method" value="PUT">
     <div class="input-field col m5 s12">
       <select name="unite">
-        {{#select service.unite.id}}
+        {{#select serv.unite.id}}
           <option value="" disabled selected>Sélectionner l'unité rattachée</option>
           {{#each unites}}
           <option value="{{id}}">{{nom}}</option>
@@ -17,13 +17,13 @@
       <label for="unite">Unité</label>
     </div>
     <div class="input-field col m5 s12">
-      <input name="service" id="service" type="text" class="validate" {{#if errors}} value="{{unite}}" {{else}} value="{{service.nom}}"
+      <input name="service" id="service" type="text" class="validate" {{#if errors}} value="{{service}}" {{else}} value="{{serv.nom}}"
         {{/if}}>
       <label for="service">Intitulé du service</label>
     </div>
     <div class="input-field col m2 s12">
       <input name="abreviation" id="abreviation" type="text" class="validate" {{#if errors}} value="{{abreviation}}"
-        {{else}} value="{{service.abreviation}}" {{/if}}>
+        {{else}} value="{{serv.abreviation}}" {{/if}}>
       <label for="abreviation">Abréviation</label>
     </div>
     <div class="input-field col m2 offset-m10 s12">

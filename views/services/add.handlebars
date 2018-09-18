@@ -6,10 +6,12 @@
   <form action="/services/add" method="POST" class="container section col s12 p6">
     <div class="input-field col m5 s12">
       <select name="unite">
+        {{#select unite}}
         <option value="" disabled selected>Sélectionner l'unité rattachée</option>
           {{#each unites}}
             <option value="{{id}}">{{nom}}</option>
           {{/each}}
+          {{/select}}
       </select>
       <label for="unite">Unité</label>
     </div>

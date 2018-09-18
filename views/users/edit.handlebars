@@ -3,79 +3,123 @@
     <h5>Mise à Jour d'informations</h5>
   </div>
   <hr>
-  <form class="container section col s12 p6">
-    <div class="input-field col m3 s12">
-      <input id="mecano" type="number" class="validate">
+  <form action="/users/register/{{user.id}}?_method=PUT" method="POST" class="container section col s12 p6" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="input-field col m1 s12">
+      <input name="mecano" id="mecano" type="number" class="validate" value="{{user.mecano}}" disabled>
       <label for="mecano">Mécano</label>
     </div>
-    <div class="input-field col m3 s12">
-      <input id="matricule" type="text" class="validate">
+    <div class="input-field col m2 s12">
+      <input name="matricule" id="matricule" type="text" class="validate" value="{{user.matricule}}" disabled>
       <label for="matricule">Matricule</label>
     </div>
-    <div class="input-field col m4 s12">
-      <select>
-        <option value="" disabled selected>Sélectionnez votre grade</option>
-        <option value="membre">Membre</option>
-        <option value="editeur">Editeur</option>
-        <option value="administrateur">Administrateur</option>
-      </select>
+    <div class="input-field col m1 s12">
+      <input name="grade" id="grade" type="text" class="validate" value="{{user.grade}}" disabled>
       <label for="grade">Grade</label>
     </div>
-        <div class="input-field col m2 s12">
-      <select>
-        <option value="" disabled selected>Genre</option>
-        <option value="masculin">Masculin</option>
-        <option value="feminin">Féminin</option>
-      </select>
-      <label for="genre">Genre</label>
-    </div>
-    <div class="input-field col m3 s12">
-      <input id="nom" type="text" class="validate">
+    <div class="input-field col m2 s12">
+      <input name="nom" id="nom" type="text" class="validate" value="{{user.nom}}" disabled>
       <label for="nom">Nom</label>
     </div>
     <div class="input-field col m4 s12">
-      <input id="prenoms" type="text" class="validate">
+      <input name="prenoms" id="prenoms" type="text" class="validate" value="{{user.prenoms}}" disabled>
       <label for="prenoms">Prénoms</label>
     </div>
     <div class="input-field col m2 s12">
-      <input id="dateNaiss" type="date" class="datepicker">
+      <select name="genre">
+        {{#if errors}}
+          {{#select genre}}
+            <option value="" disabled selected>Genre</option>
+            <option value="masculin">Masculin</option>
+            <option value="feminin">Féminin</option>
+          {{/select}}
+        {{else}}
+          {{#select user.genre}}
+            <option value="" disabled selected>Genre</option>
+            <option value="masculin">Masculin</option>
+            <option value="feminin">Féminin</option>
+          {{/select}}
+        {{/if}}
+      </select>
+      <label for="genre">Genre</label>
+    </div>
+    <div class="input-field col m2 s12">
+      {{#if user.naissance.date}}
+      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker" data-value="{{dateFormat user.naissance.date "YYYY-MM-DD"}}">
+      {{else}}
+      <input name="dateNaiss"  id="dateNaiss" type="date" class="datepicker" {{#if dateNaiss}} data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+      {{/if}}
+      <input type="hidden" name="dateNaiss">
       <label for="dateNaiss">Né(e) le</label>
     </div>
-    <div class="input-field col m3 s12">
-      <input id="lieuNaiss" type="text" class="validate">
+    <div class="input-field col m2 s12">
+      <input name="lieuNaiss" id="lieuNaiss" type="text" class="validate" {{#if errors}} value="{{lieuNaiss}}" {{else}}
+        value="{{user.naissance.lieu}}" {{/if}}>
       <label for="lieuNaiss">À</label>
     </div>
-    <div class="input-field col m6 s12">
-      <input id="pere" type="text" class="validate">
+    <div class="input-field col m4 s12">
+      <input name="pere" id="pere" type="text" class="validate" {{#if errors}} value="{{pere}}" {{else}} value="{{user.parents.pere}}" {{/if}}>
       <label for="pere">Fils de (Père)</label>
     </div>
-    <div class="input-field col m6 s12">
-      <input id="mere" type="text" class="validate">
+    <div class="input-field col m4 s12">
+      <input name="mere" id="mere" type="text" class="validate" {{#if errors}} value="{{mere}}" {{else}} value="{{user.parents.mere}}" {{/if}}>
       <label for="mere">Et de (Mère)</label>
     </div>
-    <div class="input-field col m3 s12">
-      <input id="dateEntreeService" type="date" class="datepicker">
-      <label for="dateEntreeService">Date d'entrée en service</label>
+    <div class="input-field col m2 s12">
+      {{#if user.dateEntreeService}}
+      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" data-value="{{dateFormat user.dateEntreeService "YYYY-MM-DD"}}">
+      {{else}}
+      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" {{#if dateEntreeService}} data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} >
+      {{/if}}
+      <input type="hidden" name="dateEntreeService">
+      <label for="dateEntreeService">Entré(e) en service le</label>
     </div>
-    <div class="input-field col m3 s12">
-      <input id="dateNomination" type="date" class="datepicker">
-      <label for="dateNomination">Date de nomination</label>
+    <div class="input-field col m2 s12">
+      {{#if user.dateNomination}}
+      <input name="dateNomination" id="dateNomination" type="date" class="datepicker"  data-value="{{dateFormat user.dateNomination "YYYY-MM-DD"}}">
+      {{else}}
+      <input name="dateNomination" id="dateNomination" type="date" class="datepicker" {{#if dateNomination}} data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} >
+      {{/if}}
+      <input type="hidden" name="dateNomination">
+      <label for="dateNomination">Nommé(e) le</label>
     </div>
-    <div class="input-field col m3 s12">
-      <select>
-        <option value="" disabled selected>Sélectionnez votre unité</option>
-        <option value="membre">Membre</option>
-        <option value="editeur">Editeur</option>
-        <option value="administrateur">Administrateur</option>
+    <div class="input-field col m5 s12">
+      <select name="unite">
+        {{#if errors}}
+          {{#select unite}}
+            <option value="" disabled selected>Sélectionnez votre unité</option>
+            {{#each unites}}
+            <option value="{{id}}">{{nom}}</option>
+            {{/each}}
+          {{/select}}
+        {{else}}
+          {{#select user.unite.id}}
+            <option value="" disabled selected>Sélectionnez votre unité</option>
+            {{#each unites}}
+            <option value="{{id}}">{{nom}}</option>
+            {{/each}}
+          {{/select}}
+        {{/if}}
       </select>
       <label for="unite">Unité d'affectation</label>
     </div>
     <div class="input-field col m3 s12">
-      <select>
-        <option value="" disabled selected>Sélectionnez votre service</option>
-        <option value="membre">Membre</option>
-        <option value="editeur">Editeur</option>
-        <option value="administrateur">Administrateur</option>
+      <select name="service">
+        {{#if errors}} 
+          {{#select service}}
+            <option value="" disabled selected>Sélectionnez votre service</option>
+            {{#each services}}
+            <option value="{{id}}">{{nom}}</option>
+            {{/each}}
+          {{/select}}
+        {{else}}
+          {{#select user.service.id}}
+            <option value="" disabled selected>Sélectionnez votre service</option>
+            {{#each services}}
+            <option value="{{id}}">{{nom}}</option>
+            {{/each}}
+          {{/select}}
+        {{/if}}
       </select>
       <label for="service">Service</label>
     </div>
@@ -86,18 +130,18 @@
     <div class="file-field input-field col m4 s12">
       <div class="btn">
         <span>Photo</span>
-        <input type="file" accept=".png, .jpg, .jpeg">
+        <input name="photo" type="file" accept=".png, .jpg, .jpeg">
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
     </div>
     <div class="input-field col m4 s12">
-      <input id="password" type="text" class="validate">
+      <input name="password" id="password" type="password" class="validate" {{#if password}} value="{{password}}" {{else}} value="{{user.password}}" {{/if}}>
       <label for="password">Mot de passe</label>
     </div>
     <div class="input-field col m4 s12">
-      <input id="confirm_password" type="text" class="validate">
+      <input name="confirm_password" id="confirm_password" type="password" class="validate" {{#if password}} value="{{confirm_password}}" {{else}} value="{{user.password}}" {{/if}}>
       <label for="confirm_password">Confirmer mot de passe</label>
     </div>
     <div class="input-field col m2 offset-m10 s12">

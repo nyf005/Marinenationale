@@ -16,13 +16,11 @@ router.get("/", (req, res) => {
 
 // Formulaire d'ajout de services
 router.get("/add", (req, res) => {
-  Unite.find()
-    .populate("unites")
-    .then(unites => {
-      res.render("services/add", {
-        unites: unites
-      });
+  Unite.find().then(unites => {
+    res.render("services/add", {
+      unites: unites
     });
+  });
 });
 
 // Traitement du formulaire d'ajout
@@ -36,11 +34,14 @@ router.post("/add", (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.render("services/add", {
-      errors: errors,
-      unite: req.body.unite,
-      service: req.body.service,
-      abreviation: req.body.abreviation
+    Unite.find().then(unites => {
+      res.render("services/add", {
+        errors: errors,
+        unites: unites,
+        unite: req.body.unite,
+        service: req.body.service,
+        abreviation: req.body.abreviation
+      });
     });
   } else {
     const newService = {
@@ -62,10 +63,10 @@ router.get("/edit/:id", (req, res) => {
     _id: req.params.id
   })
     .populate("unite")
-    .then(service => {
+    .then(serv => {
       Unite.find().then(unites => {
         res.render("services/edit", {
-          service: service,
+          serv: serv,
           unites: unites
         });
       });
@@ -83,12 +84,28 @@ router.put("/edit/:id", (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.render("services/edit", {
-      errors: errors,
-      unite: req.body.unite,
-      service: req.body.service,
-      abreviation: req.body.abreviation
-    });
+    Service.findOne({
+      _id: req.params.id
+    })
+      .populate("unite")
+      .then(serv => {
+        Unite.find().then(unites => {
+          res.render("services/edit", {
+            serv: serv,
+            errors: errors,
+            unite: req.body.unite,
+            service: req.body.service,
+            abreviation: req.body.abreviation,
+            unites: unites
+          });
+        });
+      });
+    // res.render("services/edit", {
+    //   errors: errors,
+    //   unite: req.body.unite,
+    //   service: req.body.service,
+    //   abreviation: req.body.abreviation
+    // });
   } else {
     Service.findOne({
       _id: req.params.id

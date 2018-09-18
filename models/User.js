@@ -22,6 +22,9 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  genre: {
+    type: String
+  },
   naissance: {
     date: {
       type: Date
@@ -45,8 +48,12 @@ const UserSchema = new Schema({
     type: Date
   },
   photo: {
-    type: String,
-    data: Buffer
+    id: {
+      type: String
+    },
+    url: {
+      type: String
+    }
   },
   unite: {
     type: Schema.Types.ObjectId,
@@ -56,9 +63,9 @@ const UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "services"
   },
-  position: {
-    type: String
-  },
+  // position: {
+  //   type: String
+  // },
   statut: {
     type: String,
     default: "membre"
