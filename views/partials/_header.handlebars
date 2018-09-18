@@ -11,7 +11,8 @@
         <li><a class="dropdown-trigger" href="#!" data-activates="equipements_1"><i class="fa fa-ship"></i> Equipements</a></li>
         <li><a class="dropdown-trigger" href="#!" data-activates="ressources_1"><i class="fa fa-users"></i> Ressources
             Humaines</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-activates="patrimoine_1"><i class="fa fa-building"></i> Patrimoine</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-activates="patrimoine_1"><i class="fa fa-building"></i>
+            Patrimoine</a></li>
       </ul>
     </div>
   </nav>
@@ -25,31 +26,60 @@
         <img src="../../img/sea.png">
       </div>
       {{#if user.photo.url}}
-      <img class="circle" src="{{user.photo.url}}">  
-      {{else}} 
-      <img class="circle" src="../../img/jdoe.jpg"> 
+      <img class="circle" src="{{user.photo.url}}">
+      {{else}}
+      <img class="circle" src="../../img/jdoe.jpg">
       {{/if}}
       <span class="white-text name">{{user.grade}} {{user.nom}} {{user.prenoms}}</span>
       <span class="white-text email">{{user.unite.abreviation}} - {{user.service.nom}}</span>
     </div>
   </li>
   <li class="divider"></li>
-    <li class="yellow accent-1">
-    <a href="/users/edit/{{user.id}}"><i class="fa fa-info"></i> Mes Informations</a>
+  <li class="yellow accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user icon_menu"></i>Espace membre
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li>
+              <a href="/users/edit/{{user.id}}"><i class="fa fa-info"></i> Mes Informations</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-book"></i> Mes Diplômes et Stages</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
   </li>
-   <li class="yellow accent-1">
-    <a href="#"><i class="fa fa-book"></i> Mes Diplômes et Stages</a>
-  </li>
-  {{#equal user.statut "super_admin"}}
    <li class="divider"></li>
-    <li class="orange accent-1"><a class="dropdown-trigger" href="#!" data-activates="personnel"><i class="fa fa-users"></i> Gestion du personnel</a></li>
-    <li class="orange accent-1"><a class="dropdown-trigger" href="#!" data-activates="grades"><i class="fa fa-bookmark"></i> Gestion des grades</a></li>
-  <li class="orange accent-1"><a class="dropdown-trigger" href="#!" data-activates="unites"><i class="fa fa-home"></i> Gestion des unités</a></li>
-  <li class="orange accent-1"><a class="dropdown-trigger" href="#!" data-activates="services"><i class="fa fa-briefcase"></i> Gestion des services</a></li>
+  {{#equal user.statut "super_admin"}}
+  <li class="orange accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Espace Administrateur
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a class="dropdown-trigger" href="#!" data-activates="personnel"><i class="fa fa-users"></i>
+                Gestion du personnel</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-activates="grades"><i class="fa fa-bookmark"></i>
+                Gestion des grades</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-activates="unites"><i class="fa fa-home"></i>
+                Gestion des unités</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-activates="services"><i class="fa fa-briefcase"></i>
+                Gestion des services</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
   {{/equal}}
-  <li class="divider"></li>
-  <li class="red darken-1"><a href="/users/logout"><i class="fa fa-sign-out"></i> Me Déconnecter</a></li>
-  <li class="divider"></li>
+   <li class="divider"></li>
+  <li class="red darken-1">
+    <a class="collapsible-header waves-effect waves-blue" href="/users/logout"><i class="fa fa-sign-out icon_menu"></i>Me Déconnecter</a>
+  </li>
   {{else}}
   <form action="/users/login" method="POST" class="container section col s12 p6">
     <div class="card-panel orange darken-3 center">ESPACE MEMBRE</div>
@@ -70,13 +100,31 @@
   </form>
   <li class="divider"></li>
   {{/if}}
-
-     <li class="blue accent-1"><a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i> Organisation</a></li>
-  <li class="blue accent-1"><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
-  <li class="blue accent-1"><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i> Equipements</a></li>
-  <li class="blue accent-1"><a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i> Ressources Humaines</a></li>
-  <li class="blue accent-1"><a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i> Patrimoine</a></li>
-
+  <li class="divider"></li>
+  <li class="blue accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-bars icon_menu"></i>Menu
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li>
+              <a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i>Organisation</a>
+            </li>
+            <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i>Equipements</a></li>
+            <li>
+              <a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i>Ressources
+                Humaines</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i>Patrimoine</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 {{!-- Dropdown structure --}}

@@ -20,6 +20,7 @@ module.exports = function(passport) {
             });
           }
 
+          // Répétitif mais préfère laisser
           if (!user.password) {
             return done(null, false, {
               message:

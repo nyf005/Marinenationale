@@ -34,7 +34,7 @@ const storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: "usersImages",
   allowedFormats: ["jpg", "jpeg", "png"],
-  transformation: [{gravity: "face", crop: "thumb"}]
+  transformation: [{width: 500, height: 500, gravity: "face", crop: "thumb" }]
 });
 const upload = multer({ storage });
 
@@ -137,32 +137,43 @@ router.post("/login", (req, res, next) => {
     .populate("unite")
     .populate("service")
     .then(user => {
-      if (user.password) {
-        passport.authenticate("local", {
-          successRedirect: "/",
-          failureRedirect: "/",
-          failureFlash: true
-        })(req, res, next);
-      } else {
-        //Pas de mot de passe, Identification avec mot de passe par défaut
-        if (req.body.password === "M@rine20nationale18") {
-          Unite.find().then(unites => {
-            Service.find().then(services => {
-              res.render(`users/edit`, {
-                user: user,
-                unites: unites,
-                services: services
+      if (user) {
+        if (user.password) {
+          passport.authenticate("local", {
+            successRedirect: "/",
+            failureRedirect: "/",
+            failureFlash: true
+          })(req, res, next);
+        } else {
+          //Pas de mot de passe, Identification avec mot de passe par défaut
+          if (req.body.password === "M@rine20nationale18") {
+            Unite.find().then(unites => {
+              Service.find().then(services => {
+                res.render(`users/edit`, {
+                  user: user,
+                  unites: unites,
+                  services: services
+                });
               });
             });
-          });
-        } else {
-          req.flash(
-            "errors_msg",
-            "Le mot de passe saisi est incorrect. Vous ne pouvez pas accéder à l'espace membre"
-          );
-          res.redirect("/");
+          } else {
+            req.flash(
+              "errors_msg",
+              "Connectez vous d'abord avec le mot de passe par défaut pour renseigner vos informations"
+            );
+            res.redirect("/");
+          }
         }
+      } else {
+        req.flash(
+          "errors_msg",
+          "Mécano Incorrect, Vous ne pouvez pas accéder à l'espace membre"
+        );
+        res.redirect("/");
       }
+    })
+    .catch(err => {
+      console.log(err);
     });
 });
 
