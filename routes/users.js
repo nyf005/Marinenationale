@@ -33,7 +33,8 @@ cloudinary.config({
 const storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: "usersImages",
-  allowedFormats: ["jpg", "jpeg", "png"]
+  allowedFormats: ["jpg", "jpeg", "png"],
+  transformation: [{width: 100, height: 100, gravity: "face", radius: "max", crop: "thumb"}]
 });
 const upload = multer({ storage });
 
