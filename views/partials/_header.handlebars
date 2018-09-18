@@ -19,7 +19,6 @@
 <!-- SIDE MENU -->
 <ul class="side-nav" id="main-menu">
   {{#if user}}
-  {{user.photo.url}}
   <li>
     <div class="user-view">
       <div class="background">
@@ -35,22 +34,18 @@
     </div>
   </li>
   <li class="divider"></li>
-  <div class="yellow accent-1">
-    <li>
+    <li class="yellow accent-1">
     <a href="/users/edit/{{user.id}}"><i class="fa fa-info"></i> Mes Informations</a>
   </li>
-   <li>
+   <li class="yellow accent-1">
     <a href="#"><i class="fa fa-book"></i> Mes Diplômes et Stages</a>
   </li>
-  </div>
   {{#equal user.statut "super_admin"}}
    <li class="divider"></li>
-  <div class="orange accent-1">
-    <li><a class="dropdown-trigger" href="#!" data-activates="personnel"><i class="fa fa-users"></i> Gestion du personnel</a></li>
-    <li><a class="dropdown-trigger" href="#!" data-activates="grades"><i class="fa fa-bookmark"></i> Gestion des grades</a></li>
-  <li><a class="dropdown-trigger" href="#!" data-activates="unites"><i class="fa fa-home"></i> Gestion des unités</a></li>
-  <li><a class="dropdown-trigger" href="#!" data-activates="services"><i class="fa fa-briefcase"></i> Gestion des services</a></li>
-  </div>
+    <li class="orange accent-1"><a class="dropdown-trigger" href="#!" data-activates="personnel"><i class="fa fa-users"></i> Gestion du personnel</a></li>
+    <li class="orange accent-1"><a class="dropdown-trigger" href="#!" data-activates="grades"><i class="fa fa-bookmark"></i> Gestion des grades</a></li>
+  <li class="orange accent-1"><a class="dropdown-trigger" href="#!" data-activates="unites"><i class="fa fa-home"></i> Gestion des unités</a></li>
+  <li class="orange accent-1"><a class="dropdown-trigger" href="#!" data-activates="services"><i class="fa fa-briefcase"></i> Gestion des services</a></li>
   {{/equal}}
   <li class="divider"></li>
   <li class="red darken-1"><a href="/users/logout"><i class="fa fa-sign-out"></i> Me Déconnecter</a></li>
@@ -75,13 +70,13 @@
   </form>
   <li class="divider"></li>
   {{/if}}
-  <div class="blue accent-1">
-     <li><a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i> Organisation</a></li>
-  <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
-  <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i> Equipements</a></li>
-  <li><a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i> Ressources Humaines</a></li>
-  <li><a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i> Patrimoine</a></li>
-  </div>
+
+     <li class="blue accent-1"><a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i> Organisation</a></li>
+  <li class="blue accent-1"><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
+  <li class="blue accent-1"><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i> Equipements</a></li>
+  <li class="blue accent-1"><a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i> Ressources Humaines</a></li>
+  <li class="blue accent-1"><a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i> Patrimoine</a></li>
+
 </ul>
 
 {{!-- Dropdown structure --}}
