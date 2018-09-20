@@ -28,11 +28,12 @@ const keys = require("./config/keys");
 //Handlebars Helpers
 const {
   select,
-  equal,
   dateFormat,
   formatDate,
   ensureAuthenticated,
-  checkGrant
+  checkGrant,
+  ifCond,
+  toTitleCase
 } = require("./helpers/functions");
 
 //Map global promises
@@ -70,11 +71,12 @@ app.engine(
   exphbs({
     helpers: {
       select: select,
-      equal: equal,
       dateFormat: dateFormat,
       formatDate: formatDate,
       ensureAuthenticated: ensureAuthenticated,
-      checkGrant: checkGrant
+      checkGrant: checkGrant,
+      ifCond: ifCond,
+      toTitleCase: toTitleCase
     },
     defaultLayout: "main"
   })

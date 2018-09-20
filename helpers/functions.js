@@ -37,11 +37,6 @@ module.exports = {
       );
   },
 
-  equal: function(a, b) {
-    var next = arguments[arguments.length - 1];
-    return a === b ? next.fn(this) : next.inverse(this);
-  },
-
   checkGrant: function(statut, checkValue, ressource, req, res) {
     let permission;
     switch (checkValue) {
@@ -172,5 +167,11 @@ module.exports = {
       default:
         return options.inverse(this);
     }
+  },
+
+  toTitleCase: function(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
   }
 };

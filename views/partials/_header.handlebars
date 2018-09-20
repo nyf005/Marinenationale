@@ -79,7 +79,7 @@
     </ul>
   </li>
   <li class="divider"></li>
-  {{#equal user.statut "super_admin"}}
+  {{#ifCond user.statut "==" "super_admin"}}
   <li class="orange accent-1">
     <ul class="collapsible collapsible-accordion">
       <li>
@@ -101,7 +101,7 @@
       </li>
     </ul>
   </li>
-  {{/equal}}
+  {{/ifCond}}
   <li class="divider"></li>
   <li class="red darken-1">
     <a class="collapsible-header waves-effect waves-blue" href="/users/logout"><i class="fa fa-sign-out icon_menu"></i>Me

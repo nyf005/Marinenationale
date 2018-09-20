@@ -5,11 +5,11 @@
   <hr>
   <form action="/users/add" method="POST" class="container section col s12 p6">
     <div class="input-field col m4 s12">
-      <input name="mecano" id="mecano" type="number" class="validate">
+      <input name="mecano" id="mecano" type="number" class="validate" {{#if errors}} value="{{mecano}}" {{/if}}>
       <label for="mecano">Mécano</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="matricule" id="matricule" type="text" class="validate">
+      <input name="matricule" id="matricule" type="text" class="validate" {{#if errors}} value="{{matricule}}" {{/if}}>
       <label for="matricule">Matricule</label>
     </div>
     <div class="input-field col m4 s12">
@@ -24,11 +24,11 @@
       <label for="grade">Grade</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="nom" id="nom" type="text" class="validate">
+      <input name="nom" id="nom" type="text" class="validate" {{#if errors}} value="{{nom}}"  {{/if}}>
       <label for="nom">Nom</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="prenoms" id="prenoms" type="text" class="validate">
+      <input name="prenoms" id="prenoms" type="text" class="validate" {{#if errors}} value="{{prenoms}}"  {{/if}}>
       <label for="prenoms">Prénoms</label>
     </div>
     <div class="input-field col m4 s12">

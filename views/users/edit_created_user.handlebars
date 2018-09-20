@@ -1,0 +1,53 @@
+<div class="row container">
+  <div class="card-panel center-align">
+    <h5>Modifier les informations d'un marin</h5>
+  </div>
+  <hr>
+  <form action="/users/edit-created/{{user.id}}?_method=PUT" method="POST" class="container section col s12 p6">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="input-field col m4 s12">
+      <input name="mecano" id="mecano" type="number" class="validate" value="{{user.mecano}}">
+      <label for="mecano">Mécano</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input name="matricule" id="matricule" type="text" class="validate" value="{{user.matricule}}">
+      <label for="matricule">Matricule</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <select name="grade">
+        {{#select user.grade}}
+        <option value="" disabled selected>Grade du marin</option>
+        {{#each ranks}}
+        <option value="{{abreviation}}">{{grade}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+      <label for="grade">Grade</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input name="nom" id="nom" type="text" class="validate" value="{{user.nom}}">
+      <label for="nom">Nom</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input name="prenoms" id="prenoms" type="text" class="validate" value="{{user.prenoms}}">
+      <label for="prenoms">Prénoms</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <select name="statut">
+        {{#select user.statut}}
+        <option value="" disabled selected>Droits d'utilisateur</option>
+        <option value="membre">Membre</option>
+        <option value="editeur">Editeur</option>
+        <option value="admin">Administrateur</option>
+        <option value="super_admin">Super Administrateur</option>
+        {{/select}}
+      </select>
+      <label>Statut</label>
+    </div>
+    <div class="input-field col m2 offset-m10 s12">
+      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>

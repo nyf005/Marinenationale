@@ -1,12 +1,12 @@
 const AccessControl = require("accesscontrol");
 
 const ac = new AccessControl();
-ac.grant("member") // switch to another role without breaking the chain
+ac.grant("membre") // switch to another role without breaking the chain
       .readAny("account", ["*", "!password"])
       .updateOwn("account")
       .deleteOwn("account")
   .grant("admin") // switch to another role without breaking the chain
-    .extend("member") // inherit role capabilities. also takes an array
+    .extend("membre") // inherit role capabilities. also takes an array
       .createAny("account") // equivalent to .createOwn('video', ['*'])
       .updateAny("created_account")
       .deleteAny("account")

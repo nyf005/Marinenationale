@@ -15,7 +15,11 @@ const Service = mongoose.model("services");
 //Load Keys
 const keys = require("../config/keys");
 
-const { ensureAuthenticated, checkGrant } = require("../helpers/functions");
+const {
+  ensureAuthenticated,
+  checkGrant,
+  toTitleCase
+} = require("../helpers/functions");
 
 //Access Control Grants Var
 let permission;
@@ -40,11 +44,15 @@ const upload = multer({ storage });
 router.get("/", ensureAuthenticated, (req, res) => {
   permission = checkGrant(req.user.statut, "readAny", "account", req, res);
   if (permission) {
-    User.find().then(users => {
-      res.render("users/index", {
-        users: users
+    User.find()
+      .populate("unite")
+      .populate("service")
+      .sort({ ordre: "asc" })
+      .then(users => {
+        res.render("users/index", {
+          users: users
+        });
       });
-    });
   }
 });
 
@@ -108,8 +116,8 @@ router.post("/add", ensureAuthenticated, (req, res) => {
             mecano: req.body.mecano,
             matricule: req.body.matricule,
             grade: req.body.grade,
-            nom: req.body.nom,
-            prenoms: req.body.prenoms,
+            nom: req.body.nom.toUpperCase(),
+            prenoms: toTitleCase(req.body.prenoms),
             statut: req.body.statut
           });
         });
@@ -118,8 +126,8 @@ router.post("/add", ensureAuthenticated, (req, res) => {
         mecano: req.body.mecano,
         matricule: req.body.matricule,
         grade: req.body.grade,
-        nom: req.body.nom,
-        prenoms: req.body.prenoms,
+        nom: req.body.nom.toUpperCase(),
+        prenoms: toTitleCase(req.body.prenoms),
         statut: req.body.statut
       };
 
@@ -137,6 +145,43 @@ router.post("/add", ensureAuthenticated, (req, res) => {
         }
       });
     }
+  }
+});
+
+//Edit created user
+router.get("/edit-created/:id", ensureAuthenticated, (req, res) => {
+  permission = checkGrant(req.user.statut, "updateAny", "created_account", req, res);
+  if (permission) {
+    User.findOne({
+      _id: req.params.id
+    })
+      .populate("unite")
+      .populate("service")
+      .then(user => {
+        Unite.find().then(unites => {
+          Service.find().then(services => {
+            Rank.find()
+              .sort({ ordre: "asc" })
+              .then(ranks => {
+                res.render("users/edit_created_user", {
+                  user: user,
+                  unites: unites,
+                  services: services,
+                  ranks: ranks
+                });
+              });
+          });
+        });
+      });
+  }
+});
+
+// Traitement du formulaire d'ajout de membre
+router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
+  permission = checkGrant(req.user.statut, "updateAny", "created_account", req, res);
+  if (permission) {
+    // Reste à faire
+    console.log("Authorized")
   }
 });
 
@@ -190,14 +235,14 @@ router.post("/login", (req, res, next) => {
 
 // Formulaire de mise à jour d'infos membres
 router.get("/edit/:id", ensureAuthenticated, (req, res) => {
-  permission = checkGrant(req.user.statut, "updateOwn", "account", req, res);
-  if (permission) {
-    User.findOne({
-      _id: req.params.id
-    })
-      .populate("unite")
-      .populate("service")
-      .then(user => {
+  User.findOne({
+    _id: req.params.id
+  })
+    .populate("unite")
+    .populate("service")
+    .then(user => {
+      permission = checkGrant(user.statut, "updateOwn", "account", req, res);
+      if (permission) {
         Unite.find().then(unites => {
           Service.find().then(services => {
             if (user.id === req.user.id) {
@@ -215,92 +260,92 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
             }
           });
         });
-      });
-  }
+      }
+    });
 });
 
 router.put("/register/:id", upload.single("photo"), (req, res) => {
-  permission = checkGrant(req.user.statut, "updateOwn", "account", req, res);
-  if (permission) {
-    let errors = [];
-    if (!req.body.genre) {
-      errors.push({
-        text: "Veuillez sélectionner votre genre"
-      });
-    }
+  let errors = [];
+  if (!req.body.genre) {
+    errors.push({
+      text: "Veuillez sélectionner votre genre"
+    });
+  }
 
-    if (!req.body.dateNaiss) {
-      errors.push({
-        text: "Veuillez sélectionner votre date de naissance"
-      });
-    }
+  if (!req.body.dateNaiss) {
+    errors.push({
+      text: "Veuillez sélectionner votre date de naissance"
+    });
+  }
 
-    if (!req.body.lieuNaiss) {
-      errors.push({
-        text: "Veuillez saisir votre lieu de naissance"
-      });
-    }
+  if (!req.body.lieuNaiss) {
+    errors.push({
+      text: "Veuillez saisir votre lieu de naissance"
+    });
+  }
 
-    if (!req.body.pere) {
-      errors.push({
-        text: "Veuillez saisir le nom complet de votre père"
-      });
-    }
+  if (!req.body.pere) {
+    errors.push({
+      text: "Veuillez saisir le nom complet de votre père"
+    });
+  }
 
-    if (!req.body.mere) {
-      errors.push({
-        text: "Veuillez saisir le nom complet de votre mère"
-      });
-    }
+  if (!req.body.mere) {
+    errors.push({
+      text: "Veuillez saisir le nom complet de votre mère"
+    });
+  }
 
-    if (!req.body.dateEntreeService) {
-      errors.push({
-        text: "Veuillez sélectionner votre date d'entrée en service"
-      });
-    }
+  if (!req.body.dateEntreeService) {
+    errors.push({
+      text: "Veuillez sélectionner votre date d'entrée en service"
+    });
+  }
 
-    if (!req.body.dateNomination) {
-      errors.push({
-        text: "Veuillez sélectionner votre date de nomination au grade actuel"
-      });
-    }
+  if (!req.body.dateNomination) {
+    errors.push({
+      text: "Veuillez sélectionner votre date de nomination au grade actuel"
+    });
+  }
 
-    if (!req.body.unite) {
-      errors.push({
-        text: "Veuillez sélectionner votre unité"
-      });
-    }
+  if (!req.body.unite) {
+    errors.push({
+      text: "Veuillez sélectionner votre unité"
+    });
+  }
 
-    if (!req.body.service) {
-      errors.push({
-        text: "Veuillez sélectionner votre service"
-      });
-    }
+  if (!req.body.service) {
+    errors.push({
+      text: "Veuillez sélectionner votre service"
+    });
+  }
 
-    if (!req.body.password) {
-      errors.push({
-        text: "Vous devez obligatoirement définir votre mot de passe"
-      });
-    }
+  if (!req.body.password) {
+    errors.push({
+      text: "Vous devez obligatoirement définir votre mot de passe"
+    });
+  }
 
-    if (req.body.password.length < 8) {
-      errors.push({
-        text: "Votre mot de passe doit contenir au moins 8 caractères"
-      });
-    }
+  if (req.body.password.length < 8) {
+    errors.push({
+      text: "Votre mot de passe doit contenir au moins 8 caractères"
+    });
+  }
 
-    if (req.body.password !== req.body.confirm_password) {
-      errors.push({
-        text: "Vos mots de passe ne sont pas cohérents"
-      });
-    }
+  if (req.body.password !== req.body.confirm_password) {
+    errors.push({
+      text: "Vos mots de passe ne sont pas cohérents"
+    });
+  }
 
-    User.findOne({
-      _id: req.params.id
-    })
-      .populate("unite")
-      .populate("service")
-      .then(user => {
+  User.findOne({
+    _id: req.params.id
+  })
+    .populate("unite")
+    .populate("service")
+    .then(user => {
+      permission = checkGrant(user.statut, "updateOwn", "account", req, res);
+      if (permission) {
         Unite.find().then(unites => {
           Service.find().then(services => {
             if (errors.length > 0) {
@@ -312,8 +357,8 @@ router.put("/register/:id", upload.single("photo"), (req, res) => {
                 genre: req.body.genre,
                 dateNaiss: req.body.dateNaiss,
                 lieuNaiss: req.body.lieuNaiss,
-                pere: req.body.pere,
-                mere: req.body.mere,
+                pere: req.body.pere.toUpperCase(),
+                mere: req.body.mere.toUpperCase(),
                 dateEntreeService: req.body.dateEntreeService,
                 dateNomination: req.body.dateNomination,
                 unite: req.body.unite,
@@ -325,8 +370,8 @@ router.put("/register/:id", upload.single("photo"), (req, res) => {
               user.genre = req.body.genre;
               user.naissance.date = req.body.dateNaiss;
               user.naissance.lieu = req.body.lieuNaiss;
-              user.parents.pere = req.body.pere;
-              user.parents.mere = req.body.mere;
+              user.parents.pere = req.body.pere.toUpperCase();
+              user.parents.mere = req.body.mere.toUpperCase();
               user.dateEntreeService = req.body.dateEntreeService;
               user.dateNomination = req.body.dateNomination;
               user.unite = req.body.unite;
@@ -362,7 +407,24 @@ router.put("/register/:id", upload.single("photo"), (req, res) => {
             }
           });
         });
+      }
+    });
+});
+
+router.delete("/delete/:id", (req, res) => {
+  permission = checkGrant(req.user.statut, "deleteAny", "account", req, res);
+  if (permission) {
+    User.findOne({
+      _id: req.params.id
+    }).then(user => {
+      cloudinary.v2.uploader.destroy(user.photo.id);
+      User.deleteOne({
+        _id: req.params.id
+      }).then(() => {
+        req.flash("success_msg", "Marin suprrimé");
+        res.redirect("/users");
       });
+    });
   }
 });
 

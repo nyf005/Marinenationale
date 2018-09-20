@@ -1,4 +1,40 @@
 <div class="container">
   <h4>Liste des marins</h4>
-  
+  <div class="input-field col m4 s12">
+    <input class="live-search-box" type="text" placeholder="Rechercher un marin">
   </div>
+  <div class="row">
+    {{#each users}}
+    {{#if password}}
+    <div class="col s12 m4 live-search-list">
+      <div class="card-panel teal hoverable">
+        {{#ifCond ../user.id "==" id }}
+        <a href="/users/edit/{{id}}" class="btn-floating right orange"><i class="fa fa-pencil"></i></a>
+        {{/ifCond}}
+        <span class="white-text">
+          <div class="chip">
+            <img src="{{photo.url}}"> <a href="#">{{grade}} {{nom}} {{prenoms}}</a>
+          </div>
+          <hr>
+          <p>
+            Unité : {{unite.abreviation}} <br>
+            Service : {{service.nom}} <br>
+            Matricule : {{matricule}} <br>
+            Né le : {{formatDate naissance.date "Do MMMM YYYY" "fr"}} <br>
+            Nommé le : {{formatDate dateNomination "Do MMMM YYYY" "fr"}} <br>
+            Dernier Stage : Néant
+          </p>
+        </span>
+        {{#ifCond ../user.statut "==" "super_admin"}}
+        <a href="/users/edit-created/{{id}}" class="btn-floating blue left"><i class="fa fa-edit"></i></a>
+        <form action="/users/delete/{{id}}?_method=DELETE" method="POST" id="delete-form">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn-floating red right"><i class="fa fa-remove"></i></button>
+        </form>
+        {{/ifCond}}
+      </div>
+    </div>
+    {{/if}}
+    {{/each}}
+  </div>
+</div>
