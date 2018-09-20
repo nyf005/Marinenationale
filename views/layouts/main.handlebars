@@ -54,9 +54,13 @@
 
       //Alert Message button close
       $('#alert_close').click(function () {
-        $("#alert_box").fadeOut("slow", function () {
+        $("#alert_box").fadeOut("slow", "swing", function () {
         });
       });
+
+      setTimeout(function () {
+          $("#alert_box").fadeOut("slow", "linear");
+        }, 4000);
     });
   </script>
 </body>

@@ -8,14 +8,14 @@ main {
   flex: 1 0 auto;
 }
 
-.logo{
+.logo {
   font-size: 25px;
 }
 .nav-wrapper .fa-bars {
   font-size: 25px;
 }
 
-.icon_menu{
+.icon_menu {
   font-size: 25px;
 }
 
@@ -23,15 +23,33 @@ footer {
   margin-top: 20px;
 }
 
-.card{
+.card {
   margin-right: 12px;
 }
 
-.icon_style{
+.icon_style {
   position: absolute;
   right: 10px;
   top: 10px;
   font-size: 20px;
   color: white;
-  cursor:pointer; 
+  cursor: pointer;
 }
+
+.msg {
+  position: absolute;
+  z-index: 2;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+/* .card img {
+  max-height: 200px;
+  object-fit: cover;
+}
+.card img.materialized.active {
+  max-height: none;
+  object-fit: none;
+} */

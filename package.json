@@ -9,6 +9,7 @@
   "author": "Fabrice N'DRI",
   "license": "ISC",
   "dependencies": {
+    "accesscontrol": "^2.2.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cloudinary": "^1.11.0",

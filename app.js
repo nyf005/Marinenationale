@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 
@@ -31,7 +31,8 @@ const {
   equal,
   dateFormat,
   formatDate,
-  ifCond
+  ensureAuthenticated,
+  checkGrant
 } = require("./helpers/functions");
 
 //Map global promises
@@ -44,7 +45,8 @@ mongoose
     {
       useNewUrlParser: true
     }
-  ).then(() => {
+  )
+  .then(() => {
     console.log("MongoDB Connected");
   })
   .catch(err => console.log(err));
@@ -52,7 +54,8 @@ mongoose
 const app = express();
 
 //Passport config
-require('./config/passport')(passport);
+require("./config/passport")(passport);
+
 
 //Body Parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -70,7 +73,8 @@ app.engine(
       equal: equal,
       dateFormat: dateFormat,
       formatDate: formatDate,
-      ifCond: ifCond
+      ensureAuthenticated: ensureAuthenticated,
+      checkGrant: checkGrant
     },
     defaultLayout: "main"
   })
