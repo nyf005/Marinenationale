@@ -2,6 +2,8 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 18px;
 }
 
 main {
@@ -10,9 +12,20 @@ main {
 
 .logo {
   font-size: 25px;
+  font-family: "Parisienne", cursive;
+  /* font-family: "Abel", sans-serif; */
 }
 .nav-wrapper .fa-bars {
   font-size: 25px;
+}
+
+.welcome{
+  font-family: "Parisienne", cursive;
+  font-size: 50px;
+}
+.menu-txt{
+ font-family: "Parisienne", cursive;
+ font-size: 30px;
 }
 
 .icon_menu {
@@ -44,12 +57,3 @@ footer {
   left: 0;
   right: 0;
 }
-
-.card img {
-  max-height: 200px;
-  object-fit: cover;
-}
-/* .card img.materialized.active {
-  max-height: none;
-  object-fit: none;
-} */

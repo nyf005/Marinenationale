@@ -1,22 +1,27 @@
 <div class="navbar-fixed">
   <nav class="blue darken-3">
-    <div class="nav-wrapper container">
+     <div class="nav-wrapper col container s12"> {{!--container --}}
       <a href="#" data-activates="main-menu" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
       <a href="/" class="logo">Marine Nationale</a>
-      <!-- RIGHT NAV -->
+
       <ul class="right hide-on-med-and-down">
-        <li><a class="dropdown-trigger" href="#!" data-activates="organisation_1"><i class="fa fa-sitemap"></i>
-            Organisation</a></li>
-        <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-activates="equipements_1"><i class="fa fa-ship"></i> Equipements</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-activates="ressources_1"><i class="fa fa-users"></i> Ressources
-            Humaines</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-activates="patrimoine_1"><i class="fa fa-building"></i>
-            Patrimoine</a></li>
+        <li>
+          <a class="dropdown-trigger" href="#!" data-activates="organisation_1">Organisation</a>
+        </li>
+        <li><a href="/missions">Missions</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-activates="equipements_1">Equipements</a></li>
+        <li>
+          <a class="dropdown-trigger" href="#!" data-activates="ressources_1">Ressources Humaines</a>
+        </li>
+        <li>
+          <a class="dropdown-trigger" href="#!" data-activates="patrimoine_1">Patrimoine</a>
+        </li>
+        {{!-- <li>Bienvenue {{user.prenoms}}</li> --}}
       </ul>
     </div>
   </nav>
 </div>
+
 <!-- SIDE MENU -->
 <ul class="side-nav" id="main-menu">
   {{#if user}}
@@ -175,6 +180,7 @@
   <li><a href="/ressources_humaines/formation">Formations et Stages</a></li>
   <li><a href="/ressources_humaines/ecole">Ecole</a></li>
 </ul>
+
 <ul id="equipements_1" class="dropdown-content">
   <li><a href="/equipements/coms">Centres Opérationnels de la Marine</a></li>
   <li><a href="/equipements/patrouilleurs">Patrouilleurs</a></li>
@@ -196,10 +202,8 @@
   <li><a href="/ressources_humaines/formation">Formations et Stages</a></li>
   <li><a href="/ressources_humaines/ecole">Ecole</a></li>
 </ul>
-<ul id="personnel" class="dropdown-content">
-  <li><a href="/users/add">Ajouter un marin</a></li>
-  <li><a href="/users">Voir les marins</a></li>
-</ul>
+
+
 <ul id="personnel" class="dropdown-content">
   <li><a href="/users/add">Ajouter un marin</a></li>
   <li><a href="/users">Voir les marins</a></li>
