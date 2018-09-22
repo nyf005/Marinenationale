@@ -16,14 +16,31 @@
             <img src="{{photo.url}}"> <a href="#">{{grade}} {{nom}} {{prenoms}}</a>
           </div>
           <hr>
-          <p class="flow-text">
-            Unité : {{unite.abreviation}} <br>
-            Service : {{service.nom}} <br>
-            Matricule : {{matricule}} <br>
-            Né le : {{formatDate naissance.date "Do MMMM YYYY" "fr"}} <br>
-            Nommé le : {{formatDate dateNomination "Do MMMM YYYY" "fr"}} <br>
-            Dernier Stage : Néant
-          </p>
+            <div class="row mb-0">
+              <div class="col m6 s12 right-align">Unité :</div>
+              <div class="col m6 s12">{{unite.abreviation}}</div>
+            </div>
+            <div class="row mb-0">
+              <div class="col m6 s12 right-align">Service :</div>
+              <div class="col m6 s12">{{service.abreviation}}</div>
+            </div>
+            <div class="row mb-0">
+              <div class="col m6 s12 right-align">Matricule :</div>
+              <div class="col m6 s12">{{matricule}}</div>
+            </div>
+            <div class="row mb-0">
+              <div class="col m6 s12 right-align"> Né le :</div>
+              <div class="col m6 s12">{{formatDate naissance.date "DD/MM/YYYY" "fr"}}</div>
+            </div>
+            <div class="row mb-0">
+              <div class="col m6 s12 right-align">Nommé le :</div>
+              <div class="col m6 s12">{{formatDate dateNomination "DD/MM/YYYY" "fr"}}</div>
+            </div>
+            <div class="row mb-0">
+              <div class="col m6 s12 right-align">Dernier Stage :</div>
+              <div class="col m6 s12">Néant</div>
+            </div>
+             
         </span>
         {{#ifCond ../user.statut "==" "super_admin"}}
         <a href="/users/edit-created/{{id}}" class="btn-floating blue left"><i class="fa fa-edit"></i></a>
