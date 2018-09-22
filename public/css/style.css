@@ -10,6 +10,16 @@ main {
   flex: 1 0 auto;
 }
 
+.bg-card-user {
+	background: rgba(0,77,64,0.5);
+  padding: 15px 0 0 0;
+  margin: 5px;
+}
+
+.truncate >img {
+	width: 120px;
+}
+
 .logo, .loginForm {
   font-size: 25px;
   font-family: "Parisienne", cursive;
