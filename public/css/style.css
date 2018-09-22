@@ -10,7 +10,7 @@ main {
   flex: 1 0 auto;
 }
 
-.logo {
+.logo, .loginForm {
   font-size: 25px;
   font-family: "Parisienne", cursive;
   /* font-family: "Abel", sans-serif; */
