@@ -18,24 +18,21 @@
         </div>
         <hr>
         <!-- Modal Structure -->
-        <div id="{{mecano}}" class="modal">
+        <div id="{{mecano}}" class="modal col m12 s12">
           <div class="modal-content">
-            <h4>Informations de {{grade}} {{nom}} {{prenoms}}</h4><hr>
-            <div class="col m3 s12 right-align">Unité :</div>
-            <div class="col m3 s12 left-align">{{unite.abreviation}}</div>
-            <div class="col m3 s12 right-align">Service :</div>
-            <div class="col m3 s12 left-align">{{service.abreviation}}</div>
-            <div class="col m3 s12 right-align">Matricule :</div>
-            <div class="col m3 s12 left-align">{{matricule}}</div>
-            <div class="col m3 s12 right-align"> Né le :</div>
-            <div class="col m3 s12 left-align">{{formatDate naissance.date "DD/MM/YYYY" "fr"}}</div>
-            <div class="col m3 s12 right-align">Nommé le :</div>
-            <div class="col m3 s12 left-align">{{formatDate dateNomination "DD/MM/YYYY" "fr"}}</div>
-            <div class="col m3 s12 right-align">Dernier Stage :</div>
-            <div class="col m3 s12 left-align">Néant</div>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+            <h4 class="flow-text">Informations de {{grade}} {{nom}} {{prenoms}}</h4><hr>
+            <div class="col m3 s6 right-align flow-text">Unité :</div>
+            <div class="col m3 s6 left-align flow-text">{{unite.abreviation}}</div>
+            <div class="col m3 s6 right-align flow-text">Service :</div>
+            <div class="col m3 s6 left-align flow-text">{{service.abreviation}}</div>
+            <div class="col m3 s6 right-align flow-text">Matricule :</div>
+            <div class="col m3 s6 left-align flow-text">{{matricule}}</div>
+            <div class="col m3 s6 right-align flow-text"> Né le :</div>
+            <div class="col m3 s6 left-align flow-text">{{formatDate naissance.date "DD/MM/YYYY" "fr"}}</div>
+            <div class="col m3 s6 right-align flow-text">Nommé le :</div>
+            <div class="col m3 s6 left-align flow-text">{{formatDate dateNomination "DD/MM/YYYY" "fr"}}</div>
+            <div class="col m3 s6 right-align flow-text">Dernier Stage :</div>
+            <div class="col m3 s6 left-align flow-text">Néant</div>
           </div>
         </div>
         {{#ifCond ../user.statut "==" "super_admin"}}
