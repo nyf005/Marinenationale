@@ -124,7 +124,7 @@ app.use("/ranks", ranks);
 app.use("/unites", unites);
 app.use("/services", services);
 
-const port = process.env.PORT || 3000 || 5000;
+const port = process.env.PORT || 3100;
 
 app.listen(port, () => {
   console.log(`Serveur démarré sur le port ${port}`);

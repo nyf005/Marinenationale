@@ -6,34 +6,55 @@
   <form action="/users/edit-created/{{user.id}}?_method=PUT" method="POST" class="container section col s12 p6">
     <input type="hidden" name="_method" value="PUT">
     <div class="input-field col m4 s12">
-      <input name="mecano" id="mecano" type="number" class="validate" value="{{user.mecano}}">
+      <input name="mecano" id="mecano" type="number" class="validate" {{#if errors}} value="{{mecano}}" {{else}} value="{{user.mecano}}"
+        {{/if}}>
       <label for="mecano">Mécano</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="matricule" id="matricule" type="text" class="validate" value="{{user.matricule}}">
+      <input name="matricule" id="matricule" type="text" class="validate" {{#if errors}} value="{{matricule}}" {{else}}
+        value="{{user.matricule}}" {{/if}}>
       <label for="matricule">Matricule</label>
     </div>
     <div class="input-field col m4 s12">
       <select name="grade">
+        {{#if errors}}
+        {{#select grade}}
+        <option value="" disabled selected>Grade du marin</option>
+        {{#each ranks}}
+        <option value="{{abreviation}}">{{grade}}</option>
+        {{/each}}
+        {{/select}}
+        {{else}}
         {{#select user.grade}}
         <option value="" disabled selected>Grade du marin</option>
         {{#each ranks}}
         <option value="{{abreviation}}">{{grade}}</option>
         {{/each}}
         {{/select}}
+        {{/if}}
       </select>
       <label for="grade">Grade</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="nom" id="nom" type="text" class="validate" value="{{user.nom}}">
+      <input name="nom" id="nom" type="text" class="validate" {{#if errors}} value="{{nom}}" {{else}} value="{{user.nom}}"
+        {{/if}}>
       <label for="nom">Nom</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="prenoms" id="prenoms" type="text" class="validate" value="{{user.prenoms}}">
+      <input name="prenoms" id="prenoms" type="text" class="validate" {{#if errors}} value="{{prenoms}}" {{else}} value="{{user.prenoms}}" {{/if}}>
       <label for="prenoms">Prénoms</label>
     </div>
     <div class="input-field col m4 s12">
       <select name="statut">
+        {{#if errors}}
+        {{#select statut}}
+        <option value="" disabled selected>Droits d'utilisateur</option>
+        <option value="membre">Membre</option>
+        <option value="editeur">Editeur</option>
+        <option value="admin">Administrateur</option>
+        <option value="super_admin">Super Administrateur</option>
+        {{/select}}
+        {{else}}
         {{#select user.statut}}
         <option value="" disabled selected>Droits d'utilisateur</option>
         <option value="membre">Membre</option>
@@ -41,6 +62,7 @@
         <option value="admin">Administrateur</option>
         <option value="super_admin">Super Administrateur</option>
         {{/select}}
+        {{/if}}
       </select>
       <label>Statut</label>
     </div>

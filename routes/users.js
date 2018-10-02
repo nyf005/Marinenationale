@@ -150,7 +150,13 @@ router.post("/add", ensureAuthenticated, (req, res) => {
 
 //Edit created user
 router.get("/edit-created/:id", ensureAuthenticated, (req, res) => {
-  permission = checkGrant(req.user.statut, "updateAny", "created_account", req, res);
+  permission = checkGrant(
+    req.user.statut,
+    "updateAny",
+    "created_account",
+    req,
+    res
+  );
   if (permission) {
     User.findOne({
       _id: req.params.id
@@ -176,16 +182,104 @@ router.get("/edit-created/:id", ensureAuthenticated, (req, res) => {
   }
 });
 
-// Traitement du formulaire d'ajout de membre
+// Traitement du formulaire de modification de membre déja crée
 router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
-  permission = checkGrant(req.user.statut, "updateAny", "created_account", req, res);
+  permission = checkGrant(
+    req.user.statut,
+    "updateAny",
+    "created_account",
+    req,
+    res
+  );
   if (permission) {
-    // Reste à faire
-    console.log("Authorized")
+    let errors = [];
+
+    if (!req.body.mecano) {
+      errors.push({
+        text: `Veuillez entrer le mécano du membre`
+      });
+    }
+
+    if (!req.body.matricule) {
+      errors.push({
+        text: `Veuillez entrer le matricule du membre`
+      });
+    }
+
+    if (!req.body.grade) {
+      errors.push({
+        text: `Veuillez sélectionner le grade du membre`
+      });
+    }
+
+    if (!req.body.nom) {
+      errors.push({
+        text: `Veuillez entrer le nom du membre`
+      });
+    }
+
+    if (!req.body.prenoms) {
+      errors.push({
+        text: `Veuillez entrer le ou les prénoms du membre`
+      });
+    }
+
+    if (errors.length > 0){
+      Rank.find()
+      .sort({ ordre: "asc" })
+      .then(ranks => {
+        res.render("users/edit_created_user", {
+          errors: errors,
+          ranks: ranks,
+          mecano: req.body.mecano,
+          matricule: req.body.matricule,
+          grade: req.body.grade,
+          nom: req.body.nom.toUpperCase(),
+          prenoms: toTitleCase(req.body.prenoms),
+          statut: req.body.statut
+        });
+      });
+    } else {
+      User.findById({
+        _id: req.params.id
+      }).then(user => {
+        if (user.mecano == req.body.mecano){
+          user.matricule = req.body.matricule;
+          user.grade = req.body.grade;
+          user.nom = req.body.nom;
+          user.prenoms = req.body.prenoms;
+          user.statut = req.body.statut;
+          user.save().then(() => {
+            req.flash("success_msg", "Modifications effectuées avec succès");
+            res.redirect('/users');
+          });
+        } else {
+          User.findOne({
+            mecano: req.body.mecano
+          }).then(member => {
+            if (!member){
+              user.mecano = req.body.mecano;
+              user.matricule = req.body.matricule;
+              user.grade = req.body.grade;
+              user.nom = req.body.nom;
+              user.prenoms = req.body.prenoms;
+              user.statut = req.body.statut;
+              user.save().then(() => {
+                req.flash("success_msg", "Modifications effectuées avec succès");
+                res.redirect('/users');
+              });
+            } else {
+              req.flash("errors_msg", "Ce mécano existe déjà dans la base de donnée.");
+              res.redirect('/users');
+            }
+          });
+        }
+      });
+    } 
   }
 });
 
-// Connexion Utilisateur ; Still have the login process to do
+// Connexion Utilisateur
 router.post("/login", (req, res, next) => {
   User.findOne({
     mecano: req.body.mecano
