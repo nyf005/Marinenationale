@@ -1,10 +1,10 @@
 <div class="navbar-fixed">
   <nav class="blue darken-3">
-    <div class="nav-wrapper col container s12"> {{!--container --}}
+    <div class="nav-wrapper row"> {{!--container --}}
       <a href="#" data-activates="main-menu" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
       <a href="/" class="logo">Marine Nationale</a>
 
-      <ul class="right hide-on-med-and-down">
+      <ul class="right hide-on-med-and-down valign-wrapper">
         <li>
           <a class="dropdown-trigger" href="#!" data-activates="organisation_1">Organisation</a>
         </li>
@@ -16,7 +16,26 @@
         <li>
           <a class="dropdown-trigger" href="#!" data-activates="patrimoine_1">Patrimoine</a>
         </li>
-        {{!-- <li>Bienvenue {{user.prenoms}}</li> --}}
+        {{#if user}}
+        {{#if user.photo.url}}
+        <li>
+          <a class="dropdown-trigger" href="#!" data-activates="user_menu">
+            <img src="{{resizeImg user.photo.id user.photo.format}}" alt="image" class="circle valign-wrapper">
+          </a>
+        </li>
+        {{else}}
+        <li>
+          <a class="dropdown-trigger" href="#!" data-activates="patrimoine_1">
+            <img src="https://res.cloudinary.com/nyf005/image/upload/w_60,h_60,c_scale/v1537449932/public/jdoe.jpg" alt=""
+              class="circle valign-wrapper">
+          </a>
+        </li>
+        {{/if}}
+        {{else}}
+        <li>
+          <a class="loginForm" href="/login">Espace Marin</a>
+        </li>
+        {{/if}}
       </ul>
     </div>
   </nav>
@@ -113,52 +132,25 @@
       Déconnecter</a>
   </li>
   {{else}}
-  <form action="/users/login" method="POST" class="container section col s12 p6">
-    <div class="center loginForm">Espace Marin</div>
+  <ul>
+    <li class="center blue darken3">MENU</li>
+    <li>
+      <a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i>Organisation</a>
+    </li>
+    <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
+    <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i>Equipements</a></li>
+    <li>
+      <a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i>Ressources
+        Humaines</a>
+    </li>
+    <li>
+      <a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i>Patrimoine</a>
+    </li>
     <hr>
-    <div class="input-field col s12">
-      <i class="material-icons prefix">account_circle</i>
-      <input name="mecano" id="mecano" type="number" class="validate">
-      <label for="mecano">Mécano</label>
-    </div>
-    <div class="input-field col s12">
-      <i class="material-icons prefix">vpn_key</i>
-      <input name="password" id="password" type="password" class="validate">
-      <label for="password">Mot de passe</label>
-    </div>
-    <center>
-      <div class='row'>
-        <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Me Connecter
-          <i class="material-icons right">send</i>
-        </button>
-      </div>
-    </center>
-  </form>
-  <li class="divider"></li>
-  <li class="blue accent-1">
-    <ul class="collapsible collapsible-accordion">
-      <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-bars icon_menu"></i>Menu
-          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
-        <div class="collapsible-body">
-          <ul>
-            <li>
-              <a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i>Organisation</a>
-            </li>
-            <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
-            <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i>Equipements</a></li>
-            <li>
-              <a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i>Ressources
-                Humaines</a>
-            </li>
-            <li>
-              <a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i>Patrimoine</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </li>
+    <li>
+      <a href="/login"><i class="fa fa-user"></i> Espace Marin</a>
+    </li>
+  </ul>
   {{/if}}
 </ul>
 
@@ -223,4 +215,20 @@
 <ul id="services" class="dropdown-content">
   <li><a href="/services/add">Ajouter un service</a></li>
   <li><a href="/services">Voir les services</a></li>
+</ul>
+
+<ul class="dropdown-content" id="user_menu">
+  <li>
+    <span class="green darken-3 loginForm center white-text">Bienvenue {{user.prenoms}}</span>
+  </li>
+  <li>
+    <a href="/users/edit/{{user.id}}">Mes Informations</a>
+  </li>
+  <li>
+    <a href="#">Mes Diplômes et Stages</a>
+  </li>
+  <li>
+    <a class="red-text waves-effect waves-blue" href="/users/logout">Me
+      Déconnecter</a>
+  </li>
 </ul>

@@ -1,5 +1,5 @@
 const moment = require("moment");
-const AccessControl = require("accesscontrol");
+const cloudinary = require("cloudinary");
 const ac = require("../config/accesscontrol");
 
 module.exports = {
@@ -173,5 +173,10 @@ module.exports = {
     return str.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
+  },
+
+  resizeImg: function(id, format) {
+    const link = `https://res.cloudinary.com/nyf005/image/upload/w_60,h_60,c_scale/v1537614359/${id}.${format}`;
+    return link;
   }
 };

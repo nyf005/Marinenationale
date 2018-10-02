@@ -5,6 +5,10 @@ router.get("/", (req, res) => {
   res.render("index/welcome");
 });
 
+router.get("/login", (req, res) => {
+  res.render("index/login");
+});
+
 // ORGANISATION
 router.get("/organisation/commandement", (req, res) => {
   res.render("index/organisation/commandement");

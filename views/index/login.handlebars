@@ -1,0 +1,24 @@
+<div class="valign-wrapper row login-box">
+  <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+    <form action="/users/login" method="POST">
+      <div class="card-content">
+        <span class="card-title">Entrez vos informations</span>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <input name="mecano" id="mecano" type="number" class="validate">
+            <label for="mecano">Mécano</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">vpn_key</i>
+            <input name="password" id="password" type="password" class="validate">
+            <label for="password">Mot de passe</label>
+          </div>
+        </div>
+      </div>
+      <div class="card-action right-align">
+        <button type="submit" class="btn green waves-effect waves-light">Valider <i class="large material-icons right">lock_open</i></button>
+      </div>
+    </form>
+  </div>
+</div>

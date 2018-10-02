@@ -53,6 +53,9 @@ const UserSchema = new Schema({
     },
     url: {
       type: String
+    },
+    format: {
+      type: String
     }
   },
   unite: {

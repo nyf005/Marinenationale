@@ -197,7 +197,7 @@ router.post("/login", (req, res, next) => {
         if (user.password) {
           passport.authenticate("local", {
             successRedirect: "/",
-            failureRedirect: "/",
+            failureRedirect: "/login",
             failureFlash: true
           })(req, res, next);
         } else {
@@ -217,7 +217,7 @@ router.post("/login", (req, res, next) => {
               "errors_msg",
               "Connectez vous d'abord avec le mot de passe par défaut pour renseigner vos informations"
             );
-            res.redirect("/");
+            res.redirect("/login");
           }
         }
       } else {
@@ -225,7 +225,7 @@ router.post("/login", (req, res, next) => {
           "errors_msg",
           "Mécano Incorrect, Vous ne pouvez pas accéder à l'espace membre"
         );
-        res.redirect("/");
+        res.redirect("/login");
       }
     })
     .catch(err => {
@@ -380,6 +380,7 @@ router.put("/register/:id", upload.single("photo"), (req, res) => {
                 cloudinary.v2.uploader.destroy(user.photo.id);
                 user.photo.id = req.file.public_id;
                 user.photo.url = req.file.url;
+                user.photo.format = req.file.format;
               }
               if (req.body.password === user.password) {
                 user.save().then(user => {

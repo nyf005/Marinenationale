@@ -33,7 +33,8 @@ const {
   ensureAuthenticated,
   checkGrant,
   ifCond,
-  toTitleCase
+  toTitleCase,
+  resizeImg
 } = require("./helpers/functions");
 
 //Map global promises
@@ -76,7 +77,8 @@ app.engine(
       ensureAuthenticated: ensureAuthenticated,
       checkGrant: checkGrant,
       ifCond: ifCond,
-      toTitleCase: toTitleCase
+      toTitleCase: toTitleCase,
+      resizeImg: resizeImg
     },
     defaultLayout: "main"
   })
@@ -122,7 +124,7 @@ app.use("/ranks", ranks);
 app.use("/unites", unites);
 app.use("/services", services);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000 || 5000;
 
 app.listen(port, () => {
   console.log(`Serveur démarré sur le port ${port}`);
