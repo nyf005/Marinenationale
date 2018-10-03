@@ -32,9 +32,10 @@
       $('.button-collapse').sideNav();
       $('.parallax').parallax();
       $('.dropdown-trigger').dropdown({
-        hover: true,
+        hover: false,
         belowOrigin: true,
-        constrainWidth: false
+        gutter: ($('.dropdown-content').width()*0.3)/2.5,
+        constrainWidth: false,
       });
       $('.datepicker').pickadate({
         monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -62,7 +63,7 @@
       setTimeout(function () {
         $("#alert_box").fadeOut("slow", "linear");
       }, 4000);
-      
+
       $('.modal').modal();
     });
 

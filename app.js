@@ -14,6 +14,7 @@ require("./models/User");
 require("./models/Rank");
 require("./models/Unite");
 require("./models/Service");
+require("./models/Training");
 
 //Load routes
 const index = require("./routes/index");
@@ -21,6 +22,7 @@ const users = require("./routes/users");
 const ranks = require("./routes/ranks");
 const unites = require("./routes/unites");
 const services = require("./routes/services");
+const tranings = require("./routes/trainings");
 
 //Load Keys
 const keys = require("./config/keys");
@@ -123,6 +125,7 @@ app.use("/users", users);
 app.use("/ranks", ranks);
 app.use("/unites", unites);
 app.use("/services", services);
+app.use("/trainings", tranings);
 
 const port = process.env.PORT || 3100;
 

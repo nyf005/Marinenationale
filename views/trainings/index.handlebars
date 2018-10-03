@@ -1,0 +1,47 @@
+<div class="fixed-action-btn">
+  <a href="/trainings/add" class="btn-floating btn-large red">
+    <i class="fa fa-plus"></i>
+  </a>
+</div>
+<div class="row container">
+  <h4>Mes formations et stages</h4>
+  {{#if trainings}}
+  <table class="responsive-table centered highlight">
+    <thead>
+      <tr>
+        <th>Période</th>
+        <th>Niveau</th>
+        <th>Intitulé</th>
+        <th>Copie Scannée</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each trainings}}
+      <tr>
+        <td>{{formatDate date_debut "DD/MM/YY" "fr"}} - {{formatDate date_fin "DD/MM/YY" "fr"}}</td>
+        <td> {{#ifCond equivalent "==" "EDG"}} {{niveau}} {{else}} {{equivalent}} {{/ifCond}}</td>
+        <td>{{intitule}}</td>
+        <td>
+            <img class="materialboxed responsive-img diplome_thumb" data-caption="Diplome de {{intitule}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_diplome.id}}.{{scan_diplome.format}}">
+        </td>
+        <td>
+          <a class="btn left-align" href="/trainings/edit/{{id}}">
+            <i class="fa fa-pencil"></i>
+          </a>
+        </td>
+        <td>
+          <form action="/trainings/delete/{{id}}?_method=DELETE" method="POST" id="delete-form">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn red"><i class="fa fa-remove"></i></button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p>Aucune formation n'a été ajoutée pour l'instant.</p>
+  {{/if}}
+</div>

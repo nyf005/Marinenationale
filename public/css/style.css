@@ -6,6 +6,10 @@ body {
   font-size: 18px;
 }
 
+.dropdown-content{
+  overflow-y: visible !important;
+}
+
 main {
   flex: 1 0 auto;
 }
@@ -82,4 +86,11 @@ footer {
   margin-right: auto;
   left: 0;
   right: 0;
+}
+
+.diplome_thumb {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
 }

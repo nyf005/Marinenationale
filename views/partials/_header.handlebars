@@ -25,7 +25,7 @@
         </li>
         {{else}}
         <li>
-          <a class="dropdown-trigger" href="#!" data-activates="patrimoine_1">
+          <a class="dropdown-trigger" href="#!" data-activates="user_menu">
             <img src="https://res.cloudinary.com/nyf005/image/upload/w_60,h_60,c_scale/v1537449932/public/jdoe.jpg" alt=""
               class="circle valign-wrapper">
           </a>
@@ -95,7 +95,7 @@
               <a href="/users/edit/{{user.id}}"><i class="fa fa-info"></i> Mes Informations</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-book"></i> Mes Diplômes et Stages</a>
+              <a href="/trainings"><i class="fa fa-book"></i> Mes Diplômes et Stages</a>
             </li>
           </ul>
         </div>
@@ -225,7 +225,7 @@
     <a href="/users/edit/{{user.id}}">Mes Informations</a>
   </li>
   <li>
-    <a href="#">Mes Diplômes et Stages</a>
+    <a href="/trainings">Mes Diplômes et Stages</a>
   </li>
   <li>
     <a class="red-text waves-effect waves-blue" href="/users/logout">Me

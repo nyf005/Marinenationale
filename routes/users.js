@@ -47,7 +47,7 @@ router.get("/", ensureAuthenticated, (req, res) => {
     User.find()
       .populate("unite")
       .populate("service")
-      .sort({ ordre: "asc" })
+      .sort({ nom: "asc" })
       .then(users => {
         res.render("users/index", {
           users: users
