@@ -6,9 +6,9 @@ body {
   font-size: 18px;
 }
 
-.dropdown-content{
+/* .dropdown-content{
   overflow-y: visible !important;
-}
+} */
 
 main {
   flex: 1 0 auto;
@@ -93,4 +93,5 @@ footer {
   border-radius: 4px;
   padding: 5px;
   width: 150px;
+  margin: auto;
 }

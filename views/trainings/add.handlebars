@@ -4,8 +4,8 @@
   </div>
   <hr>
   <form action="/trainings/add" method="POST" enctype="multipart/form-data">
-    <div class="input-field col m4 s12">
-      <select name="niveau">
+    <div class="input-field col m5 s12">
+      <select name="niveau" class="validate">
         <option value="" disabled selected>Niveau</option>
         <option value="BE">Brevet Elémentaire</option>
         <option value="BAT">Brevet d'Aptitude Technique</option>
@@ -19,7 +19,7 @@
       </select>
       <label for="niveau">Niveau</label>
     </div>
-    <div class="input-field col m8 s12">
+    <div class="input-field col m7 s12">
       <input name="intitule" id="intitule" type="text" class="validate">
       <label for="intitule">Intitulé</label>
     </div>
@@ -41,7 +41,7 @@
       <label for="date_debut">Date de début</label>
     </div>
     <div class="input-field col m2 s12">
-      <input name="date_fin" id="date_debut" type="date" class="datepicker" {{#if date_fin}} data-value="{{dateFormat date_fin "YYYY-MM-DD"}}"
+      <input name="date_fin" id="date_fin" type="date" class="datepicker" {{#if date_fin}} data-value="{{dateFormat date_fin "YYYY-MM-DD"}}"
         {{else}} data-value="" {{/if}}>
       <label for="date_fin">Date de fin</label>
     </div>
