@@ -358,7 +358,7 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
     });
 });
 
-router.put("/register/:id", upload.single("photo"), (req, res) => {
+router.put("/register/:id", upload.single("photo"), ensureAuthenticated, (req, res) => {
   let errors = [];
   if (!req.body.genre) {
     errors.push({
@@ -443,6 +443,9 @@ router.put("/register/:id", upload.single("photo"), (req, res) => {
         Unite.find().then(unites => {
           Service.find().then(services => {
             if (errors.length > 0) {
+              if(req.file){
+                cloudinary.v2.uploader.destroy(req.file.public_id);
+              }
               res.render("users/edit", {
                 errors: errors,
                 user: user,
@@ -506,7 +509,7 @@ router.put("/register/:id", upload.single("photo"), (req, res) => {
     });
 });
 
-router.delete("/delete/:id", (req, res) => {
+router.delete("/delete/:id", ensureAuthenticated, (req, res) => {
   permission = checkGrant(req.user.statut, "deleteAny", "account", req, res);
   if (permission) {
     User.findOne({

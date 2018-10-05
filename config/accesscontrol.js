@@ -4,8 +4,8 @@ const ac = new AccessControl();
 ac.grant("membre") // switch to another role without breaking the chain
       .readOwn(["account", "training"])
       .createOwn("training")
-      .updateOwn("account")
-      .deleteOwn("account")
+      .updateOwn(["account", "training"])
+      .deleteOwn(["account", "training"])
   .grant("admin") // switch to another role without breaking the chain
     .extend("membre") // inherit role capabilities. also takes an array
       .readAny("account", ["*", "!password"])
