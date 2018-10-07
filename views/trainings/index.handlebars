@@ -21,7 +21,7 @@
       {{#each trainings}}
       <tr>
         <td>{{formatDate date_debut "DD/MM/YY" "fr"}} - {{formatDate date_fin "DD/MM/YY" "fr"}}</td>
-        <td> {{#ifCond equivalent "==" "EDG"}} {{niveau}} {{else}} {{equivalent}} {{/ifCond}}</td>
+        <td> {{#ifCond equivalent "==" "EDG"}} {{toTitleCase niveau}} {{else}} {{toTitleCase equivalent}} {{/ifCond}}</td>
         <td>{{intitule}}</td>
         <td>
             <img class="materialboxed responsive-img diplome_thumb" data-caption="Diplome de {{intitule}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_diplome.id}}.{{scan_diplome.format}}">

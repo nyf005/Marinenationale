@@ -26,6 +26,9 @@ router.get("/missions", (req, res) => {
 });
 
 // EQUIPEMENTS
+router.get("/equipements/coms", (req, res) => {
+  res.render("index/equipements/coms");
+});
 router.get("/equipements/patrouilleurs", (req, res) => {
   res.render("index/equipements/patrouilleurs");
 });

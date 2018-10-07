@@ -11,6 +11,7 @@ const User = mongoose.model("users");
 const Rank = mongoose.model("ranks");
 const Unite = mongoose.model("unites");
 const Service = mongoose.model("services");
+const Training = mongoose.model("trainings");
 
 //Load Keys
 const keys = require("../config/keys");
@@ -40,7 +41,7 @@ const storage = cloudinaryStorage({
 });
 const upload = multer({ storage });
 
-// Liste des marins
+//Liste des marins
 router.get("/", ensureAuthenticated, (req, res) => {
   permission = checkGrant(req.user.statut, "readAny", "account", req, res);
   if (permission) {
@@ -49,9 +50,15 @@ router.get("/", ensureAuthenticated, (req, res) => {
       .populate("service")
       .sort({ nom: "asc" })
       .then(users => {
-        res.render("users/index", {
-          users: users
-        });
+        Training.find()
+          .populate("user")
+          .sort({ date_fin: "desc" })
+          .then(trainings => {
+            res.render("users/index", {
+              users: users,
+              trainings: trainings
+            });
+          });
       });
   }
 });
@@ -224,26 +231,26 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
       });
     }
 
-    if (errors.length > 0){
+    if (errors.length > 0) {
       Rank.find()
-      .sort({ ordre: "asc" })
-      .then(ranks => {
-        res.render("users/edit_created_user", {
-          errors: errors,
-          ranks: ranks,
-          mecano: req.body.mecano,
-          matricule: req.body.matricule,
-          grade: req.body.grade,
-          nom: req.body.nom.toUpperCase(),
-          prenoms: toTitleCase(req.body.prenoms),
-          statut: req.body.statut
+        .sort({ ordre: "asc" })
+        .then(ranks => {
+          res.render("users/edit_created_user", {
+            errors: errors,
+            ranks: ranks,
+            mecano: req.body.mecano,
+            matricule: req.body.matricule,
+            grade: req.body.grade,
+            nom: req.body.nom.toUpperCase(),
+            prenoms: toTitleCase(req.body.prenoms),
+            statut: req.body.statut
+          });
         });
-      });
     } else {
       User.findById({
         _id: req.params.id
       }).then(user => {
-        if (user.mecano == req.body.mecano){
+        if (user.mecano == req.body.mecano) {
           user.matricule = req.body.matricule;
           user.grade = req.body.grade;
           user.nom = req.body.nom;
@@ -251,13 +258,13 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
           user.statut = req.body.statut;
           user.save().then(() => {
             req.flash("success_msg", "Modifications effectuées avec succès");
-            res.redirect('/users');
+            res.redirect("/users");
           });
         } else {
           User.findOne({
             mecano: req.body.mecano
           }).then(member => {
-            if (!member){
+            if (!member) {
               user.mecano = req.body.mecano;
               user.matricule = req.body.matricule;
               user.grade = req.body.grade;
@@ -265,17 +272,23 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
               user.prenoms = req.body.prenoms;
               user.statut = req.body.statut;
               user.save().then(() => {
-                req.flash("success_msg", "Modifications effectuées avec succès");
-                res.redirect('/users');
+                req.flash(
+                  "success_msg",
+                  "Modifications effectuées avec succès"
+                );
+                res.redirect("/users");
               });
             } else {
-              req.flash("errors_msg", "Ce mécano existe déjà dans la base de donnée.");
-              res.redirect('/users');
+              req.flash(
+                "errors_msg",
+                "Ce mécano existe déjà dans la base de donnée."
+              );
+              res.redirect("/users");
             }
           });
         }
       });
-    } 
+    }
   }
 });
 
@@ -358,7 +371,7 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
     });
 });
 
-router.put("/register/:id", upload.single("photo"), ensureAuthenticated, (req, res) => {
+router.put("/register/:id", upload.single("photo"), (req, res) => {
   let errors = [];
   if (!req.body.genre) {
     errors.push({
@@ -443,7 +456,7 @@ router.put("/register/:id", upload.single("photo"), ensureAuthenticated, (req, r
         Unite.find().then(unites => {
           Service.find().then(services => {
             if (errors.length > 0) {
-              if(req.file){
+              if (req.file) {
                 cloudinary.v2.uploader.destroy(req.file.public_id);
               }
               res.render("users/edit", {
@@ -516,11 +529,19 @@ router.delete("/delete/:id", ensureAuthenticated, (req, res) => {
       _id: req.params.id
     }).then(user => {
       cloudinary.v2.uploader.destroy(user.photo.id);
-      User.deleteOne({
-        _id: req.params.id
-      }).then(() => {
-        req.flash("success_msg", "Marin suprrimé");
-        res.redirect("/users");
+      Training.find({
+        user: user.id
+      }).then(trainings => {
+        trainings.forEach(training => {
+          cloudinary.v2.uploader.destroy(training.scan_diplome.id);
+        });
+
+        User.deleteOne({
+          _id: req.params.id
+        }).then(() => {
+          req.flash("success_msg", "Marin suprrimé");
+          res.redirect("/users");
+        });
       });
     });
   }
