@@ -23,7 +23,7 @@ module.exports = {
   },
 
   stripTags: function(input) {
-    return input.replace(/(&nbsp;|&#39;|<([^>]+)>)/gi, "");
+    return input.replace(/(&nbsp;|&#39;|<([^>]+)>|[&\/\\()~%'"])/gi, "");
   },
 
   dateFormat: function(date, format) {
