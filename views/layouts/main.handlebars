@@ -27,6 +27,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
   <script>
     $(document).ready(function () {
       $('.button-collapse').sideNav();
@@ -66,6 +67,36 @@
 
       $('.modal').modal();
     });
+
+    CKEDITOR.replace('commentaire',
+      {
+        removePlugins: 'elementspath',
+        addPlugins: 'Underline',
+        language: 'fr',
+        height: 100,
+        resize_enabled: false,
+        toolbar:
+          [
+            {
+              items: ['Copy', 'Cut', 'Paste']
+            },
+            {
+              items: ['Undo', 'Redo']
+            },
+            {
+              items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
+            },
+            {
+              items: ['Format']
+            },
+            {
+              items: ['Link', 'Unlink']
+            },
+            {
+              items: ['Indent', 'Outdent', '-', 'BulletedList', 'NumberedList']
+            },
+          ],
+      });
 
     jQuery(document).ready(function ($) {
       $('.live-search-list').each(function () {

@@ -1,0 +1,50 @@
+<div class="fixed-action-btn">
+  <a href="/informations/add" class="btn-floating btn-large red">
+    <i class="fa fa-plus"></i>
+  </a>
+</div>
+<div class="row container">
+  <h4>Tableau d'informations</h4>
+  <hr>
+  {{#each informations}}
+  <div class="col s12 m4">
+    <div class="card">
+      <div class="card-image info-card-img">
+        <img class="materialboxed responsive-img" data-caption="{{objet}}" width="100%" src="{{image.url}}" alt="image">
+      </div>
+
+      <div class="card-action" style="padding:0px">
+        <div class="fixed-action-btn horizontal" style="position:relative; float:right; bottom:35px; right:10px">
+          {{{editIcon ../user.statut id}}}
+        </div>
+      </div>
+
+      <div class="card-content info-card-cont">
+        <h6>{{objet}}</h6>
+        <p class="info-text">{{stripTags (truncate commentaire 100)}}</p>
+        <br>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <p>Pas d'informations</p>
+  {{/each}}
+</div>
+
+
+
+{{!-- <div class="card">
+  <div class="card-image info-card-img">
+    <img class="materialboxed responsive-img" data-caption="{{objet}}" width="100%" src="{{image.url}}" alt="image">
+  </div>
+  <div class="card-content info-card-cont">
+    {{{editIcon ../user.statut id}}}
+    <h6>{{objet}}</h6>
+    <p class="info-text">{{stripTags (truncate commentaire 100)}}</p>
+    <br>
+  </div>
+  <div class="card-action center-align">
+    <a class="btn grey" href="/informations/show/{{id}}">Tout lire</a>
+  </div>
+</div>
+</div> --}}

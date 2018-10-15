@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="col s12 m8">
+    <h3>{{information.objet}}
+      <small>{{{editIcon user.statut information.id false}}}</small>
+    </h3>
+    <div class="card story">
+      <div class="card-content">
+        <span class="card-title">
+          Information publiée le {{formatDate information.date_ajout "Do MMMM YYYY" "fr"}}
+        </span>
+        <hr>
+        {{stripTags information.commentaire}}
+      </div>
+    </div>
+  </div>
+</div>

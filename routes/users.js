@@ -303,7 +303,7 @@ router.post("/login", (req, res, next) => {
       if (user) {
         if (user.password) {
           passport.authenticate("local", {
-            successRedirect: "/",
+            successRedirect: "/informations",
             failureRedirect: "/login",
             failureFlash: true
           })(req, res, next);

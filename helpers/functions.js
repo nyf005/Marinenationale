@@ -10,7 +10,22 @@ module.exports = {
     req.flash("errors_msg", `Vous n'êtes pas autorisé à accéder à cette page.`);
     res.redirect("/");
   },
-  
+
+  truncate: function(str, len) {
+    if (str.length > len && str.length > 0) {
+      var new_str = str + " ";
+      new_str = str.substr(0, len);
+      new_str = str.substr(0, new_str.lastIndexOf(" "));
+      new_str = new_str.length > 0 ? new_str : str.substr(0, len);
+      return new_str + "...";
+    }
+    return str;
+  },
+
+  stripTags: function(input) {
+    return input.replace(/(&nbsp;|&#39;|<([^>]+)>)/gi, "");
+  },
+
   dateFormat: function(date, format) {
     var dateObj = new Date(date);
     var momentObj = moment(dateObj);
@@ -170,7 +185,7 @@ module.exports = {
   },
 
   toTitleCase: function(str) {
-    return str.replace(/\w\S*/g, function (txt) {
+    return str.replace(/\w\S*/g, function(txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   },
@@ -178,5 +193,34 @@ module.exports = {
   resizeImg: function(id, format) {
     const link = `https://res.cloudinary.com/nyf005/image/upload/w_60,h_60,c_thumb/v1537614359/${id}.${format}`;
     return link;
+  },
+
+  editIcon: function(statut, infoId, floating = true) {
+    if (statut === "admin" || statut === "super_admin") {
+      if (floating){
+        return `
+        <a class="btn-floating halfway-fab green"><i class="large material-icons">dehaze</i></a>
+        <ul>
+          <li>
+            <form action="/informations/delete/${infoId}?_method=DELETE" method="POST" id="delete-form">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn-floating red">
+                <i class="material-icons">delete_forever</i>
+              </button>
+            </form>
+          </li>
+          <li><a href="/informations/edit/${infoId}" class="btn-floating blue"><i class="material-icons">create</i></a></li>
+          <li><a href="/informations/show/${infoId}" class="btn-floating orange darken-1"><i class="material-icons">book</i></a></li>
+        </ul>`;
+      } else {
+        return `<a href="/informations/edit/${infoId}"><i class="material-icons">create</i></a>`;
+      }
+    } else {
+      if (floating){
+        return `<a href="/informations/show/${infoId}" class="btn-floating halfway-fab orange"><i class="material-icons">book</i></a>`;
+      } else {
+        return ``;
+      }
+    }
   }
 };

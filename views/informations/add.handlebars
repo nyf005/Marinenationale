@@ -1,0 +1,36 @@
+<div class="row container">
+  <div class="card-panel center-align">
+    <h5>Ajouter une information</h5>
+  </div>
+  <hr>
+  <form action="/informations/add" method="POST" enctype="multipart/form-data">
+    <div class="input-field col m8 offset-m2 s12">
+      <input name="reference" id="reference" type="text" class="validate" {{#if errors}} value="{{reference}}" {{/if}}>
+      <label for="reference">Reférence</label>
+    </div>
+    <div class="input-field col m8 offset-m2 s12">
+      <input name="objet" id="objet" type="text" class="validate" {{#if errors}} value="{{objet}}" {{/if}}>
+      <label for="objet">Objet</label>
+    </div>
+    <div class="file-field input-field col m8 offset-m2 s12">
+      <div class="btn">
+        <span>Image</span>
+        <input name="image_info" type="file" accept=".png, .jpg, .jpeg">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <div class="input-field col m8 offset-m2 s12">
+      <span>Commentaire</span>
+      <textarea name="commentaire">
+        {{#if errors}} {{stripTags commentaire}} {{/if}}
+      </textarea>
+    </div>
+    <div class="input-field col m8 offset-m8 s12">
+      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>

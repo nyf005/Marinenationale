@@ -20,6 +20,25 @@ main {
   margin: 5px;
 }
 
+.info-card-img{
+  height: 150px; /* Your height here */
+  overflow: scroll;
+}
+
+.info-card-cont{
+  width: auto;
+  height: 150px; /* Your height here */
+  overflow: hidden;
+}
+
+.info-text{
+  font-size: 15px;
+}
+
+.halfway-fab{
+  top: 15px;
+}
+
 .truncate > img {
   width: 120px;
 }
@@ -38,6 +57,12 @@ main {
   font-size: 25px;
   font-family: "Parisienne", cursive;
   /* font-family: "Abel", sans-serif; */
+}
+
+.div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
 }
 .loginForm {
   font-size: 18px;
@@ -134,10 +159,8 @@ table > tbody + tbody {
 }
 
 .table-bordered > thead,
-tbody > tr > th,
-td {
-  border: 0;
-  border-bottom: 1px solid #e0e0e0;
+  tbody > tr > th,
+  td {
+   border: 0;
+   border-bottom: 1px solid #e0e0e0;
 }
-
-

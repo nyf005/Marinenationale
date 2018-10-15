@@ -15,6 +15,7 @@ require("./models/Rank");
 require("./models/Unite");
 require("./models/Service");
 require("./models/Training");
+require("./models/Information");
 
 //Load routes
 const index = require("./routes/index");
@@ -23,6 +24,7 @@ const ranks = require("./routes/ranks");
 const unites = require("./routes/unites");
 const services = require("./routes/services");
 const tranings = require("./routes/trainings");
+const informations = require("./routes/informations");
 
 //Load Keys
 const keys = require("./config/keys");
@@ -36,7 +38,10 @@ const {
   checkGrant,
   ifCond,
   toTitleCase,
-  resizeImg
+  resizeImg,
+  truncate,
+  stripTags,
+  editIcon
 } = require("./helpers/functions");
 
 //Map global promises
@@ -80,7 +85,10 @@ app.engine(
       checkGrant: checkGrant,
       ifCond: ifCond,
       toTitleCase: toTitleCase,
-      resizeImg: resizeImg
+      resizeImg: resizeImg,
+      truncate: truncate,
+      stripTags: stripTags,
+      editIcon: editIcon
     },
     defaultLayout: "main"
   })
@@ -126,8 +134,9 @@ app.use("/ranks", ranks);
 app.use("/unites", unites);
 app.use("/services", services);
 app.use("/trainings", tranings);
+app.use("/informations", informations);
 
-const port = process.env.PORT || 3100;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Serveur démarré sur le port ${port}`);
