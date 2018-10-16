@@ -1,15 +1,26 @@
 <div class="container">
   <div class="col s12 m8">
-    <h3>{{information.objet}}
-      <small>{{{editIcon user.statut information.id false}}}</small>
-    </h3>
     <div class="card story">
       <div class="card-content">
         <span class="card-title">
-          Information publiée le {{formatDate information.date_ajout "Do MMMM YYYY" "fr"}}
+          Objet :
+          {{information.objet}}
+          <small>{{{editIcon user.statut information.id false}}}</small>
+          <br>
+          Référence : {{information.reference}}
         </span>
-        <hr>
+        <br>
         {{stripTags information.commentaire}}
+        <br>
+      </div>
+      <div class="card-action right-align">
+        <span class="left">
+          <img class="materialboxed responsive-img diplome_thumb" data-caption="{{information.objet}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{information.image.id}}.{{information.image.format}}">
+        </span>
+        
+        <small>
+          Information publiée le {{formatDate information.date_ajout "Do MMMM YYYY" "fr"}}
+        </small>
       </div>
     </div>
   </div>

@@ -1,8 +1,10 @@
+{{#ifCond user.statut "!=" "membre"}}
 <div class="fixed-action-btn">
   <a href="/informations/add" class="btn-floating btn-large red">
     <i class="fa fa-plus"></i>
   </a>
 </div>
+{{/ifCond}}
 <div class="row container">
   <h4>Tableau d'informations</h4>
   <hr>
