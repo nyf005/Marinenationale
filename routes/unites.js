@@ -80,36 +80,43 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
 
 // Traitement du formulaire de modification
 router.put("/edit/:id", ensureAuthenticated, (req, res) => {
-  permission = checkGrant(req.user.statut, "updateAny", "unite", req, res);
-  if (permission) {
-    let errors = [];
-
-    if (!req.body.unite) {
-      errors.push({
-        text: `Veuillez entrer le nom de l'unité`
-      });
-    }
-
-    if (errors.length > 0) {
-      res.render("unites/edit", {
-        errors: errors,
-        unite: req.body.unite,
-        abreviation: req.body.abreviation
-      });
-    } else {
-      Unite.findOne({
-        _id: req.params.id
-      }).then(unite => {
+  Unite.findOne({
+    _id: req.params.id
+  }).then(unite => {
+    permission = checkGrant(req.user.statut, "updateAny", "unite", req, res);
+    if (permission) {
+      let errors = [];
+  
+      if (!req.body.unite) {
+        errors.push({
+          text: `Veuillez entrer le nom de l'unité`
+        });
+      }
+  
+      if (!req.body.abreviation) {
+        errors.push({
+          text: `Veuillez entrer l'abréviation de l'unité`
+        });
+      }
+  
+      if (errors.length > 0) {
+        res.render("unites/edit", {
+          errors: errors,
+          unite: unite,
+          unit: req.body.unite,
+          abreviation: req.body.abreviation
+        });
+      } else {
         unite.nom = req.body.unite;
         unite.abreviation = req.body.abreviation;
-
+    
         unite.save().then(unite => {
           req.flash("success_msg", "Unité mise à jour avec succès");
           res.redirect("/unites");
         });
-      });
+      }
     }
-  }
+  });
 });
 
 // Suppression d'unités

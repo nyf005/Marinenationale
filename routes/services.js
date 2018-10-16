@@ -99,6 +99,12 @@ router.put("/edit/:id", ensureAuthenticated, (req, res) => {
       });
     }
 
+    if (!req.body.abreviation) {
+      errors.push({
+        text: `Veuillez entrer l'abréviation du service`
+      });
+    }
+
     if (errors.length > 0) {
       Service.findOne({
         _id: req.params.id
@@ -116,12 +122,6 @@ router.put("/edit/:id", ensureAuthenticated, (req, res) => {
             });
           });
         });
-      // res.render("services/edit", {
-      //   errors: errors,
-      //   unite: req.body.unite,
-      //   service: req.body.service,
-      //   abreviation: req.body.abreviation
-      // });
     } else {
       Service.findOne({
         _id: req.params.id

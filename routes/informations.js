@@ -33,8 +33,9 @@ const upload = multer({ storage });
 router.get("/", ensureAuthenticated, (req, res) => {
   permission = checkGrant(req.user.statut, "readAny", "information", req, res);
   if (permission) {
-    Information.find()
-      .sort({ date_ajout: "desc" })
+    Information
+      .find({ $where : `this.date_expiration > ${Date.now()}` })
+      .sort({ date_ajout: "asc" })
       .then(informations => {
         res.render("informations/index", {
           informations: informations
@@ -90,6 +91,13 @@ router.post(
         });
       }
 
+      if (!req.body.date_exp) {
+        errors.push({
+          text:
+            "Veuillez rentrer la date d'expiration de cette information"
+        });
+      }
+
       if (errors.length > 0) {
         if (req.file) {
           cloudinary.v2.uploader.destroy(req.file.public_id);
@@ -99,7 +107,8 @@ router.post(
           reference: req.body.reference,
           objet: req.body.objet,
           image: req.file,
-          commentaire: req.body.commentaire
+          commentaire: req.body.commentaire,
+          date_exp: req.body.date_exp
         });
       } else {
         const newInformation = {
@@ -111,6 +120,7 @@ router.post(
             url: req.file.url,
             format: req.file.format
           },
+          date_expiration : req.body.date_exp,
           date_ajout: new Date()
         };
 
@@ -160,46 +170,59 @@ router.put(
   upload.single("image_info"),
   ensureAuthenticated,
   (req, res) => {
-    permission = checkGrant(
-      req.user.statut,
-      "updateAny",
-      "information",
-      req,
-      res
-    );
-    if (permission) {
-      let errors = [];
 
-      if (!req.body.reference) {
-        errors.push({
-          text: "Veuillez saisir la référence de l'information"
-        });
-      }
-
-      if (!req.body.objet) {
-        errors.push({
-          text: "Veuillez saisir l'objet de l'information"
-        });
-      }
-
-      if (errors.length > 0) {
-        if (req.file) {
-          cloudinary.v2.uploader.destroy(req.file.public_id);
+    Information.findOne({
+      _id: req.params.id
+    }).then(information => {
+      permission = checkGrant(
+        req.user.statut,
+        "updateAny",
+        "information",
+        req,
+        res
+      );
+      if (permission) {
+        
+        let errors = [];
+  
+        if (!req.body.reference) {
+          errors.push({
+            text: "Veuillez saisir la référence de l'information"
+          });
         }
-        res.render("informations/edit", {
-          errors: errors,
-          reference: req.body.reference,
-          objet: req.body.objet,
-          image: req.file,
-          commentaire: req.body.commentaire
-        });
-      } else {
-        Information.findOne({
-          _id: req.params.id
-        }).then(information => {
+  
+        if (!req.body.objet) {
+          errors.push({
+            text: "Veuillez saisir l'objet de l'information"
+          });
+        }
+  
+        if (!req.body.date_exp) {
+          errors.push({
+            text:
+              "Veuillez rentrer la date d'expiration de cette information"
+          });
+        }
+  
+        if (errors.length > 0) {
+          if (req.file) {
+            cloudinary.v2.uploader.destroy(req.file.public_id);
+          }
+          res.render("informations/edit", {
+            errors: errors,
+            information: information,
+            reference: req.body.reference,
+            objet: req.body.objet,
+            image: req.file,
+            commentaire: req.body.commentaire,
+            date_exp: req.body.date_exp
+          });
+        } else {
           information.reference = req.body.reference.toUpperCase();
           information.objet = req.body.objet.toUpperCase();
           information.commentaire = req.body.commentaire;
+          information.date_ajout = new Date();
+          information.date_expiration = req.body.date_exp;
           if (req.file) {
             cloudinary.v2.uploader.destroy(information.image.id);
             information.image.id = req.file.public_id;
@@ -210,9 +233,9 @@ router.put(
             req.flash("success_msg", "Modifications effectuées avec succès");
             res.redirect("/informations");
           });
-        });
+        }
       }
-    }
+    });
   }
 );
 

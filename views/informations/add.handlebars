@@ -4,15 +4,15 @@
   </div>
   <hr>
   <form action="/informations/add" method="POST" enctype="multipart/form-data">
-    <div class="input-field col m8 offset-m2 s12">
-      <input name="reference" id="reference" type="text" class="validate" {{#if errors}} value="{{reference}}" {{/if}}>
-      <label for="reference">Reférence</label>
-    </div>
-    <div class="input-field col m8 offset-m2 s12">
+    <div class="input-field col m6 s12">
       <input name="objet" id="objet" type="text" class="validate" {{#if errors}} value="{{objet}}" {{/if}}>
       <label for="objet">Objet</label>
     </div>
-    <div class="file-field input-field col m8 offset-m2 s12">
+    <div class="input-field col m6 s12">
+      <input name="reference" id="reference" type="text" class="validate" {{#if errors}} value="{{reference}}" {{/if}}>
+      <label for="reference">Reférence</label>
+    </div>
+    <div class="file-field input-field col m10 s12">
       <div class="btn">
         <span>Image</span>
         <input name="image_info" type="file" accept=".png, .jpg, .jpeg">
@@ -21,13 +21,17 @@
         <input class="file-path validate" type="text">
       </div>
     </div>
-    <div class="input-field col m8 offset-m2 s12">
+    <div class="input-field col m2 s12">
+      <input name="date_exp" id="date_exp" type="date" class="date_exp" {{#if date_exp}} data-value="{{dateFormat date_exp "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+      <label for="date_fin">Expire le</label>
+    </div>
+    <div class="input-field col m12 s12">
       <span>Commentaire</span>
       <textarea name="commentaire">
         {{#if errors}} {{stripTags commentaire}} {{/if}}
       </textarea>
     </div>
-    <div class="input-field col m8 offset-m8 s12">
+    <div class="input-field col m2 offset-m10 s12">
       <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
         <i class="material-icons right">send</i>
       </button>

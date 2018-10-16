@@ -22,6 +22,9 @@ const InformationSchema = new Schema({
       type: String
     }
   },
+  date_expiration:{
+    type: Date
+  },
   date_ajout:{
     type: Date
   }

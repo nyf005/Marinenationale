@@ -44,13 +44,27 @@
         weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
         today: 'aujourd\'hui',
         clear: 'effacer',
-        maxDate: new Date(),
         firstDay: 1,
         format: 'dd mmmm yyyy',
         formatSubmit: 'yyyy-mm-dd',
         selectYears: 70,
         selectMonths: true,
         max: new Date(),
+        hiddenName: true
+      });
+
+      $('.date_exp').pickadate({
+        monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+        monthsShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'],
+        weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        today: 'aujourd\'hui',
+        clear: 'effacer',
+        firstDay: 1,
+        format: 'dd mmmm yyyy',
+        formatSubmit: 'yyyy-mm-dd',
+        selectYears: 2,
+        selectMonths: true,
+        min: new Date(),
         hiddenName: true
       });
       $('select').material_select();

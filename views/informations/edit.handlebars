@@ -4,31 +4,43 @@
   </div>
   <hr>
   <form action="/informations/edit/{{information.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
-  <input type="hidden" name="_method" value="PUT">
-    <div class="input-field col m8 offset-m2 s12">
-      <input name="reference" id="reference" type="text" class="validate" {{#if errors}} value="{{reference}}" {{else}} value="{{information.reference}}" {{/if}}>
+    <input type="hidden" name="_method" value="PUT">
+    <div class="input-field col m6 s12">
+      <input name="reference" id="reference" type="text" class="validate" {{#if errors}} value="{{reference}}" {{else}}
+        value="{{information.reference}}" {{/if}}>
       <label for="reference">Reférence</label>
     </div>
-    <div class="input-field col m8 offset-m2 s12">
-      <input name="objet" id="objet" type="text" class="validate" {{#if errors}} value="{{objet}}" {{else}} value="{{information.objet}}"  {{/if}}>
+    <div class="input-field col m6 s12">
+      <input name="objet" id="objet" type="text" class="validate" {{#if errors}} value="{{objet}}" {{else}} value="{{information.objet}}"
+        {{/if}}>
       <label for="objet">Objet</label>
     </div>
-    <div class="file-field input-field col m8 offset-m2 s12">
+    <div class="file-field input-field col m10 s12">
       <div class="btn">
         <span>Image</span>
-        <input name="image_info" type="file"  accept=".png, .jpg, .jpeg">
+        <input name="image_info" type="file" accept=".png, .jpg, .jpeg">
       </div>
       <div class="file-path-wrapper">
-        <input class="file-path validate" type="text" {{#if information.image.id}} value="La copie de cette information existe déjà dans la base de donnée." {{/if}}>
+        <input class="file-path validate" type="text" {{#if information.image.id}} value="La copie de cette information existe déjà dans la base de donnée."
+          {{/if}}>
       </div>
     </div>
-    <div class="input-field col m8 offset-m2 s12">
+    <div class="input-field col m2 s12">
+      {{#if information.date_expiration}}
+      <input name="date_exp" id="date_exp" type="date" class="date_exp" data-value="{{dateFormat information.date_expiration "YYYY-MM-DD"}}">
+      {{else}}
+      <input name="date_exp" id="date_exp" type="date" class="date_exp" {{#if date_exp}} data-value="{{dateFormat date_exp "YYYY-MM-DD"}}"
+        {{else}} data-value="" {{/if}}>
+      {{/if}}
+      <label for="date_fin">Expire le</label>
+    </div>
+    <div class="input-field col m12 s12">
       <span>Commentaire</span>
       <textarea name="commentaire">
         {{#if errors}} {{stripTags commentaire}} {{else}} {{stripTags information.commentaire}} {{/if}}
       </textarea>
     </div>
-    <div class="input-field col m8 offset-m8 s12">
+    <div class="input-field col m2 offset-m10 s12">
       <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
         <i class="material-icons right">send</i>
       </button>
