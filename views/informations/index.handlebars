@@ -23,7 +23,7 @@
 
       <div class="card-content info-card-cont">
         <h6>{{objet}}</h6>
-        <p class="info-text">{{stripTags (truncate commentaire 100)}}</p>
+        <p class="info-text">{{stripTags (truncate commentaire 150)}}</p>
         <br>
       </div>
     </div>
@@ -32,21 +32,3 @@
   <p>Pas d'informations</p>
   {{/each}}
 </div>
-
-
-
-{{!-- <div class="card">
-  <div class="card-image info-card-img">
-    <img class="materialboxed responsive-img" data-caption="{{objet}}" width="100%" src="{{image.url}}" alt="image">
-  </div>
-  <div class="card-content info-card-cont">
-    {{{editIcon ../user.statut id}}}
-    <h6>{{objet}}</h6>
-    <p class="info-text">{{stripTags (truncate commentaire 100)}}</p>
-    <br>
-  </div>
-  <div class="card-action center-align">
-    <a class="btn grey" href="/informations/show/{{id}}">Tout lire</a>
-  </div>
-</div>
-</div> --}}

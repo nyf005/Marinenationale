@@ -96,19 +96,7 @@
             },
             {
               items: ['Undo', 'Redo']
-            },
-            {
-              items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
-            },
-            {
-              items: ['Format']
-            },
-            {
-              items: ['Link', 'Unlink']
-            },
-            {
-              items: ['Indent', 'Outdent', '-', 'BulletedList', 'NumberedList']
-            },
+            }
           ],
       });
 
@@ -131,3 +119,35 @@
 </body>
 
 </html>
+
+{{!-- 
+CKEDITOR.replace('commentaire',
+      {
+        removePlugins: 'elementspath',
+        addPlugins: 'Underline',
+        language: 'fr',
+        height: 100,
+        resize_enabled: false,
+        toolbar:
+          [
+            {
+              items: ['Copy', 'Cut', 'Paste']
+            },
+            {
+              items: ['Undo', 'Redo']
+            },
+            {
+              items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
+            },
+            {
+              items: ['Format']
+            },
+            {
+              items: ['Link', 'Unlink']
+            },
+            {
+              items: ['Indent', 'Outdent', '-', 'BulletedList', 'NumberedList']
+            },
+          ],
+      });
+ --}}

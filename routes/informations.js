@@ -35,7 +35,7 @@ router.get("/", ensureAuthenticated, (req, res) => {
   if (permission) {
     Information
       .find({ $where : `this.date_expiration > ${Date.now()}` })
-      .sort({ date_ajout: "asc" })
+      .sort({ date_ajout: "desc" })
       .then(informations => {
         res.render("informations/index", {
           informations: informations
@@ -240,20 +240,20 @@ router.put(
 );
 
 router.delete("/delete/:id", ensureAuthenticated, (req, res) => {
-  permission = checkGrant(
-    req.user.statut,
-    "deleteAny",
-    "information",
-    req,
-    res
-  );
-  if (permission) {
-    Information.deleteOne({
-      _id: req.params.id
-    }).then(() => {
-      req.flash("success_msg", "Information suprrimée");
-      res.redirect("/informations");
-    });
-  }
+  Information.findOne({
+    _id: req.params.id
+  }).then(information => {
+      permission = checkGrant(req.user.statut, "deleteAny", "information", req, res);
+      if (permission) {
+        cloudinary.v2.uploader.destroy(information.image.id);
+        Information.deleteOne({
+          _id: req.params.id
+        }).then(() => {
+          req.flash("success_msg", "Information supprimée");
+          res.redirect("/informations");
+        });
+      }
+
+  });
 });
 module.exports = router;

@@ -28,7 +28,7 @@ main {
 .info-card-cont{
   width: auto;
   height: 150px; /* Your height here */
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .info-text{

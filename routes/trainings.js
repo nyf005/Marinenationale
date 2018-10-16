@@ -337,7 +337,7 @@ router.delete("/delete/:id", ensureAuthenticated, (req, res) => {
         Training.deleteOne({
           _id: req.params.id
         }).then(() => {
-          req.flash("success_msg", "Formation suprrimée");
+          req.flash("success_msg", "Formation supprimée");
           res.redirect("/trainings");
         });
       }

@@ -1,6 +1,7 @@
 const moment = require("moment");
 const cloudinary = require("cloudinary");
 const ac = require("../config/accesscontrol");
+const he = require('he');
 
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
@@ -17,13 +18,14 @@ module.exports = {
       new_str = str.substr(0, len);
       new_str = str.substr(0, new_str.lastIndexOf(" "));
       new_str = new_str.length > 0 ? new_str : str.substr(0, len);
-      return new_str + "...";
+      return new_str + " ...";
     }
     return str;
   },
 
   stripTags: function(input) {
-    return input.replace(/(&nbsp;|&#39;|<([^>]+)>|[&\/\\()~%'"])/gi, "");
+    // return he.decode(input.replace(/(&nbsp;|<([^>]+)>)/ig, ""));
+    return he.decode(input.replace(/<[^>]+>/g, ''));
   },
 
   dateFormat: function(date, format) {
