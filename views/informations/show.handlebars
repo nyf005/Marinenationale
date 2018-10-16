@@ -14,13 +14,15 @@
         <br>
       </div>
       <div class="card-action right-align">
-        <span class="left">
-          <img class="materialboxed responsive-img diplome_thumb" data-caption="{{information.objet}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{information.image.id}}.{{information.image.format}}">
-        </span>
-        
-        <small>
-          Publié le {{formatDate information.date_ajout "Do MMMM YYYY" "fr"}}
-        </small>
+        <div class="row">
+          <span class="left">
+            <img class="materialboxed responsive-img diplome_thumb" data-caption="{{information.objet}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{information.image.id}}.{{information.image.format}}">
+          </span>
+
+          <small>
+            Publié le {{formatDate information.date_ajout "Do MMMM YYYY" "fr"}}
+          </small>
+        </div>
       </div>
     </div>
   </div>
