@@ -16,6 +16,7 @@ require("./models/Unite");
 require("./models/Service");
 require("./models/Training");
 require("./models/Information");
+require("./models/Actualite");
 
 //Load routes
 const index = require("./routes/index");
@@ -25,6 +26,7 @@ const unites = require("./routes/unites");
 const services = require("./routes/services");
 const tranings = require("./routes/trainings");
 const informations = require("./routes/informations");
+const actualites = require("./routes/actualites");
 
 //Load Keys
 const keys = require("./config/keys");
@@ -135,6 +137,7 @@ app.use("/unites", unites);
 app.use("/services", services);
 app.use("/trainings", tranings);
 app.use("/informations", informations);
+app.use("/actualites", actualites);
 
 const port = process.env.PORT || 5000;
 

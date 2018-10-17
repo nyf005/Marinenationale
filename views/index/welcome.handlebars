@@ -38,42 +38,28 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="container">
+  
+  <h5>Actualités de la Marine nationale <a class="right" href="">Voir toutes les actualités</a></h5>
+  <hr>
   <div class="row">
-    <div class="col xl4 l4 m12 12">
-      <div class="card-panel center promo blue-grey darken-3 white-text">
+    {{#each actualites}}
+    <div class="col m4 s12">
+      <div class="card-panel center promo">
         <i class="material-icons">info</i>
-        <p class="promo-caption">Actualité</p>
-        <p class="light center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur corrupti possimus
-          aliquam, autem commodi voluptatem reiciendis, laboriosam quas sit tempore porro enim, ab architecto. Magni
-          ullam necessitatibus impedit eaque obcaecati.</p>
+        <p class="promo-caption">{{titre}}</p>
+        <p class="light">
+          {{stripTags (truncate texte 150)}}
+        </p>
+        <div class="card-action">
+          <a href="/actualites/show/{{id}}" class="waves-effect btn waves-teal right">Voir l'article</a>
+        </div>
       </div>
     </div>
-    <div class="col xl4 l4 m12 12">
-      <div class="card-panel center promo blue-grey darken-3 white-text">
-        <i class="material-icons">info</i>
-        <p class="promo-caption">Actualité</p>
-        <p class="light center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur corrupti possimus
-          aliquam, autem commodi voluptatem reiciendis, laboriosam quas sit tempore porro enim, ab architecto. Magni
-          ullam necessitatibus impedit eaque obcaecati.</p>
-      </div>
-    </div>
-    <div class="col xl4 l4 m12 12">
-      <div class="card-panel center promo blue-grey darken-3 white-text">
-        <i class="material-icons">info</i>
-        <p class="promo-caption">Actualité</p>
-        <p class="light center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur corrupti possimus
-          aliquam, autem commodi voluptatem reiciendis, laboriosam quas sit tempore porro enim, ab architecto. Magni
-          ullam necessitatibus impedit eaque obcaecati.</p>
-      </div>
-    </div>
+    {{/each}}
   </div>
-</div>
 
-<div class="container">
-  <div class="row valign-wrapper">
+  {{!-- <div class="row valign-wrapper">
     <!-- imagenes --> <br>
     <div class="col xl4 l4 m4 s12">
       <img class="materialboxed" data-caption="Fotografía" width="100%" src="https://res.cloudinary.com/nyf005/image/upload/v1537449933/public/pat3.jpg">
@@ -88,5 +74,5 @@
       <img class="materialboxed" data-caption="Fotografía" width="100%" src="https://res.cloudinary.com/nyf005/image/upload/v1537449933/public/sea.png">
     </div>
     <!-- imagenes -->
-  </div>
+  </div> --}}
 </div>

@@ -1,5 +1,4 @@
 const moment = require("moment");
-const cloudinary = require("cloudinary");
 const ac = require("../config/accesscontrol");
 const he = require('he');
 
@@ -201,7 +200,7 @@ module.exports = {
     if (statut === "admin" || statut === "super_admin") {
       if (floating){
         return `
-        <a class="btn-floating halfway-fab green"><i class="large material-icons">dehaze</i></a>
+        <a class="btn-floating pulse halfway-fab green"><i class="large material-icons">dehaze</i></a>
         <ul>
           <li>
             <form action="/informations/delete/${infoId}?_method=DELETE" method="POST" id="delete-form">
@@ -219,7 +218,7 @@ module.exports = {
       }
     } else {
       if (floating){
-        return `<a href="/informations/show/${infoId}" class="btn-floating halfway-fab orange"><i class="material-icons">book</i></a>`;
+        return `<a href="/informations/show/${infoId}" class="btn-floating pulse halfway-fab orange"><i class="material-icons">book</i></a>`;
       } else {
         return ``;
       }

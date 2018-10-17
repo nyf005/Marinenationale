@@ -10,9 +10,9 @@ ac.grant("membre") // switch to another role without breaking the chain
   .grant("admin") // switch to another role without breaking the chain
     .extend("membre") // inherit role capabilities. also takes an array
       .readAny("account", ["*", "!password"])
-      .createAny(["account", "information"]) // equivalent to .createOwn('video', ['*'])
-      .updateAny(["created_account", "information"])
-      .deleteAny(["account", "information"])
+      .createAny(["account", "information", "actualite"]) // equivalent to .createOwn('video', ['*'])
+      .updateAny(["created_account", "information", "actualite"])
+      .deleteAny(["account", "information", "actualite"])
   .grant("super_admin") // define new or modify existing role. also takes an array.
     .extend("admin")
       .createAny(["rank", "unite", "service"]) // equivalent to .createOwn('video', ['*'])

@@ -1,0 +1,36 @@
+<div class="row container">
+  <div class="card-panel center-align">
+    <h5>Modifier une actualité</h5>
+  </div>
+  <hr>
+  <form action="/actualites/edit/{{actualite.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="input-field col m6 s12">
+      <input name="titre" id="titre" type="text" class="validate" {{#if errors}} value="{{titre}}" {{else}} value="{{actualite.titre}}" {{/if}}>
+      <label for="titre">Titre</label>
+    </div>
+
+    <div class="file-field input-field col m6 s12">
+      <div class="btn">
+        <span>Image</span>
+        <input name="image_actu" type="file" accept=".png, .jpg, .jpeg">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" {{#if actualite.image.id}} value="Une illustration de cette actualité existe déjà dans la base de donnée."
+          {{/if}}>>
+      </div>
+    </div>
+
+    <div class="input-field col m12 s12">
+      <span>Texte</span>
+      <textarea name="commentaire">
+        {{#if errors}} {{stripTags texte}} {{else}} {{stripTags actualite.texte}} {{/if}}
+      </textarea>
+    </div>
+
+    <div class="input-field col m2 offset-m10 s12">
+      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>

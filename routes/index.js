@@ -1,8 +1,19 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
+
+const Actualite = mongoose.model("actualites");
 
 router.get("/", (req, res) => {
-  res.render("index/welcome");
+  Actualite
+  .find()
+  .limit(3)
+  .sort({ date_publication: "desc" })
+  .then(actualites => {
+    res.render("index/welcome", {
+      actualites: actualites
+    });
+  })
 });
 
 router.get("/login", (req, res) => {
