@@ -43,25 +43,25 @@ main {
   font-weight: 500;
 }
 
+.actu {
+  padding: 2px 10px;
+  width: auto;
+  height: 200px; /* Your height here */
+  overflow: scroll;
+  text-align: justify;
+}
+
+.actu-text{
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 .halfway-fab{
   top: 15px;
 }
 
 .truncate > img {
   width: 120px;
-}
-
-.promo-caption {
-  font-size: 1.3rem;
-  font-weight: 500;
-  margin-top: 5px;
-  margin-bottom: 0;
-}
-
-.promo .light {
-  padding: 2px 10px;
-  height: 100px;
-  text-align: justify;
 }
 
 .logo {

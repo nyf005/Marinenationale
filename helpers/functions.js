@@ -2,6 +2,7 @@ const moment = require("moment");
 const ac = require("../config/accesscontrol");
 const he = require('he');
 
+
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
     if (req.isAuthenticated()) {
@@ -17,14 +18,16 @@ module.exports = {
       new_str = str.substr(0, len);
       new_str = str.substr(0, new_str.lastIndexOf(" "));
       new_str = new_str.length > 0 ? new_str : str.substr(0, len);
-      return new_str + " ...";
+      return new_str + " <b class='blue-text'>...</b>";
     }
     return str;
   },
 
   stripTags: function(input) {
     // return he.decode(input.replace(/(&nbsp;|<([^>]+)>)/ig, ""));
-    return he.decode(input.replace(/<[^>]+>/g, ''));
+    // return he.decode(input.replace(/<[^>]+>/g, ''));
+
+    return he.decode(input);
   },
 
   dateFormat: function(date, format) {

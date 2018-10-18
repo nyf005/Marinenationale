@@ -30,15 +30,21 @@ const storage = cloudinaryStorage({
 });
 const upload = multer({ storage });
 
+router.get("/", ensureAuthenticated, (req, res) => {
+  permission = checkGrant(req.user.statut, "createAny", "actualite", req, res);
+  if (permission) {
+    Actualite.find()
+      .sort({ date_publication: "desc" })
+      .then(actualites => {
+        res.render("actualites/index", {
+          actualites: actualites
+        });
+      });
+  }
+});
 
 router.get("/add", ensureAuthenticated, (req, res) => {
-  permission = checkGrant(
-    req.user.statut,
-    "createAny",
-    "actualite",
-    req,
-    res
-  );
+  permission = checkGrant(req.user.statut, "createAny", "actualite", req, res);
   if (permission) {
     res.render("actualites/add");
   }
@@ -67,8 +73,7 @@ router.post(
 
       if (!req.body.commentaire) {
         errors.push({
-          text:
-            "Veuillez rentrer le texte de cette actualité"
+          text: "Veuillez rentrer le texte de cette actualité"
         });
       }
 
@@ -84,7 +89,7 @@ router.post(
         });
       } else {
         let newActualite = {};
-        if (req.file){
+        if (req.file) {
           newActualite = {
             titre: req.body.titre.toUpperCase(),
             texte: req.body.commentaire,
@@ -105,7 +110,7 @@ router.post(
 
         new Actualite(newActualite).save().then(() => {
           req.flash("success_msg", "Nouvelle actualité ajoutée");
-          res.redirect("/");
+          res.redirect("/actualites");
         });
       }
     }
@@ -113,9 +118,7 @@ router.post(
 );
 
 // To Check, Already Done. Create corresponding pages
-router.get("/show/:id", ensureAuthenticated, (req, res) => {
-  permission = checkGrant(req.user.statut, "readAny", "actualite", req, res);
-  if (permission) {
+router.get("/show/:id", (req, res) => {
     Actualite.findOne({
       _id: req.params.id
     }).then(actualite => {
@@ -123,17 +126,21 @@ router.get("/show/:id", ensureAuthenticated, (req, res) => {
         actualite: actualite
       });
     });
-  }
+});
+
+router.get("/showall", (req, res) => {
+  Actualite
+  .find()
+  .sort({ date_publication: "desc" })
+  .then(actualites => {
+    res.render("actualites/showall", {
+      actualites: actualites
+    });
+  });
 });
 
 router.get("/edit/:id", ensureAuthenticated, (req, res) => {
-  permission = checkGrant(
-    req.user.statut,
-    "updateAny",
-    "actualite",
-    req,
-    res
-  );
+  permission = checkGrant(req.user.statut, "updateAny", "actualite", req, res);
   if (permission) {
     Actualite.findOne({
       _id: req.params.id
@@ -150,7 +157,6 @@ router.put(
   upload.single("image_actu"),
   ensureAuthenticated,
   (req, res) => {
-
     Actualite.findOne({
       _id: req.params.id
     }).then(actualite => {
@@ -162,22 +168,20 @@ router.put(
         res
       );
       if (permission) {
-        
         let errors = [];
-  
+
         if (!req.body.titre) {
           errors.push({
             text: "Veuillez saisir un titre pour l'actualité"
           });
         }
-  
+
         if (!req.body.commentaire) {
           errors.push({
-            text:
-              "Veuillez rentrer le texte de cette actualité"
+            text: "Veuillez rentrer le texte de cette actualité"
           });
         }
-  
+
         if (errors.length > 0) {
           if (req.file) {
             cloudinary.v2.uploader.destroy(req.file.public_id);
@@ -192,7 +196,7 @@ router.put(
         } else {
           actualite.titre = req.body.titre.toUpperCase();
           actualite.texte = req.body.commentaire;
-          information.date_publication = new Date();
+          actualite.date_publication = new Date();
           if (req.file) {
             cloudinary.v2.uploader.destroy(actualite.image.id);
             actualite.image.id = req.file.public_id;
@@ -213,17 +217,22 @@ router.delete("/delete/:id", ensureAuthenticated, (req, res) => {
   Actualite.findOne({
     _id: req.params.id
   }).then(actualite => {
-      permission = checkGrant(req.user.statut, "deleteAny", "actualite", req, res);
-      if (permission) {
-        cloudinary.v2.uploader.destroy(actualite.image.id);
-        Actualite.deleteOne({
-          _id: req.params.id
-        }).then(() => {
-          req.flash("success_msg", "Actualité supprimée");
-          res.redirect("/actualites");
-        });
-      }
-
+    permission = checkGrant(
+      req.user.statut,
+      "deleteAny",
+      "actualite",
+      req,
+      res
+    );
+    if (permission) {
+      cloudinary.v2.uploader.destroy(actualite.image.id);
+      Actualite.deleteOne({
+        _id: req.params.id
+      }).then(() => {
+        req.flash("success_msg", "Actualité supprimée");
+        res.redirect("/actualites");
+      });
+    }
   });
 });
 module.exports = router;

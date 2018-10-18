@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="col s12 m8">
+    <div class="card story">
+      <div class="card-content info-show">
+        <span class="card-title">
+          {{actualite.titre}}
+          <br>
+        </span>
+        <br>
+        {{{stripTags actualite.texte}}}
+        <br>
+      </div>
+      <div class="card-action right-align">
+        <div class="row">
+          {{#if actualite.image.id}}
+          <span class="left">
+            <img class="materialboxed responsive-img diplome_thumb" data-caption="{{actualite.image}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{actualite.image.id}}.{{actualite.image.format}}">
+          </span>
+          {{/if}}
+          <small style="padding-bottom:0px;">
+            Publié le {{formatDate actualite.date_publication "Do MMMM YYYY" "fr"}}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

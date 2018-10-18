@@ -1,0 +1,22 @@
+<div class="container">
+  <h5>Actualités de la Marine nationale</h5>
+  <hr>
+  <div class="row">
+    {{#each actualites}}
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-content actu">
+          <h6 class="center"><b>{{titre}}</b></h6>
+          <p class="actu-text">{{{stripTags (truncate texte 150)}}}</p>
+          <br>
+        </div>
+        <div>
+          <a href="/actualites/show/{{id}}" class="waves-effect btn waves-teal right">Voir l'article</a>
+        </div>
+      </div>
+    </div>
+    {{else}}
+    <p class="center">Aucune actualité pour le moment.</p>
+    {{/each}}
+  </div>
+</div>

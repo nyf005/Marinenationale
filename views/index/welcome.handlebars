@@ -39,19 +39,19 @@
     </div>
   </div>
 
-  
-  <h5>Actualités de la Marine nationale <a class="right" href="">Voir toutes les actualités</a></h5>
+
+  <h5>Actualités de la Marine nationale <a class="right" href="/actualites/showall">Voir toutes les actualités</a></h5>
   <hr>
   <div class="row">
     {{#each actualites}}
-    <div class="col m4 s12">
-      <div class="card-panel center promo">
-        <i class="material-icons">info</i>
-        <p class="promo-caption">{{titre}}</p>
-        <p class="light">
-          {{stripTags (truncate texte 150)}}
-        </p>
-        <div class="card-action">
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-content actu">
+          <h6 class="center"><b>{{titre}}</b></h6>
+          <p class="actu-text">{{{stripTags (truncate texte 150)}}}</p>
+          <br>
+        </div>
+        <div>
           <a href="/actualites/show/{{id}}" class="waves-effect btn waves-teal right">Voir l'article</a>
         </div>
       </div>

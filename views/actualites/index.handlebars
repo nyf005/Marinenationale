@@ -1,0 +1,40 @@
+<div class="fixed-action-btn">
+  <a href="/actualites/add" class="btn-floating btn-large red">
+  <i class="fa fa-plus"></i>
+  </a>
+</div>
+<div class="container">
+  <h4>Gestion des actualités</h4>
+  <hr>
+  {{#if actualites}}
+  <table class="responsive-table centered highlight">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each actualites}}
+      <tr>
+        <td>{{titre}}</td>
+        <td>
+          <a class="btn left-align" href="/actualites/edit/{{id}}">
+            <i class="fa fa-pencil"></i> Modifier
+          </a>
+        </td>
+        <td>
+          <form action="/actualites/delete/{{id}}?_method=DELETE" method="POST" id="delete-form">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn red"><i class="fa fa-remove"></i> Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p>Aucune actualité n'a été ajoutée pour l'instant.</p>
+  {{/if}}
+</div>
