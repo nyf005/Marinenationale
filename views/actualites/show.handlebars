@@ -7,16 +7,22 @@
           <br>
         </span>
         <br>
-        {{{stripTags actualite.texte}}}
+        {{#if actualite.image.id}}
+        <div class="row valign-wrapper">
+          <div class="col m8 s12">
+            {{{stripTags actualite.texte}}}
+          </div>
+          <div class="col m4 s12">
+            <img class="materialboxed responsive-img" data-caption="{{actualite.image}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{actualite.image.id}}.{{actualite.image.format}}">
+          </div>
+        </div>
+        {{else}}
+          {{{stripTags actualite.texte}}}
+        {{/if}}
         <br>
       </div>
       <div class="card-action right-align">
         <div class="row">
-          {{#if actualite.image.id}}
-          <span class="left">
-            <img class="materialboxed responsive-img diplome_thumb" data-caption="{{actualite.image}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{actualite.image.id}}.{{actualite.image.format}}">
-          </span>
-          {{/if}}
           <small style="padding-bottom:0px;">
             Publié le {{formatDate actualite.date_publication "Do MMMM YYYY" "fr"}}
           </small>
