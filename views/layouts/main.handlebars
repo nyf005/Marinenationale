@@ -82,6 +82,22 @@
       $('.modal').modal();
     });
 
+    jQuery(document).ready(function ($) {
+      $('.live-search-list').each(function () {
+        $(this).attr('data-search-term', $(this).text().toLowerCase());
+      });
+      $('.live-search-box').on('keyup', function () {
+        var searchTerm = $(this).val().toLowerCase().replace("'", "\\'");
+        $('.live-search-list').each(function () {
+          if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      });
+    });
+
     CKEDITOR.replace('commentaire',
       {
         removePlugins: 'elementspath',
@@ -108,55 +124,39 @@
             }
           ]
       });
-
-    jQuery(document).ready(function ($) {
-      $('.live-search-list').each(function () {
-        $(this).attr('data-search-term', $(this).text().toLowerCase());
-      });
-      $('.live-search-box').on('keyup', function () {
-        var searchTerm = $(this).val().toLowerCase().replace("'", "\\'");
-        $('.live-search-list').each(function () {
-          if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-        });
-      });
-    });
   </script>
 </body>
 
 </html>
 
-{{!-- 
+{{!--
 CKEDITOR.replace('commentaire',
-      {
-        removePlugins: 'elementspath',
-        addPlugins: 'Underline',
-        language: 'fr',
-        height: 100,
-        resize_enabled: false,
-        toolbar:
-          [
-            {
-              items: ['Copy', 'Cut', 'Paste']
-            },
-            {
-              items: ['Undo', 'Redo']
-            },
-            {
-              items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
-            },
-            {
-              items: ['Format']
-            },
-            {
-              items: ['Link', 'Unlink']
-            },
-            {
-              items: ['Indent', 'Outdent', '-', 'BulletedList', 'NumberedList']
-            },
-          ],
-      });
- --}}
+{
+removePlugins: 'elementspath',
+addPlugins: 'Underline',
+language: 'fr',
+height: 100,
+resize_enabled: false,
+toolbar:
+[
+{
+items: ['Copy', 'Cut', 'Paste']
+},
+{
+items: ['Undo', 'Redo']
+},
+{
+items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
+},
+{
+items: ['Format']
+},
+{
+items: ['Link', 'Unlink']
+},
+{
+items: ['Indent', 'Outdent', '-', 'BulletedList', 'NumberedList']
+},
+],
+});
+--}}
