@@ -70,8 +70,14 @@ router.get("/add", ensureAuthenticated, (req, res) => {
     Rank.find()
       .sort({ ordre: "asc" })
       .then(ranks => {
-        res.render("users/add", {
-          ranks: ranks
+        Unite.find().then(unites => {
+          Service.find().then(services => {
+            res.render("users/add", {
+              ranks: ranks,
+              unites: unites,
+              services: services
+            });
+          });
         });
       });
   }
@@ -85,31 +91,86 @@ router.post("/add", ensureAuthenticated, (req, res) => {
 
     if (!req.body.mecano) {
       errors.push({
-        text: `Veuillez entrer le mécano du membre`
+        text: `Veuillez entrer le mécano du marin`
       });
     }
 
     if (!req.body.matricule) {
       errors.push({
-        text: `Veuillez entrer le matricule du membre`
+        text: `Veuillez entrer le matricule du marin`
       });
     }
 
     if (!req.body.grade) {
       errors.push({
-        text: `Veuillez sélectionner le grade du membre`
+        text: `Veuillez sélectionner le grade du marin`
       });
     }
 
     if (!req.body.nom) {
       errors.push({
-        text: `Veuillez entrer le nom du membre`
+        text: `Veuillez entrer le nom du marin`
       });
     }
 
     if (!req.body.prenoms) {
       errors.push({
-        text: `Veuillez entrer le ou les prénoms du membre`
+        text: `Veuillez entrer le ou les prénoms du marin`
+      });
+    }
+
+    if (!req.body.genre) {
+      errors.push({
+        text: "Veuillez sélectionner le genre du marin"
+      });
+    }
+
+    if (!req.body.dateNaiss) {
+      errors.push({
+        text: "Veuillez sélectionner la date de naissance du marin"
+      });
+    }
+
+    if (!req.body.lieuNaiss) {
+      errors.push({
+        text: "Veuillez saisir le lieu de naissance du marin"
+      });
+    }
+
+    if (!req.body.pere) {
+      errors.push({
+        text: "Veuillez saisir le nom complet du père du marin"
+      });
+    }
+
+    if (!req.body.mere) {
+      errors.push({
+        text: "Veuillez saisir le nom complet de la mère du marin"
+      });
+    }
+
+    if (!req.body.dateEntreeService) {
+      errors.push({
+        text: "Veuillez sélectionner la date d'entrée en service du marin"
+      });
+    }
+
+    if (!req.body.dateNomination) {
+      errors.push({
+        text:
+          "Veuillez sélectionner la date de nomination au grade actuel du marin"
+      });
+    }
+
+    if (!req.body.unite) {
+      errors.push({
+        text: "Veuillez sélectionner l'unité du marin"
+      });
+    }
+
+    if (!req.body.service) {
+      errors.push({
+        text: "Veuillez sélectionner le service du marin"
       });
     }
 
@@ -117,34 +178,65 @@ router.post("/add", ensureAuthenticated, (req, res) => {
       Rank.find()
         .sort({ ordre: "asc" })
         .then(ranks => {
-          res.render("users/add", {
-            errors: errors,
-            ranks: ranks,
+          Unite.find().then(unites => {
+            Service.find().then(services => {
+              res.render("users/add", {
+                errors: errors,
+                ranks: ranks,
+                unites: unites,
+                services: services,
+                genre: req.body.genre,
+                mecano: req.body.mecano,
+                matricule: req.body.matricule,
+                grade: req.body.grade,
+                nom: req.body.nom.toUpperCase(),
+                prenoms: toTitleCase(req.body.prenoms),
+                statut: req.body.statut,
+                dateNaiss: req.body.dateNaiss,
+                lieuNaiss: req.body.lieuNaiss,
+                pere: req.body.pere.toUpperCase(),
+                mere: req.body.mere.toUpperCase(),
+                dateEntreeService: req.body.dateEntreeService,
+                dateNomination: req.body.dateNomination,
+                unite: req.body.unite,
+                service: req.body.service
+              });
+            });
+          });
+        });
+    } else {
+      User.findOne({
+        mecano: req.body.mecano
+      }).then(user => {
+        if (user) {
+          req.flash(
+            "errors_msg",
+            "Ce mécano est déja enregistré dans la base de données"
+          );
+          res.redirect("/users/add");
+        } else {
+          const newUser = {
             mecano: req.body.mecano,
             matricule: req.body.matricule,
             grade: req.body.grade,
             nom: req.body.nom.toUpperCase(),
             prenoms: toTitleCase(req.body.prenoms),
-            statut: req.body.statut
-          });
-        });
-    } else {
-      const newUser = {
-        mecano: req.body.mecano,
-        matricule: req.body.matricule,
-        grade: req.body.grade,
-        nom: req.body.nom.toUpperCase(),
-        prenoms: toTitleCase(req.body.prenoms),
-        statut: req.body.statut
-      };
+            statut: req.body.statut,
+            genre: req.body.genre,
+            naissance: {
+              date: req.body.dateNaiss,
+              lieu: req.body.lieuNaiss
+            },
+            parents: {
+              pere: req.body.pere.toUpperCase(),
+              mere: req.body.mere.toUpperCase()
+            },
+            dateEntreeService: req.body.dateEntreeService,
+            dateNomination: req.body.dateNomination,
+            unite: req.body.unite,
+            service: req.body.service
+          };
 
-      User.findOne({
-        mecano: newUser.mecano
-      }).then(user => {
-        if (user) {
-          req.flash("errors_msg", "Ce membre existe déja");
-          res.redirect("/users/add");
-        } else {
           new User(newUser).save().then(user => {
             req.flash("success_msg", "Nouveau membre ajouté");
             res.redirect("/users/add");
@@ -203,31 +295,86 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
 
     if (!req.body.mecano) {
       errors.push({
-        text: `Veuillez entrer le mécano du membre`
+        text: `Veuillez entrer le mécano du marin`
       });
     }
 
     if (!req.body.matricule) {
       errors.push({
-        text: `Veuillez entrer le matricule du membre`
+        text: `Veuillez entrer le matricule du marin`
       });
     }
 
     if (!req.body.grade) {
       errors.push({
-        text: `Veuillez sélectionner le grade du membre`
+        text: `Veuillez sélectionner le grade du marin`
       });
     }
 
     if (!req.body.nom) {
       errors.push({
-        text: `Veuillez entrer le nom du membre`
+        text: `Veuillez entrer le nom du marin`
       });
     }
 
     if (!req.body.prenoms) {
       errors.push({
-        text: `Veuillez entrer le ou les prénoms du membre`
+        text: `Veuillez entrer le ou les prénoms du marin`
+      });
+    }
+
+    if (!req.body.genre) {
+      errors.push({
+        text: "Veuillez sélectionner le genre du marin"
+      });
+    }
+
+    if (!req.body.dateNaiss) {
+      errors.push({
+        text: "Veuillez sélectionner la date de naissance du marin"
+      });
+    }
+
+    if (!req.body.lieuNaiss) {
+      errors.push({
+        text: "Veuillez saisir le lieu de naissance du marin"
+      });
+    }
+
+    if (!req.body.pere) {
+      errors.push({
+        text: "Veuillez saisir le nom complet du père du marin"
+      });
+    }
+
+    if (!req.body.mere) {
+      errors.push({
+        text: "Veuillez saisir le nom complet de la mère du marin"
+      });
+    }
+
+    if (!req.body.dateEntreeService) {
+      errors.push({
+        text: "Veuillez sélectionner la date d'entrée en service du marin"
+      });
+    }
+
+    if (!req.body.dateNomination) {
+      errors.push({
+        text:
+          "Veuillez sélectionner la date de nomination au grade actuel du marin"
+      });
+    }
+
+    if (!req.body.unite) {
+      errors.push({
+        text: "Veuillez sélectionner l'unité du marin"
+      });
+    }
+
+    if (!req.body.service) {
+      errors.push({
+        text: "Veuillez sélectionner le service du marin"
       });
     }
 
@@ -235,15 +382,30 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
       Rank.find()
         .sort({ ordre: "asc" })
         .then(ranks => {
-          res.render("users/edit_created_user", {
-            errors: errors,
-            ranks: ranks,
-            mecano: req.body.mecano,
-            matricule: req.body.matricule,
-            grade: req.body.grade,
-            nom: req.body.nom.toUpperCase(),
-            prenoms: toTitleCase(req.body.prenoms),
-            statut: req.body.statut
+          Unite.find().then(unites => {
+            Service.find().then(services => {
+              res.render("users/edit_created_user", {
+                errors: errors,
+                ranks: ranks,
+                unites: unites,
+                services: services,
+                genre: req.body.genre,
+                mecano: req.body.mecano,
+                matricule: req.body.matricule,
+                grade: req.body.grade,
+                nom: req.body.nom.toUpperCase(),
+                prenoms: toTitleCase(req.body.prenoms),
+                statut: req.body.statut,
+                dateNaiss: req.body.dateNaiss,
+                lieuNaiss: req.body.lieuNaiss,
+                pere: req.body.pere.toUpperCase(),
+                mere: req.body.mere.toUpperCase(),
+                dateEntreeService: req.body.dateEntreeService,
+                dateNomination: req.body.dateNomination,
+                unite: req.body.unite,
+                service: req.body.service
+              });
+            });
           });
         });
     } else {
@@ -256,6 +418,16 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
           user.nom = req.body.nom;
           user.prenoms = req.body.prenoms;
           user.statut = req.body.statut;
+          user.genre = req.body.genre;
+          user.naissance.date = req.body.dateNaiss;
+          user.naissance.lieu = req.body.lieuNaiss;
+          user.parents.pere = req.body.pere.toUpperCase();
+          user.parents.mere = req.body.mere.toUpperCase();
+          user.dateEntreeService = req.body.dateEntreeService;
+          user.dateNomination = req.body.dateNomination;
+          user.unite = req.body.unite;
+          user.service = req.body.service;
+          
           user.save().then(() => {
             req.flash("success_msg", "Modifications effectuées avec succès");
             res.redirect("/users");
@@ -271,6 +443,15 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
               user.nom = req.body.nom;
               user.prenoms = req.body.prenoms;
               user.statut = req.body.statut;
+              user.genre = req.body.genre;
+              user.naissance.date = req.body.dateNaiss;
+              user.naissance.lieu = req.body.lieuNaiss;
+              user.parents.pere = req.body.pere.toUpperCase();
+              user.parents.mere = req.body.mere.toUpperCase();
+              user.dateEntreeService = req.body.dateEntreeService;
+              user.dateNomination = req.body.dateNomination;
+              user.unite = req.body.unite;
+              user.service = req.body.service;
               user.save().then(() => {
                 req.flash(
                   "success_msg",
@@ -281,7 +462,7 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
             } else {
               req.flash(
                 "errors_msg",
-                "Ce mécano existe déjà dans la base de donnée."
+                "Ce mécano existe déjà dans la base de données."
               );
               res.redirect("/users");
             }
@@ -322,7 +503,7 @@ router.post("/login", (req, res, next) => {
           } else {
             req.flash(
               "errors_msg",
-              "Connectez vous d'abord avec le mot de passe par défaut pour renseigner vos informations"
+              "Connectez vous d'abord avec le mot de passe par défaut puis renseignez vos informations"
             );
             res.redirect("/login");
           }
@@ -348,84 +529,32 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
     .populate("unite")
     .populate("service")
     .then(user => {
+      Unite.find().then(unites => {
+        Service.find().then(services => {
       permission = checkGrant(user.statut, "updateOwn", "account", req, res);
       if (permission) {
-        Unite.find().then(unites => {
-          Service.find().then(services => {
-            if (user.id === req.user.id) {
-              res.render("users/edit", {
-                user: user,
-                unites: unites,
-                services: services
-              });
-            } else {
-              req.flash(
-                "errors_msg",
-                "Vous n'êtes pas autorisé à accéder à cette page."
-              );
-              res.redirect("/");
-            }
+        
+        if (user.id === req.user.id) {
+          res.render("users/edit", {
+            user: user,
+            unites: unites,
+            services: services
           });
-        });
+        } else {
+          req.flash(
+            "errors_msg",
+            "Vous n'êtes pas autorisé à accéder à cette page."
+          );
+          res.redirect("/");
+        }
       }
+    });
+  });
     });
 });
 
 router.put("/register/:id", upload.single("photo"), (req, res) => {
   let errors = [];
-  if (!req.body.genre) {
-    errors.push({
-      text: "Veuillez sélectionner votre genre"
-    });
-  }
-
-  if (!req.body.dateNaiss) {
-    errors.push({
-      text: "Veuillez sélectionner votre date de naissance"
-    });
-  }
-
-  if (!req.body.lieuNaiss) {
-    errors.push({
-      text: "Veuillez saisir votre lieu de naissance"
-    });
-  }
-
-  if (!req.body.pere) {
-    errors.push({
-      text: "Veuillez saisir le nom complet de votre père"
-    });
-  }
-
-  if (!req.body.mere) {
-    errors.push({
-      text: "Veuillez saisir le nom complet de votre mère"
-    });
-  }
-
-  if (!req.body.dateEntreeService) {
-    errors.push({
-      text: "Veuillez sélectionner votre date d'entrée en service"
-    });
-  }
-
-  if (!req.body.dateNomination) {
-    errors.push({
-      text: "Veuillez sélectionner votre date de nomination au grade actuel"
-    });
-  }
-
-  if (!req.body.unite) {
-    errors.push({
-      text: "Veuillez sélectionner votre unité"
-    });
-  }
-
-  if (!req.body.service) {
-    errors.push({
-      text: "Veuillez sélectionner votre service"
-    });
-  }
 
   if (!req.body.password) {
     errors.push({
@@ -453,71 +582,44 @@ router.put("/register/:id", upload.single("photo"), (req, res) => {
     .then(user => {
       permission = checkGrant(user.statut, "updateOwn", "account", req, res);
       if (permission) {
-        Unite.find().then(unites => {
-          Service.find().then(services => {
-            if (errors.length > 0) {
-              if (req.file) {
-                cloudinary.v2.uploader.destroy(req.file.public_id);
-              }
-              res.render("users/edit", {
-                errors: errors,
-                user: user,
-                unites: unites,
-                services: services,
-                genre: req.body.genre,
-                dateNaiss: req.body.dateNaiss,
-                lieuNaiss: req.body.lieuNaiss,
-                pere: req.body.pere.toUpperCase(),
-                mere: req.body.mere.toUpperCase(),
-                dateEntreeService: req.body.dateEntreeService,
-                dateNomination: req.body.dateNomination,
-                unite: req.body.unite,
-                service: req.body.service,
-                password: req.body.password,
-                confirm_password: req.body.confirm_password
-              });
-            } else {
-              user.genre = req.body.genre;
-              user.naissance.date = req.body.dateNaiss;
-              user.naissance.lieu = req.body.lieuNaiss;
-              user.parents.pere = req.body.pere.toUpperCase();
-              user.parents.mere = req.body.mere.toUpperCase();
-              user.dateEntreeService = req.body.dateEntreeService;
-              user.dateNomination = req.body.dateNomination;
-              user.unite = req.body.unite;
-              user.service = req.body.service;
-              if (req.file) {
-                cloudinary.v2.uploader.destroy(user.photo.id);
-                user.photo.id = req.file.public_id;
-                user.photo.url = req.file.url;
-                user.photo.format = req.file.format;
-              }
-              if (req.body.password === user.password) {
-                user.save().then(user => {
+        if (errors.length > 0) {
+          if (req.file) {
+            cloudinary.v2.uploader.destroy(req.file.public_id);
+          }
+          res.render("users/edit", {
+            errors: errors,
+            user: user,
+            password: req.body.password,
+            confirm_password: req.body.confirm_password
+          });
+        } else {
+          if (req.file) {
+            cloudinary.v2.uploader.destroy(user.photo.id);
+            user.photo.id = req.file.public_id;
+            user.photo.url = req.file.url;
+            user.photo.format = req.file.format;
+          }
+          if (req.body.password === user.password) {
+            user.save().then(user => {
+              req.flash("success_msg", "Modifications effectuées avec succès");
+              res.redirect(`/users/edit/${user.id}`);
+            });
+          } else {
+            bcrypt.genSalt(10, (err, salt) => {
+              bcrypt.hash(req.body.password, salt, (err, hash) => {
+                if (err) throw err;
+                user.password = hash;
+                user.save().then(() => {
                   req.flash(
                     "success_msg",
-                    "Modifications effectuées avec succès"
+                    "Vos informations ont été enregistrées avec succès. Vous pouvez vous connecter avec votre nouveau mot de passe pour accéder à votre espace membre."
                   );
-                  res.redirect(`/users/edit/${user.id}`);
+                  res.redirect("/");
                 });
-              } else {
-                bcrypt.genSalt(10, (err, salt) => {
-                  bcrypt.hash(req.body.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    user.password = hash;
-                    user.save().then(user => {
-                      req.flash(
-                        "success_msg",
-                        "Vos informations ont été enregistrées avec succès. Vous pouvez vous connecter avec votre nouveau mot de passe pour accéder à votre espace membre."
-                      );
-                      res.redirect("/");
-                    });
-                  });
-                });
-              }
-            }
-          });
-        });
+              });
+            });
+          }
+        }
       }
     });
 });

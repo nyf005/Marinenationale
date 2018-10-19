@@ -4,35 +4,8 @@
   </div>
   <hr>
   <form action="/users/add" method="POST" class="container section col s12 p6">
-    <div class="input-field col m4 s12">
-      <input name="mecano" id="mecano" type="number" class="validate" {{#if errors}} value="{{mecano}}" {{/if}}>
-      <label for="mecano">Mécano</label>
-    </div>
-    <div class="input-field col m4 s12">
-      <input name="matricule" id="matricule" type="text" class="validate" {{#if errors}} value="{{matricule}}" {{/if}}>
-      <label for="matricule">Matricule</label>
-    </div>
-    <div class="input-field col m4 s12">
-      <select name="grade" >
-        {{#select grade}}
-        <option value="" disabled selected>Grade du marin</option>
-        {{#each ranks}}
-          <option value="{{abreviation}}">{{grade}}</option>
-        {{/each}}
-        {{/select}}
-      </select>
-      <label for="grade">Grade</label>
-    </div>
-    <div class="input-field col m4 s12">
-      <input name="nom" id="nom" type="text" class="validate" {{#if errors}} value="{{nom}}"  {{/if}}>
-      <label for="nom">Nom</label>
-    </div>
-    <div class="input-field col m4 s12">
-      <input name="prenoms" id="prenoms" type="text" class="validate" {{#if errors}} value="{{prenoms}}"  {{/if}}>
-      <label for="prenoms">Prénoms</label>
-    </div>
-    <div class="input-field col m4 s12">
-      <select name="statut" >
+    <div class="input-field col m3 s12">
+      <select name="statut">
         {{#select statut}}
         <option value="" disabled selected>Droits d'utilisateur</option>
         <option value="membre">Membre</option>
@@ -43,6 +16,97 @@
       </select>
       <label>Statut</label>
     </div>
+    <div class="input-field col m2 s12">
+      <input name="mecano" id="mecano" type="number" class="validate" {{#if errors}} value="{{mecano}}" {{/if}}>
+      <label for="mecano">Mécano</label>
+    </div>
+    <div class="input-field col m3 s12">
+      <input name="matricule" id="matricule" type="text" class="validate" {{#if errors}} value="{{matricule}}" {{/if}}>
+      <label for="matricule">Matricule</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <select name="grade">
+        {{#select grade}}
+        <option value="" disabled selected>Grade du marin</option>
+        {{#each ranks}}
+        <option value="{{abreviation}}">{{grade}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+      <label for="grade">Grade</label>
+    </div>
+    <div class="input-field col m2 s12">
+      <select name="genre">
+        {{#select genre}}
+        <option value="" disabled selected>Genre</option>
+        <option value="masculin">Masculin</option>
+        <option value="feminin">Féminin</option>
+        {{/select}}
+      </select>
+      <label for="genre">Genre</label>
+    </div>
+    <div class="input-field col m2 s12">
+      <input name="nom" id="nom" type="text" class="validate" {{#if errors}} value="{{nom}}" {{/if}}>
+      <label for="nom">Nom</label>
+    </div>
+    <div class="input-field col m4 s12">
+      <input name="prenoms" id="prenoms" type="text" class="validate" {{#if errors}} value="{{prenoms}}" {{/if}}>
+      <label for="prenoms">Prénoms</label>
+    </div>
+
+    <div class="input-field col m2 s12">
+      <input name="dateNaiss"  id="dateNaiss" type="date" class="datepicker" {{#if dateNaiss}} data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+      <label for="dateNaiss">Né(e) le</label>
+    </div>
+    <div class="input-field col m2 s12">
+      <input name="lieuNaiss" id="lieuNaiss" type="text" class="validate" {{#if errors}} value="{{lieuNaiss}}" {{/if}}>
+      <label for="lieuNaiss">À</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <input name="pere" id="pere" type="text" class="validate" {{#if errors}} value="{{pere}}" {{/if}}>
+      <label for="pere">Fils de (Père)</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <input name="mere" id="mere" type="text" class="validate" {{#if errors}} value="{{mere}}" {{/if}}>
+      <label for="mere">Et de (Mère)</label>
+    </div>
+    <div class="input-field col m2 s12">
+      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" {{#if dateEntreeService}}
+        data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+      <label for="dateEntreeService">Entré(e) en service le</label>
+    </div>
+    <div class="input-field col m2 s12">
+      <input name="dateNomination" id="dateNomination" type="date" class="datepicker" {{#if dateNomination}} data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}"
+        {{else}} data-value="" {{/if}}>
+      <label for="dateNomination">Nommé(e) le</label>
+    </div>
+    <div class="input-field col m5 s12">
+      <select name="unite">
+        {{#select unite}}
+        <option value="" disabled selected>Sélectionnez votre unité</option>
+        {{#each unites}}
+        <option value="{{id}}">{{nom}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+      <label for="unite">Unité d'affectation</label>
+    </div>
+    <div class="input-field col m3 s12">
+      <select name="service">
+        {{#select service}}
+        <option value="" disabled selected>Sélectionnez votre service</option>
+        {{#each services}}
+        <option value="{{id}}">{{nom}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+      <label for="service">Service</label>
+    </div>
+    {{!-- <div class="input-field col m2 s12">
+      <input id="position" type="text" class="validate">
+      <label for="position">Position</label>
+    </div> --}}
+
     <div class="input-field col m2 offset-m10 s12">
       <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
         <i class="material-icons right">send</i>

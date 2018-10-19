@@ -1,10 +1,11 @@
 <div class="row container">
   <div class="card-panel center-align">
-    <h5>Mise à Jour d'informations</h5>
+    <h5>Mes informations</h5>
   </div>
   <hr>
   <form action="/users/register/{{user.id}}?_method=PUT" method="POST" class="container section col s12 p6" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="PUT">
+    <div class="row">
     <div class="input-field col m1 s12">
       <input name="mecano" id="mecano" type="number" class="validate" value="{{user.mecano}}" disabled>
       <label for="mecano">Mécano</label>
@@ -26,7 +27,7 @@
       <label for="prenoms">Prénoms</label>
     </div>
     <div class="input-field col m2 s12">
-      <select name="genre">
+      <select name="genre" disabled>
         {{#if errors}}
           {{#select genre}}
             <option value="" disabled selected>Genre</option>
@@ -45,46 +46,46 @@
     </div>
     <div class="input-field col m2 s12">
       {{#if user.naissance.date}}
-      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker" data-value="{{dateFormat user.naissance.date "YYYY-MM-DD"}}">
+      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker" data-value="{{dateFormat user.naissance.date "YYYY-MM-DD"}}" disabled>
       {{else}}
-      <input name="dateNaiss"  id="dateNaiss" type="date" class="datepicker" {{#if dateNaiss}} data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+      <input name="dateNaiss"  id="dateNaiss" type="date" class="datepicker" {{#if dateNaiss}} data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
       {{/if}}
       <input type="hidden" name="dateNaiss">
       <label for="dateNaiss">Né(e) le</label>
     </div>
     <div class="input-field col m2 s12">
       <input name="lieuNaiss" id="lieuNaiss" type="text" class="validate" {{#if errors}} value="{{lieuNaiss}}" {{else}}
-        value="{{user.naissance.lieu}}" {{/if}}>
+        value="{{user.naissance.lieu}}" {{/if}}disabled>
       <label for="lieuNaiss">À</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="pere" id="pere" type="text" class="validate" {{#if errors}} value="{{pere}}" {{else}} value="{{user.parents.pere}}" {{/if}}>
+      <input name="pere" id="pere" type="text" class="validate" {{#if errors}} value="{{pere}}" {{else}} value="{{user.parents.pere}}" {{/if}} disabled>
       <label for="pere">Fils de (Père)</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="mere" id="mere" type="text" class="validate" {{#if errors}} value="{{mere}}" {{else}} value="{{user.parents.mere}}" {{/if}}>
+      <input name="mere" id="mere" type="text" class="validate" {{#if errors}} value="{{mere}}" {{else}} value="{{user.parents.mere}}" {{/if}} disabled>
       <label for="mere">Et de (Mère)</label>
     </div>
     <div class="input-field col m2 s12">
       {{#if user.dateEntreeService}}
-      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" data-value="{{dateFormat user.dateEntreeService "YYYY-MM-DD"}}">
+      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" data-value="{{dateFormat user.dateEntreeService "YYYY-MM-DD"}}" disabled>
       {{else}}
-      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" {{#if dateEntreeService}} data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} >
+      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" {{#if dateEntreeService}} data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
       {{/if}}
       <input type="hidden" name="dateEntreeService">
       <label for="dateEntreeService">Entré(e) en service le</label>
     </div>
     <div class="input-field col m2 s12">
       {{#if user.dateNomination}}
-      <input name="dateNomination" id="dateNomination" type="date" class="datepicker"  data-value="{{dateFormat user.dateNomination "YYYY-MM-DD"}}">
+      <input name="dateNomination" id="dateNomination" type="date" class="datepicker"  data-value="{{dateFormat user.dateNomination "YYYY-MM-DD"}}" disabled>
       {{else}}
-      <input name="dateNomination" id="dateNomination" type="date" class="datepicker" {{#if dateNomination}} data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} >
+      <input name="dateNomination" id="dateNomination" type="date" class="datepicker" {{#if dateNomination}} data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
       {{/if}}
       <input type="hidden" name="dateNomination">
       <label for="dateNomination">Nommé(e) le</label>
     </div>
     <div class="input-field col m5 s12">
-      <select name="unite">
+      <select name="unite" disabled>
         {{#if errors}}
           {{#select unite}}
             <option value="" disabled selected>Sélectionnez votre unité</option>
@@ -104,7 +105,7 @@
       <label for="unite">Unité d'affectation</label>
     </div>
     <div class="input-field col m3 s12">
-      <select name="service">
+      <select name="service" disabled>
         {{#if errors}} 
           {{#select service}}
             <option value="" disabled selected>Sélectionnez votre service</option>
@@ -127,6 +128,10 @@
       <input id="position" type="text" class="validate">
       <label for="position">Position</label>
     </div> --}}
+    </div>
+    <hr>
+    <div class="row">
+      <h6 class="center"> <u>Modifier mot de passe et/ou photo</u> </h6><br>
     <div class="file-field input-field col m4 s12">
       <div class="btn">
         <span>Photo</span>
@@ -148,6 +153,7 @@
       <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
         <i class="material-icons right">send</i>
       </button>
+    </div>
     </div>
   </form>
 </div>

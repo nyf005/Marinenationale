@@ -6,7 +6,7 @@ ac.grant("membre") // switch to another role without breaking the chain
       .readAny("information")
       .createOwn("training")
       .updateOwn(["account", "training"])
-      .deleteOwn(["account", "training"])
+      .deleteOwn("training")
   .grant("admin") // switch to another role without breaking the chain
     .extend("membre") // inherit role capabilities. also takes an array
       .readAny("account", ["*", "!password"])
