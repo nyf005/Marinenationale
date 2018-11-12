@@ -269,7 +269,7 @@ router.get("/edit-created/:id", ensureAuthenticated, (req, res) => {
               .sort({ ordre: "asc" })
               .then(ranks => {
                 res.render("users/edit_created_user", {
-                  user: user,
+                  selected_user: user,
                   unites: unites,
                   services: services,
                   ranks: ranks
