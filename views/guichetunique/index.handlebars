@@ -1,0 +1,52 @@
+<div class="row container">
+  <div class="card-panel center-align">
+    <h5>Guichet Unique des Stages et Formations</h5>
+  </div>
+  <hr>
+
+  {{#if users}}
+  <div class="input-field col offset-m3 m6 s12">
+    <input class="live-search-box" type="text" placeholder="Rechercher un marin">
+  </div>
+  <table class="responsive-table centered highlight">
+    <thead>
+      <tr>
+        <th>Mecano</th>
+        <th>Matricule</th>
+        <th>Grade</th>
+        <th>Nom et Prénoms</th>
+        <th>Unité</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+      <tr class="live-search-list">
+        <td>{{mecano}}</td>
+        <td> {{matricule}}</td>
+        <td> {{grade}}</td>
+        <td>{{nom}} {{prenoms}}</td>
+        <td>
+          {{unite.abreviation}}
+        </td>
+        {{#ifCond ../user.statut "==" "operateur_bes"}}
+        <td>
+          <a href="/guichetunique/add/{{id}}" class="btn left-align blue">
+            <i class="fa fa-plus"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/guichetunique/usertrainings/{{id}}" class="btn left-align orange">
+            <i class="fa fa-graduation-cap"></i>
+          </a>
+        </td>
+        {{/ifCond}}
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p>Il faut nécessairement que le marin existe dans la Base de Donnée de la Marine avant que le BES l'enrégistre.</p>
+  {{/if}}
+</div>

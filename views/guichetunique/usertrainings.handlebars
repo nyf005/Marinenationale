@@ -1,0 +1,52 @@
+{{#ifCond user.statut "==" "operateur_bes"}}
+<div class="fixed-action-btn">
+    <a href="/trainings/add" class="btn-floating btn-large red">
+        <i class="fa fa-plus"></i>
+    </a>
+</div>
+{{/ifCond}}
+<div class="row container">
+    <h4>Formations et Stages</h4>
+    <hr>
+    {{#if trainings}}
+    <table class="responsive-table centered highlight">
+        <thead>
+            <tr>
+                <th>Période</th>
+                <th>Niveau</th>
+                <th>Intitulé</th>
+                <th>Copie Scannée</th>
+                <th></th>
+                {{!-- <th></th> --}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each trainings}}
+            <tr>
+                <td>{{formatDate date_debut "DD/MM/YY" "fr"}} - {{formatDate date_fin "DD/MM/YY" "fr"}}</td>
+                <td> {{#ifCond equivalent "==" "EDG"}} {{toTitleCase niveau}} {{else}} {{toTitleCase equivalent}}
+                    {{/ifCond}}</td>
+                <td>{{intitule}}</td>
+                <td>
+                    <img class="materialboxed responsive-img thumb" data-caption="Diplome de {{intitule}}"
+                        src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_diplome.id}}.{{scan_diplome.format}}">
+                </td>
+                <td>
+                    <a class="btn left-align" href="/guichetunique/edit/{{id}}">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </td>
+                <td>
+                    <form action="/guichetunique/delete/{{id}}?_method=DELETE" method="POST" id="delete-form" onclick="return ConfirmDelete();">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn red"><i class="fa fa-remove"></i></button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>Aucune formation n'a été ajoutée pour l'instant.</p>
+    {{/if}}
+</div>

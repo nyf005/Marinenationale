@@ -1,54 +1,52 @@
-<div class="parallax-container">
-  <div class="container">
-    <div class="row">
-      <h1 class="col l8 welcome blue-text flow-text">
-        <b>Bienvenue {{user.prenoms}},<br>
-          sur le site officiel de la Marine nationale de la Côte d'Ivoire.</b>
-        <hr>
-      </h1>
-    </div>
-  </div>
-  <div class="parallax">
-    <img class="responsive-img" src="https://res.cloudinary.com/nyf005/image/upload/v1537449933/public/pat3.jpg">
-  </div>
-</div>
-
 <div class="container">
-  <hr>
+  <br>
   <div class="row">
     <div class="col s12 m12">
-      <div class="card-panel grey lighten-5 z-depth-1">
+      <div class="">
         <div class="row">
-          <div class="col m4 s12">
-            <img src="https://res.cloudinary.com/nyf005/image/upload/v1537449932/public/cemmar.jpg" alt="" class="circle responsive-img">
+          <div class="col m4 s12 center-align ">
+            <img src="https://res.cloudinary.com/nyf005/image/upload/c_scale,w_250/v1576510424/public/cemmar.jpg" alt=""
+              class="circle responsive-img">
             <!-- notice the "circle" class -->
-            <h5 class="center-align black-text">C.A. Célestin N'GUESSAN</h5>
+            <h6 class="black-text">Contre Amiral<br>N'GUESSAN Kouamé Célestin</h6>
           </div>
-          <div class="col m8 s12 flow-text">
-            <h5 class="center-align">Mot de bienvenue du Chef d'Etat-major de la Marine
+          <div class="col m8 s12 info-show">
+            <h5 class="center-align titre">Mot de bienvenue du Chef d'Etat-major de la Marine
               <hr>
             </h5>
-            <span class="black-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti alias praesentium illo eos suscipit.
-              Praesentium, reprehenderit vitae eaque quaerat recusandae eum. Nam dolorum officiis reiciendis, accusamus
-              perferendis cupiditate iste exercitationem!
-            </span>
+            <p align="justify">
+              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+              Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+              Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a
+              Lorem Ipsum passage, and going through the cites of the word in classical literature ...
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="parallax-container">
+  <div class="parallax">
+    <img class="responsive-img" src="https://res.cloudinary.com/nyf005/image/upload/v1576278939/public/def.jpg">
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h5 class="lignes"><span class="titre">À la une</span> </h5>
+    <a class="right" href="/actualites/showall">Voir toutes les actualités</a>
+  </div>
 
 
-  <h5>Actualités de la Marine nationale <a class="right" href="/actualites/showall">Voir toutes les actualités</a></h5>
-  <hr>
   <div class="row">
     {{#each actualites}}
     <div class="col s12 m4">
       <div class="card">
-        <div class="card-content actu">
+        <div class="card-content info-show actu">
           <h6 class="center"><b>{{titre}}</b></h6>
-          <p class="actu-text">{{{stripTags (truncate texte 150)}}}</p>
+          <p>{{{stripTags (truncate texte 150)}}}</p>
           <br>
         </div>
         <div>
@@ -60,21 +58,4 @@
     <p class="center">Aucune actualité pour le moment.</p>
     {{/each}}
   </div>
-
-  {{!-- <div class="row valign-wrapper">
-    <!-- imagenes --> <br>
-    <div class="col xl4 l4 m4 s12">
-      <img class="materialboxed" data-caption="Fotografía" width="100%" src="https://res.cloudinary.com/nyf005/image/upload/v1537449933/public/pat3.jpg">
-    </div>
-    <div class="col xl4 l4 m4 s12">
-      <img class="materialboxed" data-caption="Fotografía" width="100%" src="https://res.cloudinary.com/nyf005/image/upload/v1537449932/public/dk.jpg">
-    </div>
-    <div class="col xl4 l4 m4 s12">
-      <img class="materialboxed" data-caption="Fotografía" width="100%" src="https://res.cloudinary.com/nyf005/image/upload/v1537449936/public/parallax-sea.jpg">
-    </div>
-    <div class="col xl4 l4 m4 s12">
-      <img class="materialboxed" data-caption="Fotografía" width="100%" src="https://res.cloudinary.com/nyf005/image/upload/v1537449933/public/sea.png">
-    </div>
-    <!-- imagenes -->
-  </div> --}}
 </div>

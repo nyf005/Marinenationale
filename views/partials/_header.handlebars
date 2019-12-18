@@ -1,42 +1,57 @@
 <div class="navbar-fixed">
   <nav class="blue darken-3">
-    <div class="nav-wrapper row"> {{!--container --}}
-      <a href="#" data-activates="main-menu" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
-      <a href="/" class="logo">Marine Nationale</a>
+    <div class="nav-wrapper"> {{!--container --}}
+      <div class="row">
+      <div class="col l1">
+        <a href="#" data-activates="main-menu" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
+      </div>
+      {{!-- <div class="col l1">
+        <img class="logo"
+          src="https://res.cloudinary.com/nyf005/image/upload/c_scale,w_58/v1576489603/public/Logo_NAVY.png" alt="">
+      </div> --}}
+      <div class="col l2">
+        <a href="/" class="logo-text">Marine nationale</a>
+      </div>
 
-      <ul class="right hide-on-med-and-down valign-wrapper">
-        <li>
-          <a class="dropdown-trigger" href="#!" data-activates="organisation_1">Organisation</a>
-        </li>
-        <li><a href="/missions">Missions</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-activates="equipements_1">Equipements</a></li>
-        <li>
-          <a class="dropdown-trigger" href="#!" data-activates="ressources_1">Ressources Humaines</a>
-        </li>
-        <li>
-          <a class="dropdown-trigger" href="#!" data-activates="patrimoine_1">Patrimoine</a>
-        </li>
-        {{#if user}}
-        {{#if user.photo.url}}
-        <li>
-          <a class="dropdown-trigger" href="#!" data-activates="user_menu">
-            <img src="{{resizeImg user.photo.id user.photo.format}}" alt="image" class="circle valign-wrapper">
-          </a>
-        </li>
-        {{else}}
-        <li>
-          <a class="dropdown-trigger" href="#!" data-activates="user_menu">
-            <img src="https://res.cloudinary.com/nyf005/image/upload/w_60,h_60,c_scale/v1537449932/public/jdoe.jpg" alt=""
-              class="circle valign-wrapper">
-          </a>
-        </li>
-        {{/if}}
-        {{else}}
-        <li>
-          <a class="loginForm" href="/login">Espace Marin</a>
-        </li>
-        {{/if}}
-      </ul>
+      <div class="col l9">
+        <ul class="right hide-on-med-and-down valign-wrapper">
+          <li>
+            <a class="dropdown-trigger titre-menu" href="#!" data-activates="organisation_1">Organisation</a>
+          </li>
+          <li><a class="titre-menu" href="/missions">Missions</a></li>
+          <li><a class="dropdown-trigger titre-menu" href="#!" data-activates="equipements_1">Equipements</a></li>
+          <li>
+            <a class="dropdown-trigger titre-menu" href="#!" data-activates="ressources_1">Ressources Humaines</a>
+          </li>
+          <li>
+            <a class="dropdown-trigger titre-menu" href="#!" data-activates="patrimoine_1">Patrimoine</a>
+          </li>
+          <li>
+            <a class="titre-menu" href="/gallery">Galerie Photo</a>
+          </li>
+          {{#if user}}
+          {{#if user.photo.url}}
+          <li>
+            <a class="dropdown-trigger" href="#!" data-activates="user_menu">
+              <img src="{{resizeImg user.photo.id user.photo.format}}" alt="image" class="circle valign-wrapper">
+            </a>
+          </li>
+          {{else}}
+          <li>
+            <a class="dropdown-trigger" href="#!" data-activates="user_menu">
+              <img src="https://res.cloudinary.com/nyf005/image/upload/w_60,h_60,c_scale/v1537449932/public/jdoe.jpg"
+                alt="" class="circle valign-wrapper">
+            </a>
+          </li>
+          {{/if}}
+          {{else}}
+          <li>
+            <a class="loginForm" href="/login">Je suis marin</a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+      </div>
     </div>
   </nav>
 </div>
@@ -67,16 +82,22 @@
         <div class="collapsible-body">
           <ul>
             <li>
-              <a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i>Organisation</a>
+              <a class="dropdown-trigger" href="#!" data-activates="organisation"><i
+                  class="fa fa-sitemap"></i>Organisation</a>
             </li>
             <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
-            <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i>Equipements</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i
+                  class="fa fa-ship"></i>Equipements</a></li>
             <li>
               <a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i>Ressources
                 Humaines</a>
             </li>
             <li>
-              <a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i>Patrimoine</a>
+              <a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i
+                  class="fa fa-building"></i>Patrimoine</a>
+            </li>
+            <li>
+              <a href="/gallery"><i class="fa fa-camera"></i>Galerie Photo</a>
             </li>
           </ul>
         </div>
@@ -107,13 +128,22 @@
   <li class="orange accent-1">
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Espace
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Super
           Administrateur
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
           <ul>
             <li><a class="dropdown-trigger" href="#!" data-activates="personnel"><i class="fa fa-users"></i>
                 Gestion du personnel</a></li>
+            <li><a href="/guichetunique/"><i class="fa fa-graduation-cap"></i>
+                Guichet Unique des Stages</a></li>
+            <li><a href="/movements/"><i class="fa fa-plane"></i>
+                Mouvements Généraux</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-activates="actualites"><i class="fa fa-newspaper-o"></i>
+                Gestion des actualités</a></li>
+            <li><a href="/gallery/add"><i class="fa fa-camera-retro"></i>Gestion de la photothèque</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-activates="informations"><i class="fa fa-info"></i>
+                Gestion des informations</a></li>
             <li><a class="dropdown-trigger" href="#!" data-activates="grades"><i class="fa fa-bookmark"></i>
                 Gestion des grades</a></li>
             <li><a class="dropdown-trigger" href="#!" data-activates="unites"><i class="fa fa-home"></i>
@@ -126,19 +156,150 @@
     </ul>
   </li>
   {{/ifCond}}
+
+  {{#ifCond user.statut "==" "operateur_cmg"}}
+  <li class="orange accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+          CMG
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="/movements/"><i class="fa fa-plane"></i>
+                Mouvements Généraux</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  {{/ifCond}}
+
+  {{#ifCond user.statut "==" "operateur_brh"}}
+  <li class="orange accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+          BRH
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+
+          <ul>
+            <li><a class="dropdown-trigger" href="#!" data-activates="personnel"><i class="fa fa-users"></i>
+                Gestion du personnel</a></li>
+            <li><a href="/informations/add"><i class="fa fa-pencil-square-o"></i>
+                Nouvelle information</a></li>
+            <li><a href="/informations"><i class="fa fa-info"></i>
+                Tableau d'informations</a></li>
+            <li><a href="/informations/showown"><i class="fa fa-info-circle"></i>
+                Informations publiées</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  {{/ifCond}}
+  {{#ifCond user.statut "==" "operateur_bes"}}
+  <li class="orange accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+          BES
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="/guichetunique/"><i class="fa fa-graduation-cap"></i>
+                Guichet Unique des Stages</a></li>
+            <li><a href="/informations/add"><i class="fa fa-pencil-square-o"></i>
+                Nouvelle information</a></li>
+            <li><a href="/informations"><i class="fa fa-info"></i>
+                Tableau d'informations</a></li>
+            <li><a href="/informations/showown"><i class="fa fa-info-circle"></i>
+                Informations publiées</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  {{/ifCond}}
+  {{#ifCond user.statut "==" "operateur_bo"}}
+  <li class="orange accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+          BO
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a class="dropdown-trigger" href="/informations/add"><i class="fa fa-pencil-square-o"></i>
+                Nouvelle information</a></li>
+            <li><a class="dropdown-trigger" href="/informations"><i class="fa fa-info"></i>
+                Tableau d'informations</a></li>
+            <li><a class="dropdown-trigger" href="/informations/showown"><i class="fa fa-info-circle"></i>
+                Informations publiées</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  {{/ifCond}}
+  {{#ifCond user.statut "==" "operateur_ucsma"}}
+  <li class="orange accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+          UCSMA
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="/informations/add"><i class="fa fa-pencil-square-o"></i>
+                Nouvelle information</a></li>
+            <li><a href="/informations"><i class="fa fa-info"></i>
+                Tableau d'informations</a></li>
+            <li><a href="/informations/showown"><i class="fa fa-info-circle"></i>
+                Informations publiées</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  {{/ifCond}}
+  {{#ifCond user.statut "==" "operateur_comm"}}
+  <li class="orange accent-1">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+          Communcation
+          <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="/actualites/add"><i class="fa fa-pencil-square-o"></i>
+                Nouvelle actualité</a></li>
+            <li><a href="/actualites"><i class="fa fa-newspaper-o"></i>
+                Gestion des actualités</a></li>
+            <li><a href="/gallery/add"><i class="fa fa-camera-retro"></i>
+                Photothèque</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  {{/ifCond}}
   <li class="divider"></li>
   <li class="red darken-1">
-    <a class="collapsible-header waves-effect waves-blue" href="/users/logout"><i class="fa fa-sign-out icon_menu"></i>Me
+    <a class="collapsible-header waves-effect waves-blue" href="/users/logout"><i
+        class="fa fa-sign-out icon_menu"></i>Me
       Déconnecter</a>
   </li>
   {{else}}
   <ul>
-    <li class="center blue darken3">MENU</li>
+    <li class="center blue darken-3 white-text loginForm"><b>Menu</b></li>
     <li>
       <a class="dropdown-trigger" href="#!" data-activates="organisation"><i class="fa fa-sitemap"></i>Organisation</a>
     </li>
     <li><a href="/missions"><i class="fa fa-anchor"></i> Missions</a></li>
-    <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i>Equipements</a></li>
+    <li><a class="dropdown-trigger" href="#!" data-activates="equipements"><i class="fa fa-ship"></i>Equipements</a>
+    </li>
     <li>
       <a class="dropdown-trigger" href="#!" data-activates="ressources"><i class="fa fa-users"></i>Ressources
         Humaines</a>
@@ -146,9 +307,12 @@
     <li>
       <a class="dropdown-trigger" href="#!" data-activates="patrimoine"><i class="fa fa-building"></i>Patrimoine</a>
     </li>
+    <li>
+      <a href="/gallery"><i class="fa fa-camera"></i>Galerie Photo</a>
+    </li>
     <hr>
     <li>
-      <a href="/login"><i class="fa fa-user"></i> Espace Marin</a>
+      <a class="loginForm orange-text" href="/login"><i class="fa fa-user orange-text"></i>Je suis marin</a>
     </li>
   </ul>
   {{/if}}
@@ -199,7 +363,15 @@
   <li><a href="/ressources_humaines/ecole">Ecole</a></li>
 </ul>
 
-
+<ul id="actualites" class="dropdown-content">
+  <li><a href="/actualites/add">Nouvelle actualité</a></li>
+  <li><a href="/actualites">Gérer les actualités</a></li>
+</ul>
+<ul id="informations" class="dropdown-content">
+  <li><a href="/informations/add">Nouvelle information</a></li>
+  <li><a href="/informations">Tableau d'informations</a></li>
+  <li><a href="/informations/showown">Informations publiées</a></li>
+</ul>
 <ul id="personnel" class="dropdown-content">
   <li><a href="/users/add">Ajouter un marin</a></li>
   <li><a href="/users">Voir les marins</a></li>
@@ -222,10 +394,13 @@
     <span class="green darken-3 loginForm center white-text">Bienvenue {{user.prenoms}}</span>
   </li>
   <li>
-    <a href="/users/edit/{{user.id}}">Mes Informations</a>
+    <a href="/informations">Tableau d'informations</a>
   </li>
   <li>
-    <a href="/trainings">Mes Diplômes et Stages</a>
+    <a href="/users/edit/{{user.id}}">Informations Personnelles</a>
+  </li>
+  <li>
+    <a href="/trainings">Diplômes et Stages</a>
   </li>
   <li>
     <a class="red-text waves-effect waves-blue" href="/users/logout">Me

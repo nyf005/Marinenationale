@@ -435,8 +435,8 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
         } else {
           User.findOne({
             mecano: req.body.mecano
-          }).then(member => {
-            if (!member) {
+          }).then(marin => {
+            if (!marin) {
               user.mecano = req.body.mecano;
               user.matricule = req.body.matricule;
               user.grade = req.body.grade;

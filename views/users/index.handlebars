@@ -1,8 +1,17 @@
+{{#ifCond user.statut "==" "operateur_brh"}}
 <div class="fixed-action-btn">
   <a href="/users/add" class="btn-floating btn-large red">
     <i class="fa fa-plus"></i>
   </a>
 </div>
+{{/ifCond}}
+{{#ifCond user.statut "==" "super_admin"}}
+<div class="fixed-action-btn">
+  <a href="/users/add" class="btn-floating btn-large red">
+    <i class="fa fa-plus"></i>
+  </a>
+</div>
+{{/ifCond}}
 <div class="container">
   <h4>Liste des marins</h4>
   <div class="input-field col m4 s12">
@@ -13,13 +22,13 @@
     {{#if password}}
     <div class="col m4 s12 center live-search-list">
       <div class="truncate bg-card-user hoverable">
-        <img {{#if photo.url}} src="{{photo.url}}" {{else}} src="https://res.cloudinary.com/nyf005/image/upload/v1537449932/public/jdoe.jpg" {{/if}} alt="" class="circle responsive-img">
+        <img {{#if photo.url}} src="{{photo.url}}" {{else}}
+          src="https://res.cloudinary.com/nyf005/image/upload/v1537449932/public/jdoe.jpg" {{/if}} alt=""
+          class="circle responsive-img">
         <div class="m12 S12">
           <a href="#{{mecano}}" class="center white-text waves-effect waves-light btn modal-trigger">{{grade}}
             {{nom}} {{prenoms}}</a>
-          {{#ifCond ../user.id "==" id }}
-          <a href="/users/edit/{{id}}" class="btn-floating orange waves-effect waves-light"><i class="fa fa-pencil"></i></a>
-          {{/ifCond}}
+
         </div>
         <hr>
         <!-- Modal Structure -->
@@ -59,7 +68,8 @@
                   <td>{{intitule}}</td>
 
                   <td>
-                    <img class="materialboxed responsive-img thumb" data-caption="Diplome de {{intitule}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_diplome.id}}.{{scan_diplome.format}}">
+                    <img class="materialboxed responsive-img thumb" data-caption="Diplome de {{intitule}}"
+                      src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_diplome.id}}.{{scan_diplome.format}}">
                   </td>
                 </tr>
                 {{!-- {{else}}
@@ -79,10 +89,20 @@
           </div>
         </div>
         {{#ifCond ../user.statut "==" "super_admin"}}
-        <a href="/users/edit-created/{{id}}" class="btn blue left waves-effect waves-light"><i class="fa fa-edit"></i></a>
+        <a href="/users/edit-created/{{id}}" class="btn blue left waves-effect waves-light"><i
+            class="fa fa-edit"></i></a>
         <form action="/users/delete/{{id}}?_method=DELETE" method="POST" id="delete-form">
           <input type="hidden" name="_method" value="DELETE">
-          <button type="submit" class="btn red right waves-effect waves-light"><i class="fa fa-remove"></i></button>
+          <button type="submit" class="btn red right waves-effect waves-light" onclick="return ConfirmDelete();"><i
+              class="fa fa-remove"></i></button>
+        </form>
+        {{/ifCond}}
+        {{#ifCond ../user.statut "==" "operateur_brh"}}
+        <a href="/users/edit-created/{{id}}" class="btn orange waves-effect waves-light left"><i
+            class="fa fa-pencil"></i></a>
+        <form action="/users/delete/{{id}}?_method=DELETE" method="POST" id="delete-form" onclick="return ConfirmDelete();">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn red waves-effect right waves-light"><i class="fa fa-remove"></i></button>
         </form>
         {{/ifCond}}
       </div>

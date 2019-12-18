@@ -200,13 +200,13 @@ module.exports = {
   },
 
   editIcon: function(statut, infoId, floating = true) {
-    if (statut === "admin" || statut === "super_admin") {
+    if (statut === "super_admin") {
       if (floating){
         return `
         <a class="btn-floating pulse halfway-fab green"><i class="large material-icons">dehaze</i></a>
         <ul>
           <li>
-            <form action="/informations/delete/${infoId}?_method=DELETE" method="POST" id="delete-form">
+            <form action="/informations/delete/${infoId}?_method=DELETE" method="POST" id="delete-form" onclick="return ConfirmDelete();">
               <input type="hidden" name="_method" value="DELETE">
               <button type="submit" class="btn-floating red">
                 <i class="material-icons">delete_forever</i>

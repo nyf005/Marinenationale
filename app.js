@@ -17,6 +17,8 @@ require("./models/Service");
 require("./models/Training");
 require("./models/Information");
 require("./models/Actualite");
+require("./models/Movement");
+require("./models/Photo");
 
 //Load routes
 const index = require("./routes/index");
@@ -24,9 +26,12 @@ const users = require("./routes/users");
 const ranks = require("./routes/ranks");
 const unites = require("./routes/unites");
 const services = require("./routes/services");
-const tranings = require("./routes/trainings");
+const trainings = require("./routes/trainings");
+const guichetunique = require("./routes/guichetunique");
 const informations = require("./routes/informations");
 const actualites = require("./routes/actualites");
+const movements = require("./routes/movements");
+const gallery = require("./routes/gallery");
 
 //Load Keys
 const keys = require("./config/keys");
@@ -54,7 +59,8 @@ mongoose
   .connect(
     keys.mongoURI,
     {
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     }
   )
   .then(() => {
@@ -135,9 +141,12 @@ app.use("/users", users);
 app.use("/ranks", ranks);
 app.use("/unites", unites);
 app.use("/services", services);
-app.use("/trainings", tranings);
+app.use("/trainings", trainings);
+app.use("/guichetunique", guichetunique);
 app.use("/informations", informations);
 app.use("/actualites", actualites);
+app.use("/movements", movements);
+app.use("/gallery", gallery);
 
 const port = process.env.PORT || 5000;
 

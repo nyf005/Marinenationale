@@ -1,0 +1,54 @@
+{{#ifCond user.statut "==" "super_admin"}}
+<div class="fixed-action-btn">
+    <a href="/movements/add" class="btn-floating btn-large red">
+        <i class="fa fa-plus"></i>
+    </a>
+</div>
+{{/ifCond}}
+<div class="row container">
+    <h4>Mouvements</h4>
+    <hr>
+    {{#if movements}}
+    <table class="responsive-table centered highlight">
+        <thead>
+            <tr>
+                <th>Période</th>
+                <th>Type</th>
+                <th>Pays</th>
+                <th>Objet</th>
+                <th>Copie Scannée</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each movements}}
+            <tr>
+                <td>{{formatDate date_depart "DD/MM/YY" "fr"}} - {{formatDate date_fin "DD/MM/YY" "fr"}}</td>
+                <td>{{type}}</td>
+                <td>{{pays}}</td>
+                <td>{{objet}}</td>
+                <td>
+                    <img class="materialboxed responsive-img thumb" data-caption="Justificatif {{reference}}"
+                        src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_justificatif.id}}.{{scan_justificatif.format}}">
+                </td>
+                <td>
+                    <a class="btn left-align" href="/movements/edit/{{id}}">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </td>
+                <td>
+                    <form action="/movements/delete/{{id}}?_method=DELETE" method="POST" id="delete-form"
+                        onclick="return ConfirmDelete();">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn red"><i class="fa fa-remove"></i></button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>Aucun mouvement n'a été ajouté pour l'instant.</p>
+    {{/if}}
+</div>

@@ -27,7 +27,7 @@
           </a>
         </td>
         <td>
-          <form action="/services/delete/{{id}}?_method=DELETE" method="POST" id="delete-form">
+          <form action="/services/delete/{{id}}?_method=DELETE" method="POST" id="delete-form" onclick="return ConfirmDelete();">
             <input type="hidden" name="_method" value="DELETE">
             <button type="submit" class="btn red"><i class="fa fa-remove"></i> Supprimer</button>
           </form>

@@ -1,8 +1,3 @@
-<div class="fixed-action-btn">
-  <a href="/trainings/add" class="btn-floating btn-large red">
-    <i class="fa fa-plus"></i>
-  </a>
-</div>
 <div class="row container">
   <h4>Mes formations et stages</h4>
   <hr>
@@ -22,21 +17,12 @@
       {{#each trainings}}
       <tr>
         <td>{{formatDate date_debut "DD/MM/YY" "fr"}} - {{formatDate date_fin "DD/MM/YY" "fr"}}</td>
-        <td> {{#ifCond equivalent "==" "EDG"}} {{toTitleCase niveau}} {{else}} {{toTitleCase equivalent}} {{/ifCond}}</td>
+        <td> {{#ifCond equivalent "==" "EDG"}} {{toTitleCase niveau}} {{else}} {{toTitleCase equivalent}} {{/ifCond}}
+        </td>
         <td>{{intitule}}</td>
         <td>
-            <img class="materialboxed responsive-img thumb" data-caption="Diplome de {{intitule}}" src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_diplome.id}}.{{scan_diplome.format}}">
-        </td>
-        <td>
-          <a class="btn left-align" href="/trainings/edit/{{id}}">
-            <i class="fa fa-pencil"></i>
-          </a>
-        </td>
-        <td>
-          <form action="/trainings/delete/{{id}}?_method=DELETE" method="POST" id="delete-form">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn red"><i class="fa fa-remove"></i></button>
-          </form>
+          <img class="materialboxed responsive-img thumb" data-caption="Diplome de {{intitule}}"
+            src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_diplome.id}}.{{scan_diplome.format}}">
         </td>
       </tr>
       {{/each}}

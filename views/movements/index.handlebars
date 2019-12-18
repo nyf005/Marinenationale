@@ -1,0 +1,53 @@
+<div class="row container">
+    <div class="card-panel center-align">
+        <h5>Mouvements Généraux des Marins</h5>
+    </div>
+    <hr>
+
+    {{#if users}}
+    <div class="input-field col offset-m3 m6 s12">
+        <input class="live-search-box" type="text" placeholder="Rechercher un marin">
+    </div>
+    <table class="responsive-table centered highlight">
+        <thead>
+            <tr>
+                <th>Mecano</th>
+                <th>Matricule</th>
+                <th>Grade</th>
+                <th>Nom et Prénoms</th>
+                <th>Unité</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr class="live-search-list">
+                <td>{{mecano}}</td>
+                <td> {{matricule}}</td>
+                <td> {{grade}}</td>
+                <td>{{nom}} {{prenoms}}</td>
+                <td>
+                    {{unite.abreviation}}
+                </td>
+                {{#ifCond ../user.statut "==" "operateur_cmg"}}
+                <td>
+                    <a href="/movements/add/{{id}}" class="btn left-align blue">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="/movements/usermovements/{{id}}" class="btn left-align orange">
+                        <i class="fa fa-plane"></i>
+                    </a>
+                </td>
+                {{/ifCond}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>Il faut nécessairement que le marin existe dans la Base de Donnée de la Marine avant qu'il lui soit attribué un
+        mouvement.</p>
+    {{/if}}
+</div>

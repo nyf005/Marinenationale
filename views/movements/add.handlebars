@@ -1,0 +1,76 @@
+<div class="row container">
+    <div class="card-panel center-align">
+        <h5>Ajouter un mouvement pour {{user.grade}} {{user.nom}} {{user.prenoms}}</h5>
+    </div>
+    <hr>
+    <form action="/movements/add/{{user.id}}" method="POST" class="container section col s12 p6"
+        enctype="multipart/form-data">
+
+        <div class="input-field col m4 s12">
+            <input name="reference" id="reference" type="text" class="validate" {{#if errors}} value="{{reference}}"
+                {{/if}}>
+            <label for="reference">Référence</label>
+        </div>
+        <div class="input-field col m5 s12">
+            <input name="objet" id="objet" type="text" class="validate" {{#if errors}} value="{{objet}}" {{/if}}>
+            <label for="objet">Objet</label>
+        </div>
+        <div class="input-field col m3 s12">
+            <select name="type">
+                {{#if errors}}
+                {{#select type}}
+                <option value="" disabled selected>Type de mouvement</option>
+                <option value="STAGE_EXTERIEUR">Stage Extérieur</option>
+                <option value="STAGE_INTERIEUR">Stage Intérieur</option>
+                <option value="FORMATION">Formation</option>
+                <option value="MISSION_INTERIEURE">Mission Intérieure</option>
+                <option value="MISSION_EXTERIEURE">Mission Extérieure</option>
+                <option value="SEMINAIRE">Séminaire</option>
+                {{/select}}
+                {{else}}
+                <option value="" disabled selected>Type de mouvement</option>
+                <option value="STAGE_EXTERIEUR">Stage Extérieur</option>
+                <option value="STAGE_INTERIEUR">Stage Intérieur</option>
+                <option value="FORMATION">Formation</option>
+                <option value="MISSION_INTERIEURE">Mission Intérieure</option>
+                <option value="MISSION_EXTERIEURE">Mission Extérieure</option>
+                <option value="SEMINAIRE">Séminaire</option>
+                {{/if}}
+            </select>
+            <label for="type">Type de mouvement</label>
+        </div>
+        <div class="input-field col m3 s12">
+            <input name="ville" id="ville" type="text" class="validate" {{#if errors}} value="{{ville}}" {{/if}}>
+            <label for="ville">Ville</label>
+        </div>
+        <div class="input-field col m3 s12">
+            <input name="pays" id="pays" type="text" class="validate" {{#if errors}} value="{{pays}}" {{/if}}>
+            <label for="pays">Pays</label>
+        </div>
+
+        <div class="input-field col m3 s12">
+            <input name="dateDebut" id="dateDebut" type="date" class="datepicker" {{#if dateDebut}}
+                data-value="{{dateFormat dateDebut "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+            <label for="dateDebut">Date de début</label>
+        </div>
+        <div class="input-field col m3 s12">
+            <input name="dateFin" id="dateFin" type="date" class="date_exp" {{#if dateFin}}
+                data-value="{{dateFormat dateFin "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+            <label for="dateFin">Date de fin</label>
+        </div>
+        <div class="file-field input-field col m12 s12">
+            <div class="btn">
+                <span>Justificatif</span>
+                <input name="scan_justificatif" type="file" accept=".png, .jpg, .jpeg">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+        <div class="input-field col m2 offset-m10 s12">
+            <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>

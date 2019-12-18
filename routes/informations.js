@@ -33,8 +33,7 @@ const upload = multer({ storage });
 router.get("/", ensureAuthenticated, (req, res) => {
   permission = checkGrant(req.user.statut, "readAny", "information", req, res);
   if (permission) {
-    Information
-      .find({ $where : `this.date_expiration > ${Date.now()}` })
+    Information.find({ $where: `this.date_expiration > ${Date.now()}` })
       .sort({ date_ajout: "desc" })
       .then(informations => {
         res.render("informations/index", {
@@ -93,8 +92,7 @@ router.post(
 
       if (!req.body.date_exp) {
         errors.push({
-          text:
-            "Veuillez rentrer la date d'expiration de cette information"
+          text: "Veuillez rentrer la date d'expiration de cette information"
         });
       }
 
@@ -120,8 +118,9 @@ router.post(
             url: req.file.url,
             format: req.file.format
           },
-          date_expiration : req.body.date_exp,
-          date_ajout: new Date()
+          date_expiration: req.body.date_exp,
+          date_ajout: new Date(),
+          proprio: req.user.id
         };
 
         new Information(newInformation).save().then(information => {
@@ -132,6 +131,18 @@ router.post(
     }
   }
 );
+
+router.get("/showown", ensureAuthenticated, (req, res) => {
+  if (checkGrant(req.user.statut, "updateOwn", "information", req, res)) {
+    Information.find({
+      proprio: req.user.id
+    }).then(informations => {
+      res.render("informations/showown", {
+        informations: informations
+      });
+    });
+  }
+});
 
 router.get("/show/:id", ensureAuthenticated, (req, res) => {
   permission = checkGrant(req.user.statut, "readAny", "information", req, res);
@@ -149,7 +160,7 @@ router.get("/show/:id", ensureAuthenticated, (req, res) => {
 router.get("/edit/:id", ensureAuthenticated, (req, res) => {
   permission = checkGrant(
     req.user.statut,
-    "updateAny",
+    "updateOwn",
     "information",
     req,
     res
@@ -158,9 +169,17 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
     Information.findOne({
       _id: req.params.id
     }).then(information => {
-      res.render("informations/edit", {
-        information: information
-      });
+      if (req.user.id == information.proprio) {
+        res.render("informations/edit", {
+          information: information
+        });
+      } else {
+        req.flash(
+          "errors_msg",
+          `Vous n'êtes pas le propriétaire de cette information`
+        );
+        res.redirect("/informations");
+      }
     });
   }
 });
@@ -170,69 +189,74 @@ router.put(
   upload.single("image_info"),
   ensureAuthenticated,
   (req, res) => {
-
     Information.findOne({
       _id: req.params.id
     }).then(information => {
-      permission = checkGrant(
-        req.user.statut,
-        "updateAny",
-        "information",
-        req,
-        res
-      );
-      if (permission) {
-        
-        let errors = [];
-  
-        if (!req.body.reference) {
-          errors.push({
-            text: "Veuillez saisir la référence de l'information"
-          });
-        }
-  
-        if (!req.body.objet) {
-          errors.push({
-            text: "Veuillez saisir l'objet de l'information"
-          });
-        }
-  
-        if (!req.body.date_exp) {
-          errors.push({
-            text:
-              "Veuillez rentrer la date d'expiration de cette information"
-          });
-        }
-  
-        if (errors.length > 0) {
-          if (req.file) {
-            cloudinary.v2.uploader.destroy(req.file.public_id);
+      if (req.user.id == information.proprio) {
+        permission = checkGrant(
+          req.user.statut,
+          "updateOwn",
+          "information",
+          req,
+          res
+        );
+        if (permission) {
+          let errors = [];
+
+          if (!req.body.reference) {
+            errors.push({
+              text: "Veuillez saisir la référence de l'information"
+            });
           }
-          res.render("informations/edit", {
-            errors: errors,
-            information: information,
-            reference: req.body.reference,
-            objet: req.body.objet,
-            image: req.file,
-            commentaire: req.body.commentaire,
-            date_exp: req.body.date_exp
-          });
+
+          if (!req.body.objet) {
+            errors.push({
+              text: "Veuillez saisir l'objet de l'information"
+            });
+          }
+
+          if (!req.body.date_exp) {
+            errors.push({
+              text: "Veuillez rentrer la date d'expiration de cette information"
+            });
+          }
+
+          if (errors.length > 0) {
+            if (req.file) {
+              cloudinary.v2.uploader.destroy(req.file.public_id);
+            }
+            res.render("informations/edit", {
+              errors: errors,
+              information: information,
+              reference: req.body.reference,
+              objet: req.body.objet,
+              image: req.file,
+              commentaire: req.body.commentaire,
+              date_exp: req.body.date_exp
+            });
+          } else {
+            information.reference = req.body.reference.toUpperCase();
+            information.objet = req.body.objet.toUpperCase();
+            information.commentaire = req.body.commentaire;
+            information.date_ajout = new Date();
+            information.date_expiration = req.body.date_exp;
+            if (req.file) {
+              cloudinary.v2.uploader.destroy(information.image.id);
+              information.image.id = req.file.public_id;
+              information.image.url = req.file.url;
+              information.image.format = req.file.format;
+            }
+            information.save().then(() => {
+              req.flash("success_msg", "Modifications effectuées avec succès");
+              res.redirect("/informations");
+            });
+          }
         } else {
-          information.reference = req.body.reference.toUpperCase();
-          information.objet = req.body.objet.toUpperCase();
-          information.commentaire = req.body.commentaire;
-          information.date_ajout = new Date();
-          information.date_expiration = req.body.date_exp;
-          if (req.file) {
-            cloudinary.v2.uploader.destroy(information.image.id);
-            information.image.id = req.file.public_id;
-            information.image.url = req.file.url;
-            information.image.format = req.file.format;
-          }
-          information.save().then(() => {
-            req.flash("success_msg", "Modifications effectuées avec succès");
-            res.redirect("/informations");
-          });
+          req.flash(
+            "errors_msg",
+            `Vous n'êtes pas le propriétaire de cette information`
+          );
+          res.redirect("/informations");
         }
       }
     });
@@ -243,7 +267,14 @@ router.delete("/delete/:id", ensureAuthenticated, (req, res) => {
   Information.findOne({
     _id: req.params.id
   }).then(information => {
-      permission = checkGrant(req.user.statut, "deleteAny", "information", req, res);
+    if (req.user.id == information.proprio) {
+      permission = checkGrant(
+        req.user.statut,
+        "deleteOwn",
+        "information",
+        req,
+        res
+      );
       if (permission) {
         cloudinary.v2.uploader.destroy(information.image.id);
         Information.deleteOne({
@@ -253,7 +284,13 @@ router.delete("/delete/:id", ensureAuthenticated, (req, res) => {
           res.redirect("/informations");
         });
       }
-
+    } else {
+      req.flash(
+        "errors_msg",
+        `Vous n'êtes pas le propriétaire de cette information`
+      );
+      res.redirect("/informations");
+    }
   });
 });
 module.exports = router;

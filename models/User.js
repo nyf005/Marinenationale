@@ -71,7 +71,7 @@ const UserSchema = new Schema({
   // },
   statut: {
     type: String,
-    default: "membre"
+    default: "marin"
   },
   password: {
     type: String

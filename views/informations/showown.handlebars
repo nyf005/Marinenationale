@@ -1,0 +1,43 @@
+<div class="container">
+    <h4>Gestion des informations</h4>
+    <hr>
+    {{#if informations}}
+    <table class="responsive-table centered highlight">
+        <thead>
+            <tr>
+                <th>Référence</th>
+                <th>Objet</th>
+                <th>Miniature</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each informations}}
+            <tr>
+                <td>{{reference}}</td>
+                <td>{{objet}}</td>
+                <td>
+                    <img class="materialboxed responsive-img thumb" data-caption="{{objet}}"
+                        src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{image.id}}.{{image.format}}">
+                </td>
+                <td>
+                    <a class="btn left-align" href="/informations/edit/{{id}}">
+                        <i class="fa fa-pencil"></i> Modifier
+                    </a>
+                </td>
+                <td>
+                    <form action="/informations/delete/{{id}}?_method=DELETE" method="POST" id="delete-form"
+                        onclick="return ConfirmDelete();">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn red"><i class="fa fa-remove"></i> Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>Vous n'avez ajouté aucune information pour l'instant.</p>
+    {{/if}}
+</div>

@@ -3,17 +3,23 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const Actualite = mongoose.model("actualites");
+const Photo = mongoose.model("photos");
 
 router.get("/", (req, res) => {
-  Actualite
-  .find()
-  .limit(3)
-  .sort({ date_publication: "desc" })
-  .then(actualites => {
-    res.render("index/welcome", {
-      actualites: actualites
+  Actualite.find()
+    .limit(3)
+    .sort({ date_publication: "desc" })
+    .then(actualites => {
+      Photo.find()
+        .limit(5)
+        .sort({ _id: "desc" })
+        .then(photos => {
+          res.render("index/welcome", {
+            actualites: actualites,
+            photos: photos
+          });
+        });
     });
-  })
 });
 
 router.get("/login", (req, res) => {

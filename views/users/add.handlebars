@@ -5,21 +5,6 @@
   <hr>
   <form action="/users/add" method="POST" class="container section col s12 p6">
     <div class="input-field col m3 s12">
-      <select name="statut">
-        {{#select statut}}
-        <option value="" disabled selected>Droits d'utilisateur</option>
-        <option value="marin">Utilisateur</option>
-        <option value="operateur_beo">Opérateur BEO</option>
-        <option value="operateur_brh">Opérateur BRH</option>
-        <option value="operateur_ucsma">Opérateur UCSMA</option>
-        <option value="operateur_comm">Opérateur COMMUNICATION</option>
-        <option value="admin_chef_brh">Chef BRH</option>
-        <option value="super_admin">Super Administrateur</option>
-        {{/select}}
-      </select>
-      <label>Statut</label>
-    </div>
-    <div class="input-field col m2 s12">
       <input name="mecano" id="mecano" type="number" class="validate" {{#if errors}} value="{{mecano}}" {{/if}}>
       <label for="mecano">Mécano</label>
     </div>
@@ -48,11 +33,11 @@
       </select>
       <label for="genre">Genre</label>
     </div>
-    <div class="input-field col m2 s12">
+    <div class="input-field col m3 s12">
       <input name="nom" id="nom" type="text" class="validate" {{#if errors}} value="{{nom}}" {{/if}}>
       <label for="nom">Nom</label>
     </div>
-    <div class="input-field col m4 s12">
+    <div class="input-field col m5 s12">
       <input name="prenoms" id="prenoms" type="text" class="validate" {{#if errors}} value="{{prenoms}}" {{/if}}>
       <label for="prenoms">Prénoms</label>
     </div>

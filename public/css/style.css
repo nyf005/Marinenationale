@@ -2,16 +2,30 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  font-family: "Titillium Web", sans-serif;
-  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  /* background: url("https://res.cloudinary.com/nyf005/image/upload/v1576489603/public/Logo_NAVY.png") no-repeat center;  */
+  background-color: aliceblue;
 }
-
-/* .dropdown-content{
-  overflow-y: visible !important;
-} */
 
 main {
   flex: 1 0 auto;
+}
+
+.parallax-container {
+margin-bottom: 35px;
+}
+
+.swiper-container {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: auto;
+  height: 500px;
 }
 
 .bg-card-user {
@@ -20,25 +34,25 @@ main {
   margin: 5px;
 }
 
-.info-card-img{
+.info-card-img {
   height: 150px; /* Your height here */
   overflow: scroll;
 }
 
-.info-card-cont{
+.info-card-cont {
   width: auto;
   height: 150px; /* Your height here */
   overflow: scroll;
   text-align: justify;
 }
 
-.info-show{
+.info-show {
   text-align: justify;
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 100;
 }
 
-.info-text{
+.info-text {
   font-size: 1rem;
   font-weight: 500;
 }
@@ -51,12 +65,12 @@ main {
   text-align: justify;
 }
 
-.actu-text{
+.actu-text {
   font-size: 1rem;
   font-weight: 500;
 }
 
-.halfway-fab{
+.halfway-fab {
   top: 15px;
 }
 
@@ -65,9 +79,16 @@ main {
 }
 
 .logo {
-  font-size: 25px;
+  font-size: 1.5rem;
   font-family: "Parisienne", cursive;
-  /* font-family: "Abel", sans-serif; */
+  vertical-align: middle;
+}
+
+.logo-text {
+  font-size: 25px;
+  font-family: "Pacifico", cursive;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .div {
@@ -78,16 +99,44 @@ main {
 .loginForm {
   font-size: 18px;
   color: orange;
-  font-family: "Parisienne", cursive;
+  font-family: "Pacifico", sans-serif;
+}
+
+.titre {
+  font-size: 28px;
+  font-family: "Pacifico", sans-serif;
+}
+
+.titre-menu {
+  font-size: 18px;
+  font-family: "Pacifico", sans-serif;
+}
+
+.titre-menu:hover {
+  background-color: #eee;
+  color: #000;
 }
 
 .nav-wrapper .fa-bars {
   font-size: 25px;
 }
 
+.lignes {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.lignes span {
+  background: aliceblue;
+  padding: 0 10px;
+}
+
 .welcome {
   font-family: "Parisienne", cursive;
-  font-size: 50px;
+  font-size: 40px;
 }
 .menu-txt {
   font-family: "Parisienne", cursive;
@@ -132,7 +181,6 @@ footer {
   margin: auto;
 }
 
-
 .table {
   width: 100%;
   max-width: 100%;
@@ -171,8 +219,8 @@ table > tbody + tbody {
 }
 
 .table-bordered > thead,
-  tbody > tr > th,
-  td {
-   border: 0;
-   border-bottom: 1px solid #e0e0e0;
+tbody > tr > th,
+td {
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
 }

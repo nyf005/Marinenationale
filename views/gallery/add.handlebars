@@ -1,0 +1,67 @@
+<div class="row container">
+    <div class="card-panel center-align">
+        <h5>Photothèque</h5>
+    </div>
+    <div class="col m5">
+        <div class="card">
+            <div class="card-content">
+                <form action="/gallery/add" method="POST" enctype="multipart/form-data">
+                    <div class="input-field">
+                        <input name="titre" type="text" class="validate" {{#if errors}} value="{{titre}}" {{/if}}>
+                        <label for="titre">Titre</label>
+                    </div>
+
+                    <div class="input-field">
+                        <textarea name="description" class="materialize-textarea"> {{#if errors}} {{description}} {{/if}}</textarea>
+                        <label for="description">Description</label>
+                    </div>
+
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Image</span>
+                            <input name="image" type="file" accept=".png, .jpg, .jpeg">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Upload
+                            <i class="material-icons right">cloud_upload</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col m7">
+        <table class="responsive-table centered highlight">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Miniature</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each photos}}
+                <tr>
+                    <td>{{titre}}</td>
+                    <td> {{description}}</td>
+                    <td>
+                        <img class="materialboxed responsive-img thumb" data-caption=" {{titre}}" src="{{image.url}}">
+                    </td>
+                    <td>
+                        <form action="/gallery/delete/{{id}}?_method=DELETE" method="POST" id="delete-form"
+                            onclick="return ConfirmDelete();">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn red"><i class="fa fa-remove"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

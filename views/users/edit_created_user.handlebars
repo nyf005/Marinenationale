@@ -3,39 +3,54 @@
     <h5>Modifier les informations d'un marin</h5>
   </div>
   <hr>
-  <form action="/users/edit-created/{{selected_user.id}}?_method=PUT" method="POST" class="container section col s12 p6">
+
+  <form {{#if errors}} action="/users/edit-created/{{user.id}}?_method=PUT" {{else}}
+    action="/users/edit-created/{{selected_user.id}}?_method=PUT" {{/if}} method="POST"
+    class="container section col s12 p6">
     <input type="hidden" name="_method" value="PUT">
+
     <div class="input-field col m3 s12">
+      {{#ifCond user.statut "==" "super_admin"}}
       <select name="statut">
         {{#if errors}}
         {{#select statut}}
         <option value="" disabled selected>Droits d'utilisateur</option>
         <option value="marin">Utilisateur</option>
-        <option value="operateur_beo">Opérateur BEO</option>
+        <option value="operateur_bo">Opérateur BEO</option>
         <option value="operateur_brh">Opérateur BRH</option>
+        <option value="operateur_bes">Opérateur BES</option>
+        <option value="operateur_cmg">Opérateur CMG</option>
         <option value="operateur_ucsma">Opérateur UCSMA</option>
         <option value="operateur_comm">Opérateur COMMUNICATION</option>
-        <option value="admin_chef_brh">Chef BRH</option>
         <option value="super_admin">Super Administrateur</option>
         {{/select}}
         {{else}}
         {{#select selected_user.statut}}
         <option value="" disabled selected>Droits d'utilisateur</option>
         <option value="marin">Utilisateur</option>
-        <option value="operateur_beo">Opérateur BEO</option>
+        <option value="operateur_bo">Opérateur BEO</option>
         <option value="operateur_brh">Opérateur BRH</option>
+        <option value="operateur_bes">Opérateur BES</option>
+        <option value="operateur_cmg">Opérateur CMG</option>
         <option value="operateur_ucsma">Opérateur UCSMA</option>
         <option value="operateur_comm">Opérateur COMMUNICATION</option>
-        <option value="admin_chef_brh">Chef BRH</option>
         <option value="super_admin">Super Administrateur</option>
         {{/select}}
         {{/if}}
       </select>
+      {{/ifCond}}
+      {{#ifCond user.statut "==" "operateur_brh"}}
+      <input type="text" hidden name="statut" {{#if errors}} value="{{statut}}" {{else}}
+        value="{{selected_user.statut}}" {{/if}}>
+      <input type="text" disabled name="statut" value="STATUT PRIVE">
+      {{/ifCond}}
+
       <label>Statut</label>
     </div>
+
     <div class="input-field col m2 s12">
-      <input name="mecano" id="mecano" type="number" class="validate" {{#if errors}} value="{{mecano}}" {{else}} value="{{selected_user.mecano}}"
-        {{/if}}>
+      <input name="mecano" id="mecano" type="number" class="validate" {{#if errors}} value="{{mecano}}" {{else}}
+        value="{{selected_user.mecano}}" {{/if}}>
       <label for="mecano">Mécano</label>
     </div>
     <div class="input-field col m3 s12">
@@ -66,37 +81,39 @@
     <div class="input-field col m2 s12">
       <select name="genre">
         {{#if errors}}
-          {{#select genre}}
-            <option value="" disabled selected>Genre</option>
-            <option value="masculin">Masculin</option>
-            <option value="feminin">Féminin</option>
-          {{/select}}
+        {{#select genre}}
+        <option value="" disabled selected>Genre</option>
+        <option value="masculin">Masculin</option>
+        <option value="feminin">Féminin</option>
+        {{/select}}
         {{else}}
-          {{#select selected_user.genre}}
-            <option value="" disabled selected>Genre</option>
-            <option value="masculin">Masculin</option>
-            <option value="feminin">Féminin</option>
-          {{/select}}
+        {{#select selected_user.genre}}
+        <option value="" disabled selected>Genre</option>
+        <option value="masculin">Masculin</option>
+        <option value="feminin">Féminin</option>
+        {{/select}}
         {{/if}}
       </select>
       <label for="genre">Genre</label>
     </div>
     <div class="input-field col m2 s12">
-      <input name="nom" id="nom" type="text" class="validate" {{#if errors}} value="{{nom}}" {{else}} value="{{selected_user.nom}}"
-        {{/if}}>
+      <input name="nom" id="nom" type="text" class="validate" {{#if errors}} value="{{nom}}" {{else}}
+        value="{{selected_user.nom}}" {{/if}}>
       <label for="nom">Nom</label>
     </div>
     <div class="input-field col m4 s12">
-      <input name="prenoms" id="prenoms" type="text" class="validate" {{#if errors}} value="{{prenoms}}" {{else}} value="{{selected_user.prenoms}}"
-        {{/if}}>
+      <input name="prenoms" id="prenoms" type="text" class="validate" {{#if errors}} value="{{prenoms}}" {{else}}
+        value="{{selected_user.prenoms}}" {{/if}}>
       <label for="prenoms">Prénoms</label>
     </div>
 
     <div class="input-field col m2 s12">
       {{#if selected_user.naissance.date}}
-      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker" data-value="{{dateFormat selected_user.naissance.date "YYYY-MM-DD"}}">
+      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker"
+        data-value="{{dateFormat selected_user.naissance.date "YYYY-MM-DD"}}">
       {{else}}
-      <input name="dateNaiss"  id="dateNaiss" type="date" class="datepicker" {{#if dateNaiss}} data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker" {{#if dateNaiss}}
+        data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
       {{/if}}
       <input type="hidden" name="dateNaiss">
       <label for="dateNaiss">Né(e) le</label>
@@ -107,27 +124,33 @@
       <label for="lieuNaiss">À</label>
     </div>
     <div class="input-field col m6 s12">
-      <input name="pere" id="pere" type="text" class="validate" {{#if errors}} value="{{pere}}" {{else}} value="{{selected_user.parents.pere}}" {{/if}}>
+      <input name="pere" id="pere" type="text" class="validate" {{#if errors}} value="{{pere}}" {{else}}
+        value="{{selected_user.parents.pere}}" {{/if}}>
       <label for="pere">Fils de (Père)</label>
     </div>
     <div class="input-field col m6 s12">
-      <input name="mere" id="mere" type="text" class="validate" {{#if errors}} value="{{mere}}" {{else}} value="{{selected_user.parents.mere}}" {{/if}}>
+      <input name="mere" id="mere" type="text" class="validate" {{#if errors}} value="{{mere}}" {{else}}
+        value="{{selected_user.parents.mere}}" {{/if}}>
       <label for="mere">Et de (Mère)</label>
     </div>
     <div class="input-field col m2 s12">
       {{#if selected_user.dateEntreeService}}
-      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" data-value="{{dateFormat selected_user.dateEntreeService "YYYY-MM-DD"}}">
+      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker"
+        data-value="{{dateFormat selected_user.dateEntreeService "YYYY-MM-DD"}}">
       {{else}}
-      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" {{#if dateEntreeService}} data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} >
+      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" {{#if dateEntreeService}}
+        data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
       {{/if}}
       <input type="hidden" name="dateEntreeService">
       <label for="dateEntreeService">Entré(e) en service le</label>
     </div>
     <div class="input-field col m2 s12">
       {{#if selected_user.dateNomination}}
-      <input name="dateNomination" id="dateNomination" type="date" class="datepicker"  data-value="{{dateFormat selected_user.dateNomination "YYYY-MM-DD"}}">
+      <input name="dateNomination" id="dateNomination" type="date" class="datepicker"
+        data-value="{{dateFormat selected_user.dateNomination "YYYY-MM-DD"}}">
       {{else}}
-      <input name="dateNomination" id="dateNomination" type="date" class="datepicker" {{#if dateNomination}} data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} >
+      <input name="dateNomination" id="dateNomination" type="date" class="datepicker" {{#if dateNomination}}
+        data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
       {{/if}}
       <input type="hidden" name="dateNomination">
       <label for="dateNomination">Nommé(e) le</label>
@@ -135,39 +158,39 @@
     <div class="input-field col m5 s12">
       <select name="unite">
         {{#if errors}}
-          {{#select unite}}
-            <option value="" disabled selected>Sélectionnez votre unité</option>
-            {{#each unites}}
-            <option value="{{id}}">{{nom}}</option>
-            {{/each}}
-          {{/select}}
+        {{#select unite}}
+        <option value="" disabled selected>Sélectionnez votre unité</option>
+        {{#each unites}}
+        <option value="{{id}}">{{nom}}</option>
+        {{/each}}
+        {{/select}}
         {{else}}
-          {{#select selected_user.unite.id}}
-            <option value="" disabled selected>Sélectionnez votre unité</option>
-            {{#each unites}}
-            <option value="{{id}}">{{nom}}</option>
-            {{/each}}
-          {{/select}}
+        {{#select selected_user.unite.id}}
+        <option value="" disabled selected>Sélectionnez votre unité</option>
+        {{#each unites}}
+        <option value="{{id}}">{{nom}}</option>
+        {{/each}}
+        {{/select}}
         {{/if}}
       </select>
       <label for="unite">Unité d'affectation</label>
     </div>
     <div class="input-field col m3 s12">
-       <select name="service">
-        {{#if errors}} 
-          {{#select service}}
-            <option value="" disabled selected>Sélectionnez votre service</option>
-            {{#each services}}
-            <option value="{{id}}">{{nom}}</option>
-            {{/each}}
-          {{/select}}
+      <select name="service">
+        {{#if errors}}
+        {{#select service}}
+        <option value="" disabled selected>Sélectionnez votre service</option>
+        {{#each services}}
+        <option value="{{id}}">{{nom}}</option>
+        {{/each}}
+        {{/select}}
         {{else}}
-          {{#select selected_user.service.id}}
-            <option value="" disabled selected>Sélectionnez votre service</option>
-            {{#each services}}
-            <option value="{{id}}">{{nom}}</option>
-            {{/each}}
-          {{/select}}
+        {{#select selected_user.service.id}}
+        <option value="" disabled selected>Sélectionnez votre service</option>
+        {{#each services}}
+        <option value="{{id}}">{{nom}}</option>
+        {{/each}}
+        {{/select}}
         {{/if}}
       </select>
       <label for="service">Service</label>

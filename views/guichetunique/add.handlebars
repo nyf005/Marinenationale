@@ -1,0 +1,79 @@
+<div class="row container">
+  <div class="card-panel center-align">
+    <h5>Ajouter une formation pour {{user.nom}}</h5>
+  </div>
+  <hr>
+  <form action="/guichetunique/add/{{user.id}}" method="POST" enctype="multipart/form-data">
+    <div class="input-field col m5 s12">
+      <select name="niveau" class="validate">
+        {{#if errors}}
+        {{#select niveau}}
+        <option value="" disabled selected>Niveau</option>
+        <option value="BE">Brevet Elémentaire</option>
+        <option value="BAT">Brevet d'Aptitude Technique</option>
+        <option value="BEAT">Brevet Elémentaire et d'Aptitude Technique</option>
+        <option value="BS">Brevet Supérieur</option>
+        <option value="APPLICATION">Application</option>
+        <option value="PERFECTIONNEMENT">Perfectionnement</option>
+        <option value="DEM">Diplôme d'Etat-Major</option>
+        <option value="EDG">Ecole De Guerre</option>
+        <option value="FORMATION">Formation</option>
+        {{/select}}
+        {{else}}
+        <option value="" disabled selected>Niveau</option>
+        <option value="BE">Brevet Elémentaire</option>
+        <option value="BAT">Brevet d'Aptitude Technique</option>
+        <option value="BEAT">Brevet Elémentaire et d'Aptitude Technique</option>
+        <option value="BS">Brevet Supérieur</option>
+        <option value="APPLICATION">Application</option>
+        <option value="PERFECTIONNEMENT">Perfectionnement</option>
+        <option value="DEM">Diplôme d'Etat-Major</option>
+        <option value="EDG">Ecole De Guerre</option>
+        <option value="FORMATION">Formation</option>
+        {{/if}}
+      </select>
+      <label for="niveau">Niveau</label>
+    </div>
+    <div class="input-field col m7 s12">
+      <input name="intitule" id="intitule" type="text" class="validate" {{#if errors}} value="{{intitule}}" {{/if}}>
+      <label for="intitule">Intitulé</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <input name="ecole" id="ecole" type="text" class="validate" {{#if errors}} value="{{ecole}}" {{/if}}>
+      <label for="ecole">Ecole</label>
+    </div>
+    <div class="input-field col m3 s12">
+      <input name="ville" id="ville" type="text" class="validate" {{#if errors}} value="{{ville}}" {{/if}}>
+      <label for="ville">Ville</label>
+    </div>
+    <div class="input-field col m3 s12">
+      <input name="pays" id="pays" type="text" class="validate" {{#if errors}} value="{{pays}}" {{/if}}>
+      <label for="pays">Pays</label>
+    </div>
+    <div class="input-field col m2 s12">
+      <input name="date_debut" id="date_debut" type="date" class="datepicker" {{#if date_debut}}
+        data-value="{{dateFormat date_debut "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+      <label for="date_debut">Date de début</label>
+    </div>
+    <div class="input-field col m2 s12">
+      <input name="date_fin" id="date_fin" type="date" class="datepicker" {{#if date_fin}}
+        data-value="{{dateFormat date_fin "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+      <label for="date_fin">Date de fin</label>
+    </div>
+
+    <div class="file-field input-field col m8 s12">
+      <div class="btn">
+        <span>Diplôme</span>
+        <input name="scan_diplome" type="file" accept=".png, .jpg, .jpeg">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <div class=" col m8 offset-m10 s12">
+      <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,17 +1,29 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const InformationSchema = new Schema({
-  reference : {
+const MovementSchema = new Schema({
+  reference: {
     type: String
   },
-  objet : {
+  type: {
     type: String
   },
-  commentaire : {
+  objet: {
     type: String
   },
-  image: {
+  ville: {
+    type: String
+  },
+  pays: {
+    type: String
+  },
+  date_depart: {
+    type: Date
+  },
+  date_fin: {
+    type: Date
+  },
+  scan_justificatif: {
     id: {
       type: String
     },
@@ -22,16 +34,10 @@ const InformationSchema = new Schema({
       type: String
     }
   },
-  date_expiration:{
-    type: Date
-  },
-  date_ajout:{
-    type: Date
-  },
-  proprio: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "users"
-  },
+  }
 });
 
-mongoose.model('informations', InformationSchema);
+mongoose.model("movements", MovementSchema);
