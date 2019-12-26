@@ -1,10 +1,17 @@
 const express = require("express");
-const moment = require("moment");
 const router = express.Router();
 const mongoose = require("mongoose");
 const multer = require("multer");
 const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
+const fetch = require("node-fetch");
+global.fetch = fetch;
+const Unsplash = require("unsplash-js").default;
+const toJson = require("unsplash-js").toJson;
+
+const unsplash = new Unsplash({
+  accessKey: "96b08d4e9f918d7687fe4a1cade9a2ac5897d30db1faa40580b168a33d59f650"
+});
 
 const Photo = mongoose.model("photos");
 //Load Keys
@@ -25,17 +32,26 @@ cloudinary.config({
 const storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: "photoGallery",
-  allowedFormats: ["jpg", "jpeg", "png"]
-  // transformation: [{ width: 500, height: 500, gravity: "face", crop: "thumb" }]
+  allowedFormats: ["jpg", "jpeg", "png"],
+  transformation: [{ quality: "auto" }]
 });
 const upload = multer({ storage });
 
 router.get("/", (req, res) => {
-  Photo.find().then(photos => {
-    res.render("gallery/index", {
-      photos: photos
+  unsplash.search
+    .photos("random", 7, 30)
+    .then(toJson)
+    .then(photos => {
+      res.render("gallery/index", {
+        photos: photos.results
+      });
     });
-  });
+
+  // Photo.find().then(photos => {
+  //   res.render("gallery/index", {
+  //     photos: photos
+  //   });
+  // });
 });
 
 router.get("/add", ensureAuthenticated, (req, res) => {

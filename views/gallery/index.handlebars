@@ -1,12 +1,8 @@
-<!-- Swiper -->
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        {{#each photos}}
-        <img src="{{image.url}}" alt="" class="swiper-slide" />
-        {{/each}}
-        {{!-- <div class="swiper-slide" style="background-image:url(./images/nature-1.jpg)"></div> --}}
-    </div>
-    <!-- Add Arrows -->
-    <div class="swiper-button-next swiper-button-black"></div>
-    <div class="swiper-button-prev swiper-button-black"></div>
+<div class="container galleria">
+    {{#each photos}}
+    <img src="{{urls.regular}}"
+        data-description="{{description}}<hr><p class='right-align'>Copyright © 2019<br>Marine Nationale, Tous droits réservés</p>"
+        data-title="{{alt_description}}" />
+    {{!-- <img src="{{image.url}}" data-description="{{description}}" data-title="{{titre}}" /> --}}
+    {{/each}}
 </div>

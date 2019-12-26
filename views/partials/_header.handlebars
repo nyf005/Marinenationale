@@ -2,55 +2,55 @@
   <nav class="blue darken-3">
     <div class="nav-wrapper"> {{!--container --}}
       <div class="row">
-      <div class="col l1">
-        <a href="#" data-activates="main-menu" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
-      </div>
-      {{!-- <div class="col l1">
+        <div class="col l1">
+          <a href="#" data-activates="main-menu" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
+        </div>
+        {{!-- <div class="col l1">
         <img class="logo"
           src="https://res.cloudinary.com/nyf005/image/upload/c_scale,w_58/v1576489603/public/Logo_NAVY.png" alt="">
       </div> --}}
-      <div class="col l2">
-        <a href="/" class="logo-text">Marine nationale</a>
-      </div>
+        <div class="col l2">
+          <a href="/" class="logo-text">Marine nationale</a>
+        </div>
 
-      <div class="col l9">
-        <ul class="right hide-on-med-and-down valign-wrapper">
-          <li>
-            <a class="dropdown-trigger titre-menu" href="#!" data-activates="organisation_1">Organisation</a>
-          </li>
-          <li><a class="titre-menu" href="/missions">Missions</a></li>
-          <li><a class="dropdown-trigger titre-menu" href="#!" data-activates="equipements_1">Equipements</a></li>
-          <li>
-            <a class="dropdown-trigger titre-menu" href="#!" data-activates="ressources_1">Ressources Humaines</a>
-          </li>
-          <li>
-            <a class="dropdown-trigger titre-menu" href="#!" data-activates="patrimoine_1">Patrimoine</a>
-          </li>
-          <li>
-            <a class="titre-menu" href="/gallery">Galerie Photo</a>
-          </li>
-          {{#if user}}
-          {{#if user.photo.url}}
-          <li>
-            <a class="dropdown-trigger" href="#!" data-activates="user_menu">
-              <img src="{{resizeImg user.photo.id user.photo.format}}" alt="image" class="circle valign-wrapper">
-            </a>
-          </li>
-          {{else}}
-          <li>
-            <a class="dropdown-trigger" href="#!" data-activates="user_menu">
-              <img src="https://res.cloudinary.com/nyf005/image/upload/w_60,h_60,c_scale/v1537449932/public/jdoe.jpg"
-                alt="" class="circle valign-wrapper">
-            </a>
-          </li>
-          {{/if}}
-          {{else}}
-          <li>
-            <a class="loginForm" href="/login">Je suis marin</a>
-          </li>
-          {{/if}}
-        </ul>
-      </div>
+        <div class="col l9">
+          <ul class="right hide-on-med-and-down valign-wrapper">
+            <li>
+              <a class="dropdown-trigger titre-menu" href="#!" data-activates="organisation_1">Organisation</a>
+            </li>
+            <li><a class="titre-menu" href="/missions">Missions</a></li>
+            <li><a class="dropdown-trigger titre-menu" href="#!" data-activates="equipements_1">Equipements</a></li>
+            <li>
+              <a class="dropdown-trigger titre-menu" href="#!" data-activates="ressources_1">Ressources Humaines</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger titre-menu" href="#!" data-activates="patrimoine_1">Patrimoine</a>
+            </li>
+            <li>
+              <a class="titre-menu" href="/gallery">Galerie Photo</a>
+            </li>
+            {{#if user}}
+            {{#if user.photo.url}}
+            <li>
+              <a class="dropdown-trigger" href="#!" data-activates="user_menu">
+                <img src="{{resizeImg user.photo.id user.photo.format}}" alt="image" class="circle valign-wrapper">
+              </a>
+            </li>
+            {{else}}
+            <li>
+              <a class="dropdown-trigger" href="#!" data-activates="user_menu">
+                <img src="https://res.cloudinary.com/nyf005/image/upload/w_60,h_60,c_scale/v1537449932/public/jdoe.jpg"
+                  alt="" class="circle valign-wrapper">
+              </a>
+            </li>
+            {{/if}}
+            {{else}}
+            <li>
+              <a class="loginForm" href="/login">Je suis marin</a>
+            </li>
+            {{/if}}
+          </ul>
+        </div>
       </div>
     </div>
   </nav>

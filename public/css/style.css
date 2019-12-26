@@ -12,7 +12,7 @@ main {
 }
 
 .parallax-container {
-margin-bottom: 35px;
+  margin-bottom: 35px;
 }
 
 .swiper-container {
@@ -26,6 +26,12 @@ margin-bottom: 35px;
   background-size: cover;
   width: auto;
   height: 500px;
+}
+
+.galleria {
+  margin-top: 20px;
+  width: 1200px;
+  height: 628px;
 }
 
 .bg-card-user {
