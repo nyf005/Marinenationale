@@ -40,6 +40,8 @@ router.get("/", ensureAuthenticated, (req, res) => {
   if (permission) {
     User.find()
       .populate("unite")
+      .populate("service")
+      .populate("grade")
       .sort({ nom: "asc" })
       .then(users => {
         res.render("movements/index", {
@@ -53,11 +55,13 @@ router.get("/", ensureAuthenticated, (req, res) => {
 router.get("/add/:id", ensureAuthenticated, (req, res) => {
   permission = checkGrant(req.user.statut, "createAny", "movement", req, res);
   if (permission) {
-    User.findOne({ _id: req.params.id }).then(user => {
-      res.render("movements/add", {
-        user: user
+    User.findOne({ _id: req.params.id })
+      .populate("grade")
+      .then(user => {
+        res.render("movements/add", {
+          user: user
+        });
       });
-    });
   }
 });
 
@@ -177,9 +181,16 @@ router.get("/usermovements/:id", ensureAuthenticated, (req, res) => {
     })
       .sort({ date_fin: "desc" })
       .then(movements => {
-        res.render("movements/usermovements", {
-          movements: movements
-        });
+        User.findOne({
+          _id: req.params.id
+        })
+          .populate("grade")
+          .then(user => {
+            res.render("movements/usermovements", {
+              movements: movements,
+              user: user
+            });
+          });
       });
   }
 });

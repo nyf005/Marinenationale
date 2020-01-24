@@ -1,6 +1,6 @@
 <div class="row container">
     <div class="card-panel center-align">
-        <h5>Ajouter un mouvement pour {{user.grade}} {{user.nom}} {{user.prenoms}}</h5>
+        <h5>Ajouter un mouvement pour {{user.grade.abreviation}} {{user.nom}} {{user.prenoms}}</h5>
     </div>
     <hr>
     <form action="/movements/add/{{user.id}}" method="POST" class="container section col s12 p6"

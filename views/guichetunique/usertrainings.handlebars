@@ -6,7 +6,7 @@
 </div>
 {{/ifCond}}
 <div class="row container">
-    <h4>Formations et Stages</h4>
+    <h4>Formations et Stages de {{user.grade.abreviation}} {{user.nom}} {{user.prenoms}}</h4>
     <hr>
     {{#if trainings}}
     <table class="responsive-table centered highlight">
@@ -16,8 +16,7 @@
                 <th>Niveau</th>
                 <th>Intitulé</th>
                 <th>Copie Scannée</th>
-                <th></th>
-                {{!-- <th></th> --}}
+                <th class="nosort">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -32,12 +31,11 @@
                         src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_diplome.id}}.{{scan_diplome.format}}">
                 </td>
                 <td>
-                    <a class="btn left-align" href="/guichetunique/edit/{{id}}">
+                    <a class="btn waves-effect" href="/guichetunique/edit/{{id}}">
                         <i class="fa fa-pencil"></i>
                     </a>
-                </td>
-                <td>
-                    <form action="/guichetunique/delete/{{id}}?_method=DELETE" method="POST" id="delete-form" onclick="return ConfirmDelete();">
+                    <form class="waves-effect" action="/guichetunique/delete/{{id}}?_method=DELETE" method="POST"
+                        id="delete-form" onclick="return ConfirmDelete();">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn red"><i class="fa fa-remove"></i></button>
                     </form>

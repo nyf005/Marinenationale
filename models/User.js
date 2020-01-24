@@ -11,8 +11,8 @@ const UserSchema = new Schema({
     required: true
   },
   grade: {
-    type: String,
-    required: true
+    type: Schema.Types.ObjectId,
+    ref: "ranks"
   },
   nom: {
     type: String,
@@ -66,9 +66,6 @@ const UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "services"
   },
-  // position: {
-  //   type: String
-  // },
   statut: {
     type: String,
     default: "marin"

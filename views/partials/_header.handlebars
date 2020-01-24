@@ -13,7 +13,7 @@
           <a href="/" class="logo-text">Marine nationale</a>
         </div>
 
-        <div class="col l9">
+        <div class="col l9 right">
           <ul class="right hide-on-med-and-down valign-wrapper">
             <li>
               <a class="dropdown-trigger titre-menu" href="#!" data-activates="organisation_1">Organisation</a>
@@ -55,29 +55,24 @@
     </div>
   </nav>
 </div>
-
 <!-- SIDE MENU -->
 <ul class="side-nav" id="main-menu">
   {{#if user}}
   <li>
     <div class="user-view">
-      <div class="background">
-        <img src="https://res.cloudinary.com/nyf005/image/upload/v1537449933/public/sea.png">
-      </div>
       {{#if user.photo.url}}
       <img class="circle" src="{{user.photo.url}}">
       {{else}}
       <img class="circle" src="https://res.cloudinary.com/nyf005/image/upload/v1537449932/public/jdoe.jpg">
       {{/if}}
-      <span class="white-text name">{{user.grade}} {{user.nom}} {{user.prenoms}}</span>
-      <span class="white-text email">{{user.unite.abreviation}} - {{user.service.nom}}</span>
+      <span class=" loginForm ">Bienvenue {{user.prenoms}}</span>
     </div>
   </li>
   <li class="divider"></li>
-  <li class="blue accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-bars icon_menu"></i>Menu
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-bars icon_menu"></i>Menu
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
           <ul>
@@ -105,10 +100,10 @@
     </ul>
   </li>
   <li class="divider"></li>
-  <li class="yellow accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user icon_menu"></i>Mon Espace
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-user icon_menu"></i>Mon Espace
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
           <ul>
@@ -125,10 +120,10 @@
   </li>
   <li class="divider"></li>
   {{#ifCond user.statut "==" "super_admin"}}
-  <li class="orange accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Super
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-user-secret icon_menu"></i>Super
           Administrateur
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
@@ -158,10 +153,10 @@
   {{/ifCond}}
 
   {{#ifCond user.statut "==" "operateur_cmg"}}
-  <li class="orange accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-user-secret icon_menu"></i>Administrateur
           CMG
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
@@ -176,10 +171,10 @@
   {{/ifCond}}
 
   {{#ifCond user.statut "==" "operateur_brh"}}
-  <li class="orange accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-user-secret icon_menu"></i>Administrateur
           BRH
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
@@ -200,10 +195,10 @@
   </li>
   {{/ifCond}}
   {{#ifCond user.statut "==" "operateur_bes"}}
-  <li class="orange accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-user-secret icon_menu"></i>Administrateur
           BES
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
@@ -223,10 +218,10 @@
   </li>
   {{/ifCond}}
   {{#ifCond user.statut "==" "operateur_bo"}}
-  <li class="orange accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-user-secret icon_menu"></i>Administrateur
           BO
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
@@ -244,10 +239,10 @@
   </li>
   {{/ifCond}}
   {{#ifCond user.statut "==" "operateur_ucsma"}}
-  <li class="orange accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-user-secret icon_menu"></i>Administrateur
           UCSMA
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
@@ -265,10 +260,10 @@
   </li>
   {{/ifCond}}
   {{#ifCond user.statut "==" "operateur_comm"}}
-  <li class="orange accent-1">
+  <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <a class="collapsible-header waves-effect waves-blue"><i class="fa fa-user-secret icon_menu"></i>Administrateur
+        <a class="collapsible-header waves-effect loginForm"><i class="fa fa-user-secret icon_menu"></i>Administrateur
           Communcation
           <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
         <div class="collapsible-body">
@@ -285,12 +280,19 @@
     </ul>
   </li>
   {{/ifCond}}
+
   <li class="divider"></li>
-  <li class="red darken-1">
-    <a class="collapsible-header waves-effect waves-blue" href="/users/logout"><i
-        class="fa fa-sign-out icon_menu"></i>Me
-      Déconnecter</a>
+  <li>
+    <a class="collapsible-header waves-effect loginForm" href="/users/etats"><i
+        class="fa fa-print icon_menu"></i>Etats</a>
   </li>
+
+  <li class="divider"></li>
+  <li class="red accent-1">
+    <a class="collapsible-header waves-effect loginForm" href="/users/logout"><i
+        class="fa fa-sign-out icon_menu"></i>Déconnexion</a>
+  </li>
+  <li class="divider"></li>
   {{else}}
   <ul>
     <li class="center blue darken-3 white-text loginForm"><b>Menu</b></li>
@@ -403,7 +405,6 @@
     <a href="/trainings">Diplômes et Stages</a>
   </li>
   <li>
-    <a class="red-text waves-effect waves-blue" href="/users/logout">Me
-      Déconnecter</a>
+    <a class="red-text waves-effect waves-blue" href="/users/logout">Déconnexion</a>
   </li>
 </ul>

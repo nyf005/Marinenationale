@@ -39,6 +39,7 @@ const keys = require("./config/keys");
 //Handlebars Helpers
 const {
   select,
+  getAge,
   dateFormat,
   formatDate,
   ensureAuthenticated,
@@ -87,6 +88,7 @@ app.engine(
   exphbs({
     helpers: {
       select: select,
+      getAge: getAge,
       dateFormat: dateFormat,
       formatDate: formatDate,
       ensureAuthenticated: ensureAuthenticated,

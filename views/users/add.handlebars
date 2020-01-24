@@ -14,10 +14,10 @@
     </div>
     <div class="input-field col m4 s12">
       <select name="grade">
-        {{#select grade}}
+        {{#select ranks}}
         <option value="" disabled selected>Grade du marin</option>
         {{#each ranks}}
-        <option value="{{abreviation}}">{{grade}}</option>
+        <option value="{{id}}">{{grade}}</option>
         {{/each}}
         {{/select}}
       </select>

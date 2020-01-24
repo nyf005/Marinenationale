@@ -13,8 +13,7 @@
         <th>Ordre</th>
         <th>Abréviation</th>
         <th>Intitulé</th>
-        <th></th>
-        <th></th>
+        <th class="nosort">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -24,14 +23,11 @@
         <td>{{abreviation}}</td>
         <td>{{grade}}</td>
         <td>
-          <a class="btn left-align" href="/ranks/edit/{{id}}">
-            <i class="fa fa-pencil"></i> Modifier
-          </a>
-        </td>
-        <td>
-          <form action="/ranks/delete/{{id}}?_method=DELETE" method="POST" id="delete-form" onclick="return ConfirmDelete();">
+          <a class="btn waves-effect" href="/ranks/edit/{{id}}">
+            <i class="fa fa-pencil"></i></a>
+          <form class="waves-effect" action="/ranks/delete/{{id}}?_method=DELETE" method="POST" id="delete-form" onclick="return ConfirmDelete();">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn red"><i class="fa fa-remove"></i> Supprimer</button>
+            <button type="submit" class="btn waves-effect red"><i class="fa fa-remove"></i></button>
           </form>
         </td>
       </tr>

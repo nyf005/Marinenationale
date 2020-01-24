@@ -1,7 +1,6 @@
 const moment = require("moment");
 const ac = require("../config/accesscontrol");
-const he = require('he');
-
+const he = require("he");
 
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
@@ -28,6 +27,11 @@ module.exports = {
     // return he.decode(input.replace(/<[^>]+>/g, ''));
 
     return he.decode(input);
+  },
+
+  getAge: function(date) {
+    var age = moment().diff(date, "years");
+    return age;
   },
 
   dateFormat: function(date, format) {
@@ -201,7 +205,7 @@ module.exports = {
 
   editIcon: function(statut, infoId, floating = true) {
     if (statut === "super_admin") {
-      if (floating){
+      if (floating) {
         return `
         <a class="btn-floating pulse halfway-fab green"><i class="large material-icons">dehaze</i></a>
         <ul>
@@ -220,7 +224,7 @@ module.exports = {
         return `<a href="/informations/edit/${infoId}"><i class="material-icons">create</i></a>`;
       }
     } else {
-      if (floating){
+      if (floating) {
         return `<a href="/informations/show/${infoId}" class="btn-floating pulse halfway-fab orange"><i class="material-icons">book</i></a>`;
       } else {
         return ``;

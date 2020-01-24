@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" href="https://res.cloudinary.com/nyf005/image/upload/v1576489603/public/Logo_NAVY.png">
   <link rel="stylesheet" href="/galleria/dist/themes/folio/galleria.folio.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
   <title>Marine Nationale</title>
 </head>
 
@@ -26,13 +28,13 @@
 
   {{> _footer}}
 
-
   <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="/galleria/dist/galleria.min.js"></script>
   <script src="/galleria/dist/themes/folio/galleria.folio.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
   <script>
     function ConfirmDelete() {
@@ -59,7 +61,9 @@
       $('.button-collapse').sideNav();
       $('.parallax').parallax();
       $('.dropdown-trigger').dropdown({
-        hover: false,
+        inDuration: 300,
+        outDuration: 225,
+        hover: true,
         belowOrigin: true,
         gutter: ($('.dropdown-content').width() * 0.3) / 2.5,
         constrainWidth: false,
@@ -78,7 +82,6 @@
         max: new Date(),
         hiddenName: true
       });
-
       $('.date_exp').pickadate({
         monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
         monthsShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'],
@@ -94,6 +97,7 @@
         hiddenName: true
       });
       $('select').material_select();
+      $(".collapsible").collapsible({ accordion: false });
 
       //Alert Message button close
       $('#alert_close').click(function () {
@@ -106,7 +110,101 @@
       }, 4000);
 
       $('.modal').modal();
+
+      //Table filtering and sorting
+      /*  $('#tableau tfoot th').each(function () {
+          var title = $(this).text();
+          $(this).html('<input type="text" placeholder="Filtrer par ' + title + '" />');
+        });*/
+      $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+          var min = parseInt($('#min').val(), 10);
+          var max = parseInt($('#max').val(), 10);
+          var age = parseFloat(data[7]) || 0; // use data for the age column
+
+          if ((isNaN(min) && isNaN(max)) ||
+            (isNaN(min) && age <= max) ||
+            (min <= age && isNaN(max)) ||
+            (min <= age && age <= max)) {
+            return true;
+          }
+          return false;
+        }
+      );
+
+      var table = $('#tableau').DataTable({
+        "lengthChange": false,
+        "sDom": '<"top">rt<"bottom"ilp><"clear">',
+        "pageLength": 10,
+        "language": {
+          "zeroRecords": "Désolé, aucun marin ne correspond à votre requête",
+          "info": "Page _PAGE_ sur _PAGES_",
+          "infoEmpty": "Pas d'enrégistrement disponible",
+          "sInfoFiltered": "(_TOTAL_ sur _MAX_ marins)",
+          "paginate": {
+            "first": 'Début',
+            "previous": "Précédent",
+            "next": "Suivant",
+            "last": 'Fin'
+          }
+        },
+        aoColumnDefs: [
+          {
+            bSortable: false,
+            aTargets: ['nosort']
+          },
+          {
+            "targets": [0, 1, 2, 3, 7],
+            "visible": false,
+            "searchable": true
+          },
+        ]
+
+      });
+
+      //Rechercher avec custom input
+      $('#live-search-box').on('keyup', function () {
+        table.search(this.value).draw();
+      });
+
+      //Filtrer par range
+      $('#min, #max').keyup(function () {
+        table.draw();
+      });
+
+      //Filtrer avec les checkbox
+      $('input:checkbox').on('change', function () {
+        //build a regex filter string with an or(|) condition
+        var categories = $('input:checkbox[name="categorie"]:checked').map(function () {
+          return '^' + this.value + '$';
+        }).get().join('|');
+
+        //filter in column 1, with an regex, no smart filtering, not case sensitive
+        table.column(3).search(categories, true, false, false).draw(false);
+
+        //build a filter string with an or(|) condition
+        var specialites = $('input:checkbox[name="specialite"]:checked').map(function () {
+          return this.value;
+        }).get().join('|');
+
+        //now filter in column 2, with no regex, no smart filtering, not case sensitive
+        table.column(8).search(specialites, true, false, false).draw(false);
+      });
+
+      /*   table.columns().every(function () {
+           var that = this;
+   
+           $('input', this.footer()).on('keyup change clear', function () {
+             if (that.search() !== this.value) {
+               that
+                 .search(this.value)
+                 .draw();
+             }
+           });
+         });*/
+
     });
+
 
     $('.carousel.carousel-slider').carousel({
       fullWidth: true
@@ -129,20 +227,6 @@
         });
       }());
     }
-
-    jQuery(document).ready(function ($) {
-      $('.live-search-list').each(function () {
-        $(this).attr('data-search-term', $(this).text().toLowerCase());
-      });
-      $('.live-search-box').on('keyup', function () {
-        var searchTerm = $(this).val().toLowerCase().replace("'", "\\'");
-        $('.live-search-list').each(function () {
-          if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
-            $(this).show();
-          } else { $(this).hide(); }
-        });
-      });
-    });
 
     CKEDITOR.replace('commentaire', {
       removePlugins: 'elementspath',

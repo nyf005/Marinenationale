@@ -3,7 +3,6 @@
     <h5>Modifier les informations d'un marin</h5>
   </div>
   <hr>
-
   <form {{#if errors}} action="/users/edit-created/{{user.id}}?_method=PUT" {{else}}
     action="/users/edit-created/{{selected_user.id}}?_method=PUT" {{/if}} method="POST"
     class="container section col s12 p6">
@@ -64,14 +63,14 @@
         {{#select grade}}
         <option value="" disabled selected>Grade du marin</option>
         {{#each ranks}}
-        <option value="{{abreviation}}">{{grade}}</option>
+        <option value="{{id}}">{{grade}}</option>
         {{/each}}
         {{/select}}
         {{else}}
-        {{#select selected_user.grade}}
+        {{#select selected_user.grade.id}}
         <option value="" disabled selected>Grade du marin</option>
         {{#each ranks}}
-        <option value="{{abreviation}}">{{grade}}</option>
+        <option value="{{id}}">{{grade}}</option>
         {{/each}}
         {{/select}}
         {{/if}}

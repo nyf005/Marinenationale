@@ -3,7 +3,8 @@ body {
   min-height: 100vh;
   flex-direction: column;
   font-family: "Roboto", sans-serif;
-  /* background: url("https://res.cloudinary.com/nyf005/image/upload/v1576489603/public/Logo_NAVY.png") no-repeat center;  */
+  font-size: 1.4rem;
+  font-weight: 200;
   background-color: aliceblue;
 }
 
@@ -11,21 +12,16 @@ main {
   flex: 1 0 auto;
 }
 
+.search-title-filter {
+  background-color: #fff;
+}
+
+.input-field .dropdown-content [type="checkbox"] + label {
+  top: -0.7em !important; /* previously 1px; */
+}
+
 .parallax-container {
   margin-bottom: 35px;
-}
-
-.swiper-container {
-  width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-.swiper-slide {
-  background-position: center;
-  background-size: cover;
-  width: auto;
-  height: 500px;
 }
 
 .galleria {
@@ -71,6 +67,12 @@ main {
   text-align: justify;
 }
 
+.actu-welcome-titre {
+  font-weight: 500;
+  font-family: "Pacifico", cursive;
+  color: navy;
+}
+
 .actu-text {
   font-size: 1rem;
   font-weight: 500;
@@ -85,13 +87,23 @@ main {
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-family: "Parisienne", cursive;
+  font-size: 1.2rem;
+  font-weight: 100;
+  font-family: "Roboto";
   vertical-align: middle;
 }
 
 .logo-text {
-  font-size: 25px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: "Pacifico", cursive;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.nosort {
+  font-size: 1.2rem;
+  font-weight: 500;
   font-family: "Pacifico", cursive;
   text-align: left;
   vertical-align: middle;
@@ -102,25 +114,73 @@ main {
   background-color: #f2f2f2;
   padding: 20px;
 }
+
 .loginForm {
-  font-size: 18px;
+  padding: 20px 10px;
+  font-size: 1.2rem;
+  font-weight: 100;
   color: orange;
   font-family: "Pacifico", sans-serif;
 }
 
 .titre {
-  font-size: 28px;
-  font-family: "Pacifico", sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
 }
 
 .titre-menu {
-  font-size: 18px;
-  font-family: "Pacifico", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 200;
+  font-family: "Roboto", sans-serif;
+  padding: 20px 10px;
+  transition: 0.4s;
+  color: #ffffff;
+  text-decoration: none;
 }
 
-.titre-menu:hover {
-  background-color: #eee;
-  color: #000;
+a {
+  position: relative;
+}
+a:hover {
+  color: navy;
+}
+a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #333;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+a:hover:before {
+  visibility: visible;
+  background-color: gold;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+.side-nav .divider {
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav li:hover > a {
+  background-color: navy;
+  color: gold;
+  font-weight: bolder;
+}
+
+.nav-wrapper ul li:hover > a {
+  background-color: navy;
+  color: gold;
+  font-weight: bolder;
 }
 
 .nav-wrapper .fa-bars {
@@ -146,7 +206,8 @@ main {
 }
 .menu-txt {
   font-family: "Parisienne", cursive;
-  font-size: 30px;
+  font-size: 1.1rem;
+  font-weight: 100;
 }
 
 .icon_menu {
@@ -196,13 +257,13 @@ footer {
 
 table > thead,
 tbody > tr > th > td {
-  text-align: left;
   vertical-align: top;
   border-top: 0;
 }
 
 table > thead > tr > th {
-  font-weight: 400;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: #757575;
   vertical-align: bottom;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -229,4 +290,30 @@ tbody > tr > th,
 td {
   border: 0;
   border-bottom: 1px solid #e0e0e0;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+tfoot {
+  display: table-header-group;
+}
+
+table > tfoot > tr > th {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.modal-content {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.placeholded label {
+  font-size: 0.8rem;
+  -webkit-transform: translateY(-140%);
+  transform: translateY(-140%);
+}
+
+.collapsible-body {
+  background-color: aliceblue;
 }

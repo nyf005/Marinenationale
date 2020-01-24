@@ -3,50 +3,111 @@
     <h5>Guichet Unique des Stages et Formations</h5>
   </div>
   <hr>
-
   {{#if users}}
   <div class="input-field col offset-m3 m6 s12">
-    <input class="live-search-box" type="text" placeholder="Rechercher un marin">
+     <input type="text" placeholder="Rechercher" id="live-search-box" class="live-search-box black-text">
   </div>
-  <table class="responsive-table centered highlight">
+
+  <table id="tableau" class="responsive-table centered highlight">
     <thead>
       <tr>
-        <th>Mecano</th>
+        <th>Mécano</th>
         <th>Matricule</th>
+        <th>Catégorie</th>
+        <th>Sous-catégorie</th>
         <th>Grade</th>
         <th>Nom et Prénoms</th>
+        <th>Sexe</th>
+        <th>Age</th>
+        <th>Spécialité</th>
         <th>Unité</th>
-        <th></th>
-        <th></th>
+        <th class="nosort">Actions</th>
       </tr>
     </thead>
+    {{!-- <tfoot>
+        <tr>
+          <th>Mécano</th>
+          <th>Matricule</th>
+          <th>Catégorie</th>
+          <th>Sous-catégorie</th>
+          <th>Grade</th>
+          <th>Nom et Prénoms</th>
+          <th>Sexe</th>
+          <th>Age</th>
+          <th>Spécialité</th>
+          <th>Unité</th>
+          <th></th>
+        </tr>
+      </tfoot> --}}
     <tbody>
       {{#each users}}
-      <tr class="live-search-list">
+      <tr>
         <td>{{mecano}}</td>
-        <td> {{matricule}}</td>
-        <td> {{grade}}</td>
+        <td>{{matricule}}</td>
+        <td>
+          {{#ifCond grade.categorie "==" "officier"}}
+          Officiers
+          {{/ifCond}}
+
+          {{#ifCond grade.categorie "==" "o_marinier"}}
+          Officiers Mariniers
+          {{/ifCond}}
+
+          {{#ifCond grade.categorie "==" "equipage"}}
+          Equipages
+          {{/ifCond}}
+        </td>
+        <td>
+          {{#ifCond grade.sousCategorie "==" "off_gen"}}
+          Officiers Généraux
+          {{/ifCond}}
+
+          {{#ifCond grade.sousCategorie "==" "off_sup"}}
+          Officiers Supérieurs
+          {{/ifCond}}
+
+          {{#ifCond grade.sousCategorie "==" "off_sub"}}
+          Officiers Subalternes
+          {{/ifCond}}
+
+          {{#ifCond grade.sousCategorie "==" "off_mar_sup"}}
+          Officiers Mariniers Supérieurs
+          {{/ifCond}}
+
+          {{#ifCond grade.sousCategorie "==" "off_mar_su"}}
+          Officiers Mariniers Subalternes
+          {{/ifCond}}
+        </td>
+        <td>{{grade.abreviation}}</td>
         <td>{{nom}} {{prenoms}}</td>
         <td>
-          {{unite.abreviation}}
+          {{#ifCond genre "==" "masculin"}}
+          Masculin
+          {{/ifCond}}
+
+          {{#ifCond genre "==" "feminin"}}
+          Féminin
+          {{/ifCond}}
         </td>
-        {{#ifCond ../user.statut "==" "operateur_bes"}}
+        <td>{{getAge naissance.date}}</td>
+        <td>Navigateur</td>
+        <td>{{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}}</td>
         <td>
-          <a href="/guichetunique/add/{{id}}" class="btn left-align blue">
+          {{!-- {{#ifCond ../user.statut "==" "operateur_bes"}} --}}
+          {{#ifCond ../user.statut "==" "super_admin"}}
+          <a href="/guichetunique/add/{{id}}" class="btn waves-effect blue">
             <i class="fa fa-plus"></i>
           </a>
-        </td>
-        <td>
-          <a href="/guichetunique/usertrainings/{{id}}" class="btn left-align orange">
+          <a href="/guichetunique/usertrainings/{{id}}" class="btn waves-effect orange">
             <i class="fa fa-graduation-cap"></i>
           </a>
+          {{/ifCond}}
         </td>
-        {{/ifCond}}
       </tr>
       {{/each}}
     </tbody>
   </table>
   {{else}}
-  <p>Il faut nécessairement que le marin existe dans la Base de Donnée de la Marine avant que le BES l'enrégistre.</p>
+  <p>Il faut nécessairement que le marin existe dans la Base de Donnée de la Marine avant que le BES enrégistre ses diplômes.</p>
   {{/if}}
-</div>
+</div> 

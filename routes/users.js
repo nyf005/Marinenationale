@@ -48,6 +48,7 @@ router.get("/", ensureAuthenticated, (req, res) => {
     User.find()
       .populate("unite")
       .populate("service")
+      .populate("grade")
       .sort({ nom: "asc" })
       .then(users => {
         Training.find()
@@ -55,6 +56,28 @@ router.get("/", ensureAuthenticated, (req, res) => {
           .sort({ date_fin: "desc" })
           .then(trainings => {
             res.render("users/index", {
+              users: users,
+              trainings: trainings
+            });
+          });
+      });
+  }
+});
+
+router.get("/etats", ensureAuthenticated, (req, res) => {
+  permission = checkGrant(req.user.statut, "readAny", "account", req, res);
+  if (permission) {
+    User.find()
+      .populate("unite")
+      .populate("service")
+      .populate("grade")
+      .sort({ nom: "asc" })
+      .then(users => {
+        Training.find()
+          .populate("user")
+          .sort({ date_fin: "desc" })
+          .then(trainings => {
+            res.render("users/requests", {
               users: users,
               trainings: trainings
             });
@@ -262,6 +285,7 @@ router.get("/edit-created/:id", ensureAuthenticated, (req, res) => {
     })
       .populate("unite")
       .populate("service")
+      .populate("grade")
       .then(user => {
         Unite.find().then(unites => {
           Service.find().then(services => {
@@ -427,7 +451,7 @@ router.put("/edit-created/:id", ensureAuthenticated, (req, res) => {
           user.dateNomination = req.body.dateNomination;
           user.unite = req.body.unite;
           user.service = req.body.service;
-          
+
           user.save().then(() => {
             req.flash("success_msg", "Modifications effectuées avec succès");
             res.redirect("/users");
@@ -528,28 +552,34 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
   })
     .populate("unite")
     .populate("service")
+    .populate("grade")
     .then(user => {
       Unite.find().then(unites => {
         Service.find().then(services => {
-      permission = checkGrant(user.statut, "updateOwn", "account", req, res);
-      if (permission) {
-        
-        if (user.id === req.user.id) {
-          res.render("users/edit", {
-            user: user,
-            unites: unites,
-            services: services
-          });
-        } else {
-          req.flash(
-            "errors_msg",
-            "Vous n'êtes pas autorisé à accéder à cette page."
+          permission = checkGrant(
+            user.statut,
+            "updateOwn",
+            "account",
+            req,
+            res
           );
-          res.redirect("/");
-        }
-      }
-    });
-  });
+          if (permission) {
+            if (user.id === req.user.id) {
+              res.render("users/edit", {
+                user: user,
+                unites: unites,
+                services: services
+              });
+            } else {
+              req.flash(
+                "errors_msg",
+                "Vous n'êtes pas autorisé à accéder à cette page."
+              );
+              res.redirect("/");
+            }
+          }
+        });
+      });
     });
 });
 

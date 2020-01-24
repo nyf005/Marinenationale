@@ -2,6 +2,16 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
+const fetch = require("node-fetch");
+global.fetch = fetch;
+const Unsplash = require("unsplash-js").default;
+const toJson = require("unsplash-js").toJson;
+var faker = require("faker");
+
+const unsplash = new Unsplash({
+  accessKey: "96b08d4e9f918d7687fe4a1cade9a2ac5897d30db1faa40580b168a33d59f650"
+});
+
 const Actualite = mongoose.model("actualites");
 const Photo = mongoose.model("photos");
 
@@ -10,16 +20,31 @@ router.get("/", (req, res) => {
     .limit(3)
     .sort({ date_publication: "desc" })
     .then(actualites => {
-      Photo.find()
-        .limit(5)
-        .sort({ _id: "desc" })
+      unsplash.search
+        .photos("random", 7, 30)
+        .then(toJson)
         .then(photos => {
           res.render("index/welcome", {
             actualites: actualites,
-            photos: photos
+            photos: photos.results
           });
         });
     });
+
+  // Actualite.find()
+  //   .limit(3)
+  //   .sort({ date_publication: "desc" })
+  //   .then(actualites => {
+  //     Photo.find()
+  //       .limit(5)
+  //       .sort({ _id: "desc" })
+  //       .then(photos => {
+  //         res.render("index/welcome", {
+  //           actualites: actualites,
+  //           photos: photos
+  //         });
+  //       });
+  //   });
 });
 
 router.get("/login", (req, res) => {
@@ -76,6 +101,20 @@ router.get("/patrimoine/sport", (req, res) => {
 });
 router.get("/patrimoine/orchestre", (req, res) => {
   res.render("index/patrimoine/orchestre");
+});
+
+router.get("/generate-fake-data", function(req, res, next) {
+  for (var i = 0; i < 100; i++) {
+    var actu = new Actualite();
+
+    actu.titre = faker.lorem.word();
+    actu.texte = faker.lorem.paragraphs();
+
+    actu.save(function(err) {
+      if (err) throw err;
+    });
+  }
+  res.redirect("/actualites");
 });
 
 module.exports = router;

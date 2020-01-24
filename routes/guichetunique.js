@@ -43,6 +43,8 @@ router.get("/", ensureAuthenticated, (req, res) => {
   if (permission) {
     User.find()
       .populate("unite")
+      .populate("service")
+      .populate("grade")
       .sort({ nom: "asc" })
       .then(users => {
         res.render("guichetunique/index", {
@@ -183,22 +185,30 @@ router.get("/usertrainings/:id", ensureAuthenticated, (req, res) => {
     })
       .sort({ date_fin: "desc" })
       .then(trainings => {
-        if (trainings) {
-          let niveau;
-          if (trainings.equivalent == "EDG") {
-            niveau = "Ecole de Guerre";
-            res.render("guichetunique/usertrainings", {
-              trainings: trainings,
-              niveau: niveau
-            });
-          } else {
-            res.render("guichetunique/usertrainings", {
-              trainings: trainings
-            });
-          }
-        } else {
-          res.render("guichetunique/usertrainings");
-        }
+        User.findOne({
+          _id: req.params.id
+        })
+          .populate("grade")
+          .then(user => {
+            if (trainings) {
+              let niveau;
+              if (trainings.equivalent == "EDG") {
+                niveau = "Ecole de Guerre";
+                res.render("guichetunique/usertrainings", {
+                  trainings: trainings,
+                  user: user,
+                  niveau: niveau
+                });
+              } else {
+                res.render("guichetunique/usertrainings", {
+                  trainings: trainings,
+                  user: user
+                });
+              }
+            } else {
+              res.render("guichetunique/usertrainings");
+            }
+          });
       });
   }
 });
@@ -322,7 +332,7 @@ router.put(
 
             training.save().then(() => {
               req.flash("success_msg", "Modifications effectuées avec succès");
-              res.redirect("/guichetunique/usertrainings/"+training.user);
+              res.redirect("/guichetunique/usertrainings/" + training.user);
             });
           }
         } else {
@@ -351,7 +361,7 @@ router.delete("/delete/:id", ensureAuthenticated, (req, res) => {
           _id: req.params.id
         }).then(() => {
           req.flash("success_msg", "Formation supprimée");
-          res.redirect("/guichetunique/usertrainings/"+training.user);
+          res.redirect("/guichetunique/usertrainings/" + training.user);
         });
       }
     });

@@ -1,0 +1,290 @@
+<div class="row">
+    <div class="col l3 m12 s12">
+        <div class="card">
+            <div class="card-content">
+                <form>
+                    <div class="input-field placeholded">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" placeholder="Rechercher" id="live-search-box"
+                            class="live-search-box black-text">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <ul class="collapsible card" data-collapsible="expandable">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">chevron_right</i> Catégorie de grade</div>
+                <div class="collapsible-body">
+                    <label class="blue-text">Trier par catégorie</label>
+                    <p>
+                        <input type="checkbox" name="categorie" class="checkbox filled-in" value="Officiers Généraux"
+                            id="officiers_generaux" />
+                        <label for="officiers_generaux">Officiers Généraux</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" name="categorie" class="checkbox filled-in" value="Officiers Supérieurs"
+                            id="officiers_superieurs" />
+                        <label for="officiers_superieurs">Officiers Supérieurs</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" name="categorie" class="checkbox filled-in" value="Officiers Subalternes"
+                            id="officiers_subalternes" />
+                        <label for="officiers_subalternes">Officiers Subalternes</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" name="categorie" class="checkbox filled-in"
+                            value="Officiers Mariniers Supérieurs" id="off_mar_sup" />
+                        <label for="off_mar_sup">Officiers Mariniers Supérieurs</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" name="categorie" class="checkbox filled-in"
+                            value="Officiers Mariniers Subalternes" id="off_mar_sub" />
+                        <label for="off_mar_sub">Officiers Mariniers Subalternes</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" name="categorie" class="checkbox filled-in" value="" id="equipages" />
+                        <label for="equipages">Equipages</label>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">chevron_right</i> Critère d'âge</div>
+                <div class="collapsible-body">
+                    <div class="row">
+                        <div class="input-field col m6">
+                            <input type="number" class="validate" min="18" placeholder="18" id="min">
+                            <label class="blue-text">Minimum</label>
+                        </div>
+                        <div class="input-field col m6">
+                            <input type="number" class="validate" max="65" placeholder="65" id="max">
+                            <label class="blue-text">Maximum</label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">chevron_right</i> Critère de diplôme</div>
+                <div class="collapsible-body">
+                    <label class="blue-text">Diplômes Militaires</label>
+                    <form action="">
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="edg" />
+                            <label for="edg">Ecole de Guerre</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="dem" />
+                            <label for="dem">Cours d'Etat-major</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="perfectionnement" />
+                            <label for="perfectionnement">Perfectionnement</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="application" />
+                            <label for="application">Application</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="bs" />
+                            <label for="bs">Brevet Supérieur</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="bat" />
+                            <label for="bat">Brevet d'Aptitude Technique</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="be" />
+                            <label for="be">Brevet Elémentaire</label>
+                        </p>
+                    </form>
+                    <br>
+                    <label class="blue-text">Diplômes Civils</label>
+                    <form action="">
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="doctorat" />
+                            <label for="doctorat">Doctorat</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="master" />
+                            <label for="master">Master</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="licence" />
+                            <label for="licence">Licence</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="bts" />
+                            <label for="bts">DEUG, BTS, DUT</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="bac" />
+                            <label for="bac">Baccalauréat</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="bepc" />
+                            <label for="bepc">BEPC</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="diplome" class="checkbox filled-in" id="cepe" />
+                            <label for="cepe">CEPE</label>
+                        </p>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">chevron_right</i> Critère de spécialité</div>
+                <div class="collapsible-body">
+                    <p>
+                        <input type="checkbox" name="specialite" class="checkbox filled-in" id="administration" />
+                        <label for="administration">Administration</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" name="specialite" class="checkbox filled-in" id="sante" />
+                        <label for="sante">Santé</label>
+                    </p>
+                    <label class="blue-text">Spécialité Officiers</label>
+                    <form action="">
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="energie" />
+                            <label for="energie">Energie</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="operations" />
+                            <label for="operations">Opérations</label>
+                        </p>
+                    </form>
+                    <br>
+                    <label class="blue-text">Spécialité Officiers Mariniers et Equipages</label>
+                    <form action="">
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="elec" />
+                            <label for="elec">Electronique et Electrotechnique</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="equipage" />
+                            <label for="equipage">Equipages</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="mecanique" />
+                            <label for="mecanique">Mécanique</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="audiovisuel" />
+                            <label for="audiovisuel">Musique et Audiovisuel</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="reseaux" />
+                            <label for="reseaux">Réseaux et Télécommunications</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="restauration" />
+                            <label for="restauration">Restauration</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="securite" />
+                            <label for="securite">Sécurité et Protection</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="service_general" />
+                            <label for="service_general">Service Général</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" name="specialite" class="checkbox filled-in" id="sport" />
+                            <label for="sport">Sport</label>
+                        </p>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col  l9 m12 s12">
+        <h5>Etat des marins selon vos critères</h5><hr>
+        <table id="tableau" class=" centered highlight">
+            <thead>
+                <tr>
+                    <th>Mécano</th>
+                    <th>Matricule</th>
+                    <th>Catégorie</th>
+                    <th>Sous-catégorie</th>
+                    <th>Grade</th>
+                    <th>Nom et Prénoms</th>
+                    <th>Sexe</th>
+                    <th>Age</th>
+                    <th>Spécialité</th>
+                    <th>Unité</th>
+                    {{!-- <th class="nosort">Actions</th> --}}
+                </tr>
+            </thead>
+            {{!-- <tfoot>
+        <tr>
+          <th>Mécano</th>
+          <th>Matricule</th>
+          <th>Catégorie</th>
+          <th>Sous-catégorie</th>
+          <th>Grade</th>
+          <th>Nom et Prénoms</th>
+          <th>Sexe</th>
+          <th>Age</th>
+          <th>Spécialité</th>
+          <th>Unité</th>
+          <th></th>
+        </tr>
+      </tfoot> --}}
+            <tbody>
+                {{#each users}}
+                <tr data-target="#{{mecano}}">
+                    <td>{{mecano}}</td>
+                    <td>{{matricule}}</td>
+                    <td>
+                        {{#ifCond grade.categorie "==" "officier"}}
+                        Officiers
+                        {{/ifCond}}
+
+                        {{#ifCond grade.categorie "==" "o_marinier"}}
+                        Officiers Mariniers
+                        {{/ifCond}}
+
+                        {{#ifCond grade.categorie "==" "equipage"}}
+                        Equipages
+                        {{/ifCond}}
+                    </td>
+                    <td>
+                        {{#ifCond grade.sousCategorie "==" "off_gen"}}
+                        Officiers Généraux
+                        {{/ifCond}}
+
+                        {{#ifCond grade.sousCategorie "==" "off_sup"}}
+                        Officiers Supérieurs
+                        {{/ifCond}}
+
+                        {{#ifCond grade.sousCategorie "==" "off_sub"}}
+                        Officiers Subalternes
+                        {{/ifCond}}
+
+                        {{#ifCond grade.sousCategorie "==" "off_mar_sup"}}
+                        Officiers Mariniers Supérieurs
+                        {{/ifCond}}
+
+                        {{#ifCond grade.sousCategorie "==" "off_mar_su"}}
+                        Officiers Mariniers Subalternes
+                        {{/ifCond}}
+                    </td>
+                    <td>{{grade.abreviation}}</td>
+                    <td>{{nom}} {{prenoms}}</td>
+                    <td>
+                        {{#ifCond genre "==" "masculin"}}
+                        Masculin
+                        {{/ifCond}}
+
+                        {{#ifCond genre "==" "feminin"}}
+                        Féminin
+                        {{/ifCond}}
+                    </td>
+                    <td>{{getAge naissance.date}}</td> 
+                    <td>Navigateur</td>
+                    <td>{{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

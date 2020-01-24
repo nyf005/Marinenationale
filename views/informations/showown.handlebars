@@ -8,8 +8,7 @@
                 <th>Référence</th>
                 <th>Objet</th>
                 <th>Miniature</th>
-                <th></th>
-                <th></th>
+                <th class="nosort">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,15 +21,12 @@
                         src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{image.id}}.{{image.format}}">
                 </td>
                 <td>
-                    <a class="btn left-align" href="/informations/edit/{{id}}">
-                        <i class="fa fa-pencil"></i> Modifier
-                    </a>
-                </td>
-                <td>
-                    <form action="/informations/delete/{{id}}?_method=DELETE" method="POST" id="delete-form"
+                    <a class="btn waves-effect left-align" href="/informations/edit/{{id}}">
+                        <i class="fa fa-pencil"></i></a>
+                    <form class="waves-effect" action="/informations/delete/{{id}}?_method=DELETE" method="POST" id="delete-form"
                         onclick="return ConfirmDelete();">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn red"><i class="fa fa-remove"></i> Supprimer</button>
+                        <button type="submit" class="btn waves-effect red"><i class="fa fa-remove"></i></button>
                     </form>
                 </td>
             </tr>

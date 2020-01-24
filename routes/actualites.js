@@ -34,7 +34,7 @@ router.get("/", ensureAuthenticated, (req, res) => {
   permission = checkGrant(req.user.statut, "createAny", "actualite", req, res);
   if (permission) {
     Actualite.find()
-      .sort({ date_publication: "desc" })
+      .sort({ date_publication: "asc" })
       .then(actualites => {
         res.render("actualites/index", {
           actualites: actualites

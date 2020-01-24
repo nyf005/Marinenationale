@@ -39,7 +39,7 @@ const upload = multer({ storage });
 
 router.get("/", (req, res) => {
   unsplash.search
-    .photos("random", 7, 30)
+    .photos("military navy", 1, 30)
     .then(toJson)
     .then(photos => {
       res.render("gallery/index", {

@@ -6,7 +6,7 @@
 </div>
 {{/ifCond}}
 <div class="row container">
-    <h4>Mouvements</h4>
+    <h4>Mouvements de {{user.grade.abreviation}} {{user.nom}} {{user.prenoms}}</h4>
     <hr>
     {{#if movements}}
     <table class="responsive-table centered highlight">
@@ -17,8 +17,7 @@
                 <th>Pays</th>
                 <th>Objet</th>
                 <th>Copie Scannée</th>
-                <th></th>
-                <th></th>
+                <th class="nosort">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -33,15 +32,13 @@
                         src="https://res.cloudinary.com/nyf005/image/upload/v1538588712/{{scan_justificatif.id}}.{{scan_justificatif.format}}">
                 </td>
                 <td>
-                    <a class="btn left-align" href="/movements/edit/{{id}}">
+                    <a class="btn waves-effect" href="/movements/edit/{{id}}">
                         <i class="fa fa-pencil"></i>
                     </a>
-                </td>
-                <td>
-                    <form action="/movements/delete/{{id}}?_method=DELETE" method="POST" id="delete-form"
+                    <form class="waves-effect" action="/movements/delete/{{id}}?_method=DELETE" method="POST" id="delete-form"
                         onclick="return ConfirmDelete();">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn red"><i class="fa fa-remove"></i></button>
+                        <button type="submit" class="btn waves-effect red"><i class="fa fa-remove"></i></button>
                     </form>
                 </td>
             </tr>
