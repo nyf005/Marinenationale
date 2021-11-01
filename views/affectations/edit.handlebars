@@ -1,0 +1,71 @@
+{{affectation}}
+<div class="row container">
+    <div class="card-panel center-align">
+        <h5>Modifier l'affectation</h5>
+    </div>
+    <hr>
+    <form action="/affectations/edit/{{affectation.id}}?_method=PUT" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="input-field col m2 s12">
+            <input name="dateAffectation" id="dateAffectation" type="text" class="datepicker" {{#if errors}}
+                data-value="{{dateFormat dateAffectation "YYYY-MM-DD"}}" {{else}}
+                data-value="{{dateFormat affectation.date "YYYY-MM-DD"}}" {{/if}}>
+            <label for="dateAffectation">Date d'affectation</label>
+        </div>
+        <div class="input-field col m6 s12">
+            <select name="unite">
+                {{#if errors}}
+                {{#select unite}}
+                <option value="" disabled selected>Attribuer nouvelle unité</option>
+                {{#each unites}}
+                <option value="{{id}}">{{nom}}</option>
+                {{/each}}
+                {{/select}}
+                {{else}}
+                {{#select affectation.unite.nom}}
+                <option value="" disabled selected>Attribuer nouvelle unité</option>
+                {{#each unites}}
+                <option value="{{id}}">{{nom}}</option>
+                {{/each}}
+                {{/select}}
+                {{/if}}
+            </select>
+            <label for="unite">Nouvelle unité</label>
+        </div>
+        <div class="input-field col m4 s12">
+            <select name="service">
+                {{#if errors}}
+                {{#select service}}
+                <option value="" disabled selected>Attribuer nouvelle unité</option>
+                {{#each services}}
+                <option value="{{id}}">{{nom}}</option>
+                {{/each}}
+                {{/select}}
+                {{else}}
+                {{#select affectation.service.nom}}
+                <option value="" disabled selected>Attribuer nouvelle unité</option>
+                {{#each services}}
+                <option value="{{id}}">{{nom}}</option>
+                {{/each}}
+                {{/select}}
+                {{/if}}
+            </select>
+            <label for="service">Nouveau service</label>
+        </div>
+        <div class="input-field col m7 s12">
+            <input name="fonction" id="fonction" type="text" class="validate" {{#if errors}} value="{{fonction}}"
+                {{else}} value="{{affectation.fonction}}" {{/if}}>
+            <label for="fonction">Nouvelle fonction</label>
+        </div>
+        <div class="input-field col m5 s12">
+            <input name="reference" id="reference" type="text" class="validate" {{#if errors}} value="{{reference}}"
+                {{else}} value="{{affectation.reference}}" {{/if}}>
+            <label for="reference">Référence</label>
+        </div>
+        <div class="input-field col m2 offset-m10 s12">
+            <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>

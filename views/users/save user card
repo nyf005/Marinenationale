@@ -91,3 +91,117 @@
     </div>
     {{/if}}
     {{/each}}
+
+
+
+
+
+
+
+Request
+
+
+    // {
+    //   $lookup: {
+    //     from: "ranks",
+    //     localField: "grade",
+    //     foreignField: "_id",
+    //     as: "grade"
+    //   }
+    // },
+    // {
+    //   $addFields: {
+    //     grade: {
+    //       $arrayElemAt: ["$grade", -1]
+    //     }
+    //   }
+    // },
+    // {
+    //   $lookup: {
+    //     from: "unites",
+    //     localField: "unite",
+    //     foreignField: "_id",
+    //     as: "unite"
+    //   }
+    // },
+    // {
+    //   $addFields: {
+    //     unite: {
+    //       $arrayElemAt: ["$unite", -1]
+    //     }
+    //   }
+    // },
+    // {
+    //   $lookup: {
+    //     from: "services",
+    //     localField: "service",
+    //     foreignField: "_id",
+    //     as: "service"
+    //   }
+    // },
+    // {
+    //   $addFields: {
+    //     service: {
+    //       $arrayElemAt: ["$service", -1]
+    //     }
+    //   }
+    // },
+    // {
+    //   $lookup: {
+    //     from: "affectations",
+    //     localField: "_id",
+    //     foreignField: "user",
+    //     as: "affectations"
+    //   }
+    // },
+    // {
+    //   $addFields: {
+    //     affectations: {
+    //       $arrayElemAt: ["$affectations", -1]
+    //     }
+    //   }
+    // },
+    // {
+    //   $lookup: {
+    //     from: "promotions",
+    //     localField: "_id",
+    //     foreignField: "user",
+    //     as: "promotions"
+    //   }
+    // },
+    // { $addFields: { promotions: { $arrayElemAt: ["$promotions", -1] } } },
+    // {
+    //   $lookup: {
+    //     from: "trainings",
+    //     localField: "_id",
+    //     foreignField: "user",
+    //     as: "trainings"
+    //   }
+    // },
+    // { $addFields: { trainings: { $arrayElemAt: ["$trainings", -1] } } }
+    // // { $unwind: "$user_affectations" },
+    // // { $unwind: "$promotions" },
+    // // { $unwind: "$trainings" }
+
+    {
+      $lookup: {
+        from: "promotions",
+        let: { userId: "$_id" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$userId"] } } },
+          {
+            $lookup: {
+              from: "ranks",
+              let: { rank_id: "$_id" },
+              pipeline: [
+                { $match: { $expr: { $eq: ["$_id", "$$rank_id"] } } }
+              ],
+              as: "grade"
+            }
+          },
+          { $unwind: "$grade" }
+        ],
+        as: "promotion"
+      }
+    },
+    { $unwind: "$promotion" }

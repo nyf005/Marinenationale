@@ -462,12 +462,12 @@
         </div>
 
         <div class="input-field col m3 s12">
-            <input name="dateDebut" id="dateDebut" type="date" class="datepicker" {{#if dateDebut}}
+            <input name="dateDebut" id="dateDebut" type="text"  class="datepicker" {{#if dateDebut}}
                 data-value="{{dateFormat dateDebut "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
             <label for="dateDebut">Date de début</label>
         </div>
         <div class="input-field col m3 s12">
-            <input name="dateFin" id="dateFin" type="date" class="date_exp" {{#if dateFin}}
+            <input name="dateFin" id="dateFin" type="text" class="date_exp" {{#if dateFin}}
                 data-value="{{dateFormat dateFin "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
             <label for="dateFin">Date de fin</label>
         </div>

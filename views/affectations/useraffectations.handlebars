@@ -1,0 +1,44 @@
+{{#ifCond user.statut "==" "super_admin"}}
+<div class="fixed-action-btn">
+    <a href="/affectations/add" class="btn-floating btn-large red">
+        <i class="fa fa-plus"></i>
+    </a>
+</div>
+{{/ifCond}}
+<div class="row container">
+    <h4>Affectations de {{user.grade.abreviation}} {{user.nom}} {{user.prenoms}}</h4>
+    <hr>
+    {{#if affectations}}
+    <table class="responsive-table centered highlight">
+        <thead>
+            <tr>
+                <th>Date d'affectation</th>
+                <th>Unité/Service</th>
+                <th>Fonction</th>
+                <th class="nosort">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each affectations}}
+            <tr>
+                <td>{{formatDate date "DD/MM/YY" "fr"}}</td>
+                <td>{{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}}</td>
+                <td>{{#if fonction}}{{fonction}}{{else}}N/D{{/if}}</td>
+                <td>
+                    <a class="btn waves-effect" href="/affectations/edit/{{id}}">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <form class="waves-effect" action="/affectations/delete/{{id}}?_method=DELETE" method="POST"
+                        id="delete-form" onclick="return ConfirmDelete();">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn waves-effect red"><i class="fa fa-remove"></i></button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>Aucune affectation n'a été ajoutée pour l'instant.</p>
+    {{/if}}
+</div>

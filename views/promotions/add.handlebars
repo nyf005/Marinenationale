@@ -1,0 +1,45 @@
+<div class="row container">
+    <div class="card-panel center-align">
+        <h5>Promotion pour {{user.grade.abreviation}} {{user.nom}} {{user.prenoms}}</h5>
+    </div>
+    <hr>
+    <form action="/promotions/add/{{user.id}}" method="POST" class="container section col s12 p6">
+
+        <div class="input-field col m5 s12">
+            <input name="reference" id="reference" type="text" class="validate" {{#if errors}} value="{{reference}}"
+                {{/if}}>
+            <label for="reference">Référence</label>
+        </div>
+        <div class="input-field col m4 s12">
+            <select name="grade">
+                {{#if errors}}
+                {{#select grade}}
+                <option value="" disabled selected>Attribuer nouveau grade</option>
+                {{#each ranks}}
+                <option value="{{id}}">{{grade}}</option>
+                {{/each}}
+                {{/select}}
+                {{else}}
+                {{#select ranks}}
+                <option value="" disabled selected>Attribuer nouveau grade</option>
+                {{#each ranks}}
+                <option value="{{id}}">{{grade}}</option>
+                {{/each}}
+                {{/select}}
+                {{/if}}
+            </select>
+            <label for="grade">Nouveau grade</label>
+        </div>
+
+        <div class="input-field col m3 s12">
+            <input name="datePromotion" id="datePromotion" type="text" class="datepicker" {{#if datePromotion}}
+                data-value="{{dateFormat datePromotion "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
+            <label for="datePromotion">Date de promotion</label>
+        </div>
+        <div class="input-field col m2 offset-m10 s12">
+            <button class="btn waves-effect waves-light green darken-3" type="submit" name="action">Valider
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>

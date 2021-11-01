@@ -470,10 +470,10 @@
 
         <div class="input-field col m3 s12">
             {{#if movement.date_depart}}
-            <input name="dateDebut" id="dateDebut" type="date" class="datepicker"
+            <input name="dateDebut" id="dateDebut" type="text"  class="datepicker"
                 data-value="{{dateFormat movement.date_depart "YYYY-MM-DD"}}">
             {{else}}
-            <input name="dateDebut" id="dateDebut" type="date" class="datepicker" {{#if dateDebut}}
+            <input name="dateDebut" id="dateDebut" type="text"  class="datepicker" {{#if dateDebut}}
                 data-value="{{dateFormat dateDebut "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
 
             {{/if}}
@@ -482,10 +482,10 @@
 
         <div class="input-field col m3 s12">
             {{#if movement.date_fin}}
-            <input name="dateFin" id="dateFin" type="date" class="date_exp"
+            <input name="dateFin" id="dateFin" type="text"  class="date_exp"
                 data-value="{{dateFormat movement.date_fin "YYYY-MM-DD"}}">
             {{else}}
-            <input name="dateFin" id="dateFin" type="date" class="date_exp" {{#if dateFin}}
+            <input name="dateFin" id="dateFin" type="text"  class="date_exp" {{#if dateFin}}
                 data-value="{{dateFormat dateFin "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
             {{/if}}
             <label for="dateFin">Date de fin</label>

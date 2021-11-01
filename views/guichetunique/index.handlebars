@@ -5,7 +5,7 @@
   <hr>
   {{#if users}}
   <div class="input-field col offset-m3 m6 s12">
-     <input type="text" placeholder="Rechercher" id="live-search-box" class="live-search-box black-text">
+    <input type="text" placeholder="Rechercher" id="live-search-box" class="live-search-box black-text">
   </div>
 
   <table id="tableau" class="responsive-table centered highlight">
@@ -78,7 +78,9 @@
           Officiers Mariniers Subalternes
           {{/ifCond}}
         </td>
-        <td>{{grade.abreviation}}</td>
+        <td>
+          {{#if promotions}} {{promotions.[0].grade.abreviation}} {{else}} {{grade.abreviation}} {{/if}}
+        </td>
         <td>{{nom}} {{prenoms}}</td>
         <td>
           {{#ifCond genre "==" "masculin"}}
@@ -91,14 +93,16 @@
         </td>
         <td>{{getAge naissance.date}}</td>
         <td>Navigateur</td>
-        <td>{{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}}</td>
+         <td> {{#if affectations}}
+          {{affectations.[0].unite.abreviation}}{{#if affectations.[0].service}}/{{affectations.[0].service.abreviation}}{{/if}}
+          {{else}} {{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}} {{/if}} </td>
         <td>
           {{!-- {{#ifCond ../user.statut "==" "operateur_bes"}} --}}
           {{#ifCond ../user.statut "==" "super_admin"}}
-          <a href="/guichetunique/add/{{id}}" class="btn waves-effect blue">
+          <a href="/guichetunique/add/{{_id}}" class="btn waves-effect blue">
             <i class="fa fa-plus"></i>
           </a>
-          <a href="/guichetunique/usertrainings/{{id}}" class="btn waves-effect orange">
+          <a href="/guichetunique/usertrainings/{{_id}}" class="btn waves-effect orange">
             <i class="fa fa-graduation-cap"></i>
           </a>
           {{/ifCond}}
@@ -108,6 +112,7 @@
     </tbody>
   </table>
   {{else}}
-  <p>Il faut nécessairement que le marin existe dans la Base de Donnée de la Marine avant que le BES enrégistre ses diplômes.</p>
+  <p>Il faut nécessairement que le marin existe dans la Base de Donnée de la Marine avant que le BES enrégistre ses
+    diplômes.</p>
   {{/if}}
-</div> 
+</div>

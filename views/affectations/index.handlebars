@@ -1,6 +1,6 @@
 <div class="row container">
     <div class="card-panel center-align">
-        <h5>Mouvements Généraux des Marins</h5>
+        <h3>AFFECTATIONS</h3>
     </div>
     <hr>
 
@@ -79,8 +79,7 @@
                     Officiers Mariniers Subalternes
                     {{/ifCond}}
                 </td>
-                <td>
-                    {{#if promotions}} {{promotions.[0].grade.abreviation}} {{else}} {{grade.abreviation}} {{/if}}
+                <td> {{#if promotions}} {{promotions.[0].grade.abreviation}} {{else}} {{grade.abreviation}} {{/if}}
                 </td>
                 <td>{{nom}} {{prenoms}}</td>
                 <td>
@@ -94,17 +93,17 @@
                 </td>
                 <td>{{getAge naissance.date}}</td>
                 <td>Navigateur</td>
-                <td> {{#if affectations}}
+                <td>{{#if affectations}}
                     {{affectations.[0].unite.abreviation}}{{#if affectations.[0].service}}/{{affectations.[0].service.abreviation}}{{/if}}
-                    {{else}} {{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}} {{/if}} </td>
+                    {{else}} {{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}} {{/if}}</td>
                 <td>
                     {{!-- {{#ifCond ../user.statut "==" "operateur_cmg"}} --}}
                     {{#ifCond ../user.statut "==" "super_admin"}}
-                    <a href="/movements/add/{{_id}}" class="btn waves-effect blue">
-                        <i class="fa fa-plus"></i>
+                    <a href="/affectations/add/{{_id}}" class="btn waves-effect blue">
+                        {{!-- <i class="fa fa-plus"></i> --}}Nouvelle affectation
                     </a>
-                    <a href="/movements/usermovements/{{_id}}" class="btn waves-effect orange">
-                        <i class="fa fa-plane"></i>
+                    <a href="/affectations/useraffectations/{{_id}}" class="btn waves-effect orange">
+                        <i class="fa fa-eye"></i>
                     </a>
                     {{/ifCond}}
                 </td>

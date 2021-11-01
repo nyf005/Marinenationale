@@ -197,7 +197,8 @@
         </ul>
     </div>
     <div class="col  l9 m12 s12">
-        <h5>Etat des marins selon vos critères</h5><hr>
+        <h5>Etat des marins selon vos critères</h5>
+        <hr>
         <table id="tableau" class=" centered highlight">
             <thead>
                 <tr>
@@ -268,7 +269,9 @@
                         Officiers Mariniers Subalternes
                         {{/ifCond}}
                     </td>
-                    <td>{{grade.abreviation}}</td>
+                    <td>
+                        {{#if promotions}} {{promotions.[0].grade.abreviation}} {{else}} {{grade.abreviation}} {{/if}}
+                    </td>
                     <td>{{nom}} {{prenoms}}</td>
                     <td>
                         {{#ifCond genre "==" "masculin"}}
@@ -279,9 +282,12 @@
                         Féminin
                         {{/ifCond}}
                     </td>
-                    <td>{{getAge naissance.date}}</td> 
+                    <td>{{getAge naissance.date}}</td>
                     <td>Navigateur</td>
-                    <td>{{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}}</td>
+                    <td> {{#if affectations}}
+                        {{affectations.[0].unite.abreviation}}{{#if affectations.[0].service}}/{{affectations.[0].service.abreviation}}{{/if}}
+                        {{else}} {{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}} {{/if}}
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>

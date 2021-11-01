@@ -46,9 +46,9 @@
     </div>
     <div class="input-field col m2 s12">
       {{#if user.naissance.date}}
-      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker" data-value="{{dateFormat user.naissance.date "YYYY-MM-DD"}}" disabled>
+      <input name="dateNaiss" id="dateNaiss" type="text" class="datepicker" data-value="{{dateFormat user.naissance.date "YYYY-MM-DD"}}" disabled>
       {{else}}
-      <input name="dateNaiss"  id="dateNaiss" type="date" class="datepicker" {{#if dateNaiss}} data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
+      <input name="dateNaiss"  id="dateNaiss" type="text" class="datepicker" {{#if dateNaiss}} data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
       {{/if}}
       <input type="hidden" name="dateNaiss">
       <label for="dateNaiss">Né(e) le</label>
@@ -68,18 +68,18 @@
     </div>
     <div class="input-field col m2 s12">
       {{#if user.dateEntreeService}}
-      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" data-value="{{dateFormat user.dateEntreeService "YYYY-MM-DD"}}" disabled>
+      <input name="dateEntreeService" id="dateEntreeService" type="text"  class="datepicker" data-value="{{dateFormat user.dateEntreeService "YYYY-MM-DD"}}" disabled>
       {{else}}
-      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" {{#if dateEntreeService}} data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
+      <input name="dateEntreeService" id="dateEntreeService" type="text"  class="datepicker" {{#if dateEntreeService}} data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
       {{/if}}
       <input type="hidden" name="dateEntreeService">
       <label for="dateEntreeService">Entré(e) en service le</label>
     </div>
     <div class="input-field col m2 s12">
       {{#if user.dateNomination}}
-      <input name="dateNomination" id="dateNomination" type="date" class="datepicker"  data-value="{{dateFormat user.dateNomination "YYYY-MM-DD"}}" disabled>
+      <input name="dateNomination" id="dateNomination" type="text"  class="datepicker"  data-value="{{dateFormat user.dateNomination "YYYY-MM-DD"}}" disabled>
       {{else}}
-      <input name="dateNomination" id="dateNomination" type="date" class="datepicker" {{#if dateNomination}} data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
+      <input name="dateNomination" id="dateNomination" type="text" class="datepicker" {{#if dateNomination}} data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}} disabled>
       {{/if}}
       <input type="hidden" name="dateNomination">
       <label for="dateNomination">Nommé(e) le</label>

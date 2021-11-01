@@ -1,6 +1,6 @@
 <div class="row container">
     <div class="card-panel center-align">
-        <h5>Mouvements Généraux des Marins</h5>
+        <h5>Promotions</h5>
     </div>
     <hr>
 
@@ -100,11 +100,11 @@
                 <td>
                     {{!-- {{#ifCond ../user.statut "==" "operateur_cmg"}} --}}
                     {{#ifCond ../user.statut "==" "super_admin"}}
-                    <a href="/movements/add/{{_id}}" class="btn waves-effect blue">
-                        <i class="fa fa-plus"></i>
+                    <a href="/promotions/add/{{_id}}" class="btn waves-effect blue">
+                        {{!-- <i class="fa fa-plus"></i> --}}Nouvelle promotion
                     </a>
-                    <a href="/movements/usermovements/{{_id}}" class="btn waves-effect orange">
-                        <i class="fa fa-plane"></i>
+                    <a href="/promotions/userpromotions/{{_id}}" class="btn waves-effect orange">
+                        <i class="fa fa-eye"></i>
                     </a>
                     {{/ifCond}}
                 </td>

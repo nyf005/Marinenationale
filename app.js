@@ -18,6 +18,8 @@ require("./models/Training");
 require("./models/Information");
 require("./models/Actualite");
 require("./models/Movement");
+require("./models/Promotion");
+require("./models/Affectation");
 require("./models/Photo");
 
 //Load routes
@@ -31,6 +33,8 @@ const guichetunique = require("./routes/guichetunique");
 const informations = require("./routes/informations");
 const actualites = require("./routes/actualites");
 const movements = require("./routes/movements");
+const promotions = require("./routes/promotions");
+const affectations = require("./routes/affectations");
 const gallery = require("./routes/gallery");
 
 //Load Keys
@@ -148,6 +152,8 @@ app.use("/guichetunique", guichetunique);
 app.use("/informations", informations);
 app.use("/actualites", actualites);
 app.use("/movements", movements);
+app.use("/promotions", promotions);
+app.use("/affectations", affectations);
 app.use("/gallery", gallery);
 
 const port = process.env.PORT || 5000;

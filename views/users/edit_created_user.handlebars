@@ -108,10 +108,10 @@
 
     <div class="input-field col m2 s12">
       {{#if selected_user.naissance.date}}
-      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker"
+      <input name="dateNaiss" id="dateNaiss" type="text"  class="datepicker"
         data-value="{{dateFormat selected_user.naissance.date "YYYY-MM-DD"}}">
       {{else}}
-      <input name="dateNaiss" id="dateNaiss" type="date" class="datepicker" {{#if dateNaiss}}
+      <input name="dateNaiss" id="dateNaiss" type="text" class="datepicker" {{#if dateNaiss}}
         data-value="{{dateFormat dateNaiss "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
       {{/if}}
       <input type="hidden" name="dateNaiss">
@@ -134,10 +134,10 @@
     </div>
     <div class="input-field col m2 s12">
       {{#if selected_user.dateEntreeService}}
-      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker"
+      <input name="dateEntreeService" id="dateEntreeService" type="text"  class="datepicker"
         data-value="{{dateFormat selected_user.dateEntreeService "YYYY-MM-DD"}}">
       {{else}}
-      <input name="dateEntreeService" id="dateEntreeService" type="date" class="datepicker" {{#if dateEntreeService}}
+      <input name="dateEntreeService" id="dateEntreeService" type="text"  class="datepicker" {{#if dateEntreeService}}
         data-value="{{dateFormat dateEntreeService "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
       {{/if}}
       <input type="hidden" name="dateEntreeService">
@@ -145,10 +145,10 @@
     </div>
     <div class="input-field col m2 s12">
       {{#if selected_user.dateNomination}}
-      <input name="dateNomination" id="dateNomination" type="date" class="datepicker"
+      <input name="dateNomination" id="dateNomination" type="text"  class="datepicker"
         data-value="{{dateFormat selected_user.dateNomination "YYYY-MM-DD"}}">
       {{else}}
-      <input name="dateNomination" id="dateNomination" type="date" class="datepicker" {{#if dateNomination}}
+      <input name="dateNomination" id="dateNomination" type="text"  class="datepicker" {{#if dateNomination}}
         data-value="{{dateFormat dateNomination "YYYY-MM-DD"}}" {{else}} data-value="" {{/if}}>
       {{/if}}
       <input type="hidden" name="dateNomination">

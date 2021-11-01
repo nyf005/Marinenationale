@@ -94,7 +94,11 @@
           Officiers Mariniers Subalternes
           {{/ifCond}}
         </td>
-        <td>{{grade.abreviation}}</td>
+        {{!-- <td>{{grade.abreviation}}</td> --}}
+        <td>
+          {{#if promotions}} {{promotions.[0].grade.abreviation}} {{else}} {{grade.abreviation}} {{/if}}
+        </td>
+
         <td>{{nom}} {{prenoms}}</td>
         <td>
           {{#ifCond genre "==" "masculin"}}
@@ -107,12 +111,17 @@
         </td>
         <td>{{getAge naissance.date}}</td>
         <td>Navigateur</td>
-        <td>{{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}}</td>
+        <td> {{#if affectations}}
+          {{affectations.[0].unite.abreviation}}{{#if affectations.[0].service}}/{{affectations.[0].service.abreviation}}{{/if}}
+          {{else}} {{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}} {{/if}}
+        </td>
+
+        {{!-- <td>{{unite.abreviation}}{{#if service}}/{{service.abreviation}}{{/if}}</td> --}}
         <td><a href="#{{mecano}}" class="waves-effect btn modal-trigger lime"><i class="fa fa-info"></i></a>
           {{!-- {{#ifCond ../user.statut "==" "operateur_bes"}} --}}
           {{#ifCond ../user.statut "==" "super_admin"}}
-          <a href="/users/edit-created/{{id}}" class="btn waves-effect blue darken-2"><i class="fa fa-edit"></i></a>
-          <form class="waves-effect waves-red darken-4" action="/users/delete/{{id}}?_method=DELETE" method="POST"
+          <a href="/users/edit-created/{{_id}}" class="btn waves-effect blue darken-2"><i class="fa fa-edit"></i></a>
+          <form class="waves-effect waves-red darken-4" action="/users/delete/{{_id}}?_method=DELETE" method="POST"
             id="delete-form">
             <input type="hidden" name="_method" value="DELETE">
             <button type="submit" class="btn red waves-effect " onclick="return ConfirmDelete();"><i
@@ -120,8 +129,8 @@
           </form>
           {{/ifCond}}
           {{#ifCond ../user.statut "==" "operateur_brh"}}
-          <a href="/users/edit-created/{{id}}" class="btn orange darken-2 waves-effect"><i class="fa fa-pencil"></i></a>
-          <form class="waves-effect waves-red darken-4" action="/users/delete/{{id}}?_method=DELETE" method="POST"
+          <a href="/users/edit-created/{{_id}}" class="btn orange darken-2 waves-effect"><i class="fa fa-pencil"></i></a>
+          <form class="waves-effect waves-red darken-4" action="/users/delete/{{_id}}?_method=DELETE" method="POST"
             id="delete-form" onclick="return ConfirmDelete();">
             <input type="hidden" name="_method" value="DELETE">
             <button type="submit" class="btn red waves-effect"><i class="fa fa-remove"></i></button>
